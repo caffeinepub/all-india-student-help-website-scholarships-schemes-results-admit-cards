@@ -1,2 +1,3 @@
-# all-india-student-help-website-scholarships-schemes-results-admit-cards
-Exported from Caffeine project: All-India Student Help Website (Scholarships, Schemes, Results, Admit Cards)
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

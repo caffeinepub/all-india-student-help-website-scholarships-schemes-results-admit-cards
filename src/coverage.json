@@ -1,0 +1,73 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-09T16:33:51.269Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 3,
+    "implemented": 3,
+    "items": [
+      {
+        "id": "REQ-25",
+        "summary": "Add a new Search page route that lets students search across all seeded updates (all categories) and view matching results using the existing UpdateCard layout.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/SearchPage.tsx",
+          "frontend/src/App.tsx",
+          "frontend/src/components/content/UpdateCard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/SearchPage.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-26",
+        "summary": "Add a simple search bar entry point in the site header for both desktop and mobile that navigates to the Search page and pre-fills the query using a URL query parameter (e.g., /search?q=...).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/navigation/SiteHeader.tsx",
+          "frontend/src/components/navigation/MobileNav.tsx",
+          "frontend/src/pages/SearchPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/navigation/SiteHeader.tsx",
+          "frontend/src/components/navigation/MobileNav.tsx",
+          "frontend/src/pages/SearchPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-27",
+        "summary": "Implement lightweight, client-side search logic that is fast for the current dataset and does not add heavy dependencies.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/searchUpdates.ts",
+          "frontend/src/pages/SearchPage.tsx",
+          "frontend/src/content/seedUpdates.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/utils/searchUpdates.ts",
+          "frontend/src/pages/SearchPage.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/components/navigation/MobileNav.tsx",
+    "frontend/src/components/navigation/SiteHeader.tsx",
+    "frontend/src/pages/SearchPage.tsx",
+    "frontend/src/utils/searchUpdates.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

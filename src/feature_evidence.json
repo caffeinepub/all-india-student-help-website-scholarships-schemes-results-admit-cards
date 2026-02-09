@@ -1,0 +1,66 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-a-new-search-page-route-that-lets-students-search-across-all-seeded-updates-all-categories-and-view-matching-results-using-the-existing-updatecard-layout",
+      "featureTitle": "Add a new Search page route that lets students search across all seeded updates (all categories) and view matching results using the existing UpdateCard layout.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/SearchPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-25"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-simple-search-bar-entry-point-in-the-site-header-for-both-desktop-and-mobile-that-navigates-to-the-search-page-and-pre-fills-the-query-using-a-url-query-parameter-e-g-search-q",
+      "featureTitle": "Add a simple search bar entry point in the site header for both desktop and mobile that navigates to the Search page and pre-fills the query using a URL query parameter (e.g., /search?q=...).",
+      "files": [
+        "frontend/src/components/navigation/MobileNav.tsx",
+        "frontend/src/components/navigation/SiteHeader.tsx",
+        "frontend/src/pages/SearchPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-26"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-lightweight-client-side-search-logic-that-is-fast-for-the-current-dataset-and-does-not-add-heavy-dependencies",
+      "featureTitle": "Implement lightweight, client-side search logic that is fast for the current dataset and does not add heavy dependencies.",
+      "files": [
+        "frontend/src/pages/SearchPage.tsx",
+        "frontend/src/utils/searchUpdates.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-27"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

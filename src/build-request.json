@@ -1,0 +1,93 @@
+{
+  "kind": "build_request",
+  "title": "Add a simple site-wide search bar for updates/posts",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-25",
+      "text": "Add a new Search page route that lets students search across all seeded updates (all categories) and view matching results using the existing UpdateCard layout.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3"
+        ],
+        "quotes": [
+          "would you like to add a simple search bar so students can find updates faster?",
+          "Yes"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A new route exists (e.g., /search) and renders inside the existing SiteLayout.",
+        "The Search page includes a search input with a clear label/placeholder in English (e.g., \"Search updates...\").",
+        "Typing a query filters across all available updates from the existing seed data (at minimum: title + excerpt; body matching is optional but if implemented must not break performance).",
+        "Results are shown as a responsive grid/list of existing UpdateCard components, and clicking a card navigates to the existing /post/$postId detail page.",
+        "When the query is empty, the page shows a helpful empty state (e.g., instructions or popular/latest items) instead of a blank list.",
+        "When there are zero matches, the page shows a clear “No results found” state with a suggestion to try different keywords.",
+        "The page sets appropriate SEO title and meta description via the existing usePageMeta hook."
+      ]
+    },
+    {
+      "id": "REQ-26",
+      "text": "Add a simple search bar entry point in the site header for both desktop and mobile that navigates to the Search page and pre-fills the query using a URL query parameter (e.g., /search?q=...).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3"
+        ],
+        "quotes": [
+          "add a simple search bar so students can find updates faster"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Desktop header provides a visible search control (input or button) without overcrowding the existing navigation links.",
+        "Mobile navigation provides a search entry point that is easy to tap and does not reduce menu usability (menu remains scrollable).",
+        "Submitting a search from header/mobile navigates to the Search page and includes the query in the URL (e.g., q=term).",
+        "The Search page reads the URL query parameter on load and shows the corresponding filtered results.",
+        "The search UI is mobile-safe (no overlaps, input/button fits on small screens, appropriate spacing)."
+      ]
+    },
+    {
+      "id": "REQ-27",
+      "text": "Implement lightweight, client-side search logic that is fast for the current dataset and does not add heavy dependencies.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3"
+        ],
+        "quotes": [
+          "simple search bar"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Search implementation uses simple string matching and does not introduce heavy third-party search libraries.",
+        "Search is case-insensitive and trims extra whitespace in the query.",
+        "Search results order is deterministic (e.g., newest first among matches or stable original order) and does not flicker between renders.",
+        "No backend changes are required for search; search works offline against the existing seeded content model."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under frontend/src/components/ui (Shadcn components are read-only and must be composed, not modified).",
+    "Do not edit frontend/src/hooks/useInternetIdentity.ts or frontend/src/hooks/useActor.ts (immutable paths).",
+    "Keep the implementation lightweight and fast-loading; avoid heavy libraries for search."
+  ],
+  "nonGoals": [
+    "Building a backend-backed full-text search index.",
+    "Adding an admin UI to manage content.",
+    "Adding user accounts beyond the existing Internet Identity integration."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}
