@@ -2,11 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-a-new-search-page-route-that-lets-students-search-across-all-seeded-updates-all-categories-and-view-matching-results-using-the-existing-updatecard-layout",
-      "featureTitle": "Add a new Search page route that lets students search across all seeded updates (all categories) and view matching results using the existing UpdateCard layout.",
+      "featureId": "feature-add-the-provided-google-search-console-verification-meta-tag-to-the-global-html-head-so-it-is-present-site-wide-on-every-route",
+      "featureTitle": "Add the provided Google Search Console verification meta tag to the global HTML <head> so it is present site-wide on every route.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/pages/SearchPage.tsx"
+        "frontend/index.html"
       ],
       "components": [
         "authorization@4.0.0",
@@ -17,17 +16,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-25"
+        "REQ-1"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-add-a-simple-search-bar-entry-point-in-the-site-header-for-both-desktop-and-mobile-that-navigates-to-the-search-page-and-pre-fills-the-query-using-a-url-query-parameter-e-g-search-q",
-      "featureTitle": "Add a simple search bar entry point in the site header for both desktop and mobile that navigates to the Search page and pre-fills the query using a URL query parameter (e.g., /search?q=...).",
+      "featureId": "feature-do-not-change-any-design-styling-layout-routing-or-page-content-as-part-of-this-update-meta-tag-addition-only",
+      "featureTitle": "Do not change any design, styling, layout, routing, or page content as part of this update (meta tag addition only).",
       "files": [
-        "frontend/src/components/navigation/MobileNav.tsx",
-        "frontend/src/components/navigation/SiteHeader.tsx",
-        "frontend/src/pages/SearchPage.tsx"
+        "frontend/index.html"
       ],
       "components": [
         "authorization@4.0.0",
@@ -38,16 +35,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-26"
+        "REQ-2"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-implement-lightweight-client-side-search-logic-that-is-fast-for-the-current-dataset-and-does-not-add-heavy-dependencies",
-      "featureTitle": "Implement lightweight, client-side search logic that is fast for the current dataset and does not add heavy dependencies.",
+      "featureId": "feature-publish-the-updated-build-after-adding-the-meta-tag",
+      "featureTitle": "Publish the updated build after adding the meta tag.",
       "files": [
-        "frontend/src/pages/SearchPage.tsx",
-        "frontend/src/utils/searchUpdates.ts"
+        "frontend/index.html"
       ],
       "components": [
         "authorization@4.0.0",
@@ -58,7 +54,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-27"
+        "REQ-3"
       ],
       "confidence": "high"
     }

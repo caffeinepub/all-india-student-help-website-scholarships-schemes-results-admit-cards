@@ -1,229 +1,35 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 9,
-  "summary": "Upgrade to a complete All-India education information & daily news platform covering School Education (Class 1–12, boards, syllabus/timetable/results, school scholarships), Competitive Exams (UPSC/SSC/Railway/Banking/NEET/JEE/CUET/state exams), Scholarships (central/state/category-wise with deadlines/eligibility), Government Education Schemes (student + skill development, process/benefits), and Education News—while keeping a clean, mobile-first, AdSense-ready, student-friendly blog-style UI.",
+  "projectStateVersion": 3,
+  "summary": "Student help website (scholarships/schemes) requiring site-wide SEO/verification updates and deployments",
   "architectural_notes": [
-    "Content must be informational, original, student-friendly; avoid fake promises/misleading claims.",
-    "Use SEO-friendly headings and structure; content should be suitable for Google AdSense approval.",
-    "Site should be mobile-first and optimized for fast loading with a blog-style layout and clear navigation.",
-    "Mobile-first responsive UI: no text/element overlap; ensure readable typography (medium font size, adequate line-height).",
-    "On mobile, display categories as clean card-style sections in a single-column vertical list; state/category actions should be full-width buttons with consistent spacing.",
-    "Use a single main heading per section (avoid duplicate headings) while preserving topic and content meaning; keep UI simple, professional, and fast-loading.",
-    "Content tone: Simple English / Hinglish; student-friendly and easy to understand; original informational content only.",
-    "Standardize post/update format: clear headline, short summary (2–3 lines), date, and category tag (School/Exam/Scholarship/News).",
-    "Homepage must not be cluttered; keep sections clearly separated and avoid mixing unrelated topics.",
-    "Maintain main purpose: trusted, daily-use, all-in-one education information + news platform for students across India."
+    "Ensure a global <head> template/layout exists so meta tags can be applied site-wide without per-page edits.",
+    "Deployment workflow should support publishing a small head-only change with no UI/layout modifications."
   ],
-  "known_issues": [
-    "Mobile layout issues: overlapping headings/paragraph text, buttons overlapping text, category labels overlapping, state buttons overlapping, insufficient spacing/padding on small screens."
-  ],
+  "known_issues": [],
   "isFixRequest": false,
   "existing_features": [
     {
-      "id": "feature-create-the-website-information-architecture-and-routing-for-these-top-level-pages-home-scholarships-india-state-wise-government-schemes-exam-results-admit-cards-state-wise-pages-at-least-jharkhand-bihar-uttar-pradesh-west-bengal-about-us-contact-us-privacy-policy-disclaimer",
-      "title": "Create the website information architecture and routing for these top-level pages: Home, Scholarships (India + State-wise), Government Schemes, Exam Results, Admit Cards, State-wise Pages (at least: Jharkhand, Bihar, Uttar Pradesh, West Bengal), About Us, Contact Us, Privacy Policy, Disclaimer.",
+      "id": "feature-add-the-provided-google-search-console-verification-meta-tag-to-the-global-html-head-so-it-is-present-site-wide-on-every-route",
+      "title": "Add the provided Google Search Console verification meta tag to the global HTML <head> so it is present site-wide on every route.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-implement-a-simple-clean-mobile-friendly-fast-loading-blog-style-layout-with-easy-navigation-using-a-consistent-visual-theme-colors-typography-spacing-and-components-across-all-pages",
-      "title": "Implement a simple, clean, mobile-friendly, fast-loading, blog-style layout with easy navigation, using a consistent visual theme (colors, typography, spacing, and components) across all pages.",
+      "id": "feature-do-not-change-any-design-styling-layout-routing-or-page-content-as-part-of-this-update-meta-tag-addition-only",
+      "title": "Do not change any design, styling, layout, routing, or page content as part of this update (meta tag addition only).",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-add-core-ui-components-for-a-blog-style-information-portal-site-header-with-navigation-footer-with-policy-links-breadcrumb-where-appropriate-and-a-reusable-post-update-card-for-listing-items-title-category-date-excerpt-and-a-read-more-link",
-      "title": "Add core UI components for a blog-style information portal: site header with navigation, footer with policy links, breadcrumb (where appropriate), and a reusable post/update card for listing items (title, category, date, excerpt, and a “Read more” link).",
+      "id": "feature-publish-the-updated-build-after-adding-the-meta-tag",
+      "title": "Publish the updated build after adding the meta tag.",
       "reqIds": [
         "REQ-3"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-generate-and-render-original-informational-student-friendly-seo-friendly-sample-content-for-1-the-home-page-and-2-one-scholarship-page-ensuring-no-fake-promises-and-adsense-suitable-wording",
-      "title": "Generate and render original, informational, student-friendly, SEO-friendly sample content for (1) the Home page and (2) one Scholarship page, ensuring no fake promises and AdSense-suitable wording.",
-      "reqIds": [
-        "REQ-4"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-basic-on-page-seo-structure-to-all-pages-a-unique-page-title-and-meta-description-and-consistent-heading-hierarchy-single-h1-per-page-then-h2-h3",
-      "title": "Add basic on-page SEO structure to all pages: a unique page title and meta description, and consistent heading hierarchy (single H1 per page, then H2/H3).",
-      "reqIds": [
-        "REQ-5"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-the-contact-us-page-with-a-simple-contact-form-name-email-message-that-stores-submissions-in-the-backend-canister-and-shows-a-clear-success-failure-state-to-the-user",
-      "title": "Implement the Contact Us page with a simple contact form (name, email, message) that stores submissions in the backend canister and shows a clear success/failure state to the user.",
-      "reqIds": [
-        "REQ-6"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-create-privacy-policy-and-disclaimer-pages-with-clear-original-informational-text-appropriate-for-an-education-notifications-portal-no-legal-advice-tone-no-misleading-claims",
-      "title": "Create Privacy Policy and Disclaimer pages with clear, original, informational text appropriate for an education notifications portal (no legal advice tone, no misleading claims).",
-      "reqIds": [
-        "REQ-8"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-an-initial-content-model-for-updates-scholarships-schemes-results-admit-cards-using-frontend-seed-data-so-the-home-and-category-pages-can-render-realistic-lists-of-posts-updates-without-requiring-an-admin-panel",
-      "title": "Add an initial content model for updates (scholarships, schemes, results, admit cards) using frontend seed data so the Home and category pages can render realistic lists of posts/updates without requiring an admin panel.",
-      "reqIds": [
-        "REQ-9"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-include-a-lightweight-performance-baseline-avoid-heavy-libraries-for-simple-tasks-ensure-images-if-any-are-optimized-and-keep-the-initial-load-focused-on-above-the-fold-content",
-      "title": "Include a lightweight performance baseline: avoid heavy libraries for simple tasks, ensure images (if any) are optimized, and keep the initial load focused on above-the-fold content.",
-      "reqIds": [
-        "REQ-10"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-fix-overlapping-text-and-ui-collisions-across-all-pages-headings-paragraphs-category-labels-badges-buttons-and-state-tiles-prioritizing-small-screen-mobile-breakpoints",
-      "title": "Fix overlapping text and UI collisions across all pages (headings, paragraphs, category labels/badges, buttons, and state tiles), prioritizing small-screen/mobile breakpoints.",
-      "reqIds": [
-        "REQ-11"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-apply-a-mobile-first-typography-pass-to-ensure-readable-text-with-consistent-line-height-and-spacing-especially-paragraphs-and-long-form-content-without-changing-content-meaning",
-      "title": "Apply a mobile-first typography pass to ensure readable text with consistent line-height and spacing (especially paragraphs and long-form content), without changing content meaning.",
-      "reqIds": [
-        "REQ-12"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-home-page-layout-to-meet-the-requested-mobile-behavior-categories-displayed-as-clean-card-style-sections-one-item-per-row-on-mobile-state-section-tiles-never-collide-and-hero-ctas-become-full-width-stacked-buttons-on-mobile-with-adequate-spacing",
-      "title": "Update the Home page layout to meet the requested mobile behavior: categories displayed as clean card-style sections (one item per row on mobile), state section tiles never collide, and hero CTAs become full-width stacked buttons on mobile with adequate spacing.",
-      "reqIds": [
-        "REQ-13"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-ensure-all-category-navigation-blocks-and-filter-button-rows-across-the-site-are-mobile-safe-no-horizontal-collisions-appropriate-wrapping-scroll-behavior-where-necessary-and-full-width-tap-targets-when-displayed-as-buttons-on-mobile",
-      "title": "Ensure all category navigation blocks and filter/button rows across the site are mobile-safe: no horizontal collisions, appropriate wrapping/scroll behavior where necessary, and full-width tap targets when displayed as buttons on mobile.",
-      "reqIds": [
-        "REQ-14"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-enforce-heading-hierarchy-and-eliminate-duplicate-main-headings-per-section-page-while-keeping-existing-content-meaning-e-g-avoid-multiple-h1s-on-a-single-page-and-avoid-visually-duplicated-headings",
-      "title": "Enforce heading hierarchy and eliminate duplicate main headings per section/page while keeping existing content meaning (e.g., avoid multiple H1s on a single page and avoid visually duplicated headings).",
-      "reqIds": [
-        "REQ-15"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-maintain-a-clean-professional-fast-loading-adsense-friendly-layout-by-using-spacing-padding-fixes-and-tailwind-utilities-no-heavy-ui-libraries-added-and-ensuring-responsive-behavior-is-achieved-with-minimal-css-changes",
-      "title": "Maintain a clean, professional, fast-loading, AdSense-friendly layout by using spacing/padding fixes and Tailwind utilities (no heavy UI libraries added) and ensuring responsive behavior is achieved with minimal CSS changes.",
-      "reqIds": [
-        "REQ-16"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-new-top-level-routes-and-pages-to-match-the-requested-website-structure-by-implementing-1-education-news-page-at-education-news-2-school-education-class-1-12-page-at-school-education-and-3-competitive-exams-page-at-competitive-exams-ensure-each-page-is-reachable-via-the-router-and-renders-inside-the-existing-sitelayout",
-      "title": "Add new top-level routes and pages to match the requested website structure by implementing: (1) Education News page at /education-news, (2) School Education (Class 1–12) page at /school-education, and (3) Competitive Exams page at /competitive-exams; ensure each page is reachable via the router and renders inside the existing SiteLayout.",
-      "reqIds": [
-        "REQ-17"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-primary-navigation-desktop-header-and-mobile-menu-to-include-the-new-top-level-sections-in-a-clean-organized-order-without-overcrowding-education-news-school-education-class-1-12-competitive-exams-scholarships-government-schemes-exam-results-admit-cards-state-wise-link-to-an-existing-entry-point-about-contact-ensure-the-mobile-menu-remains-scrollable-and-tap-targets-remain-mobile-friendly",
-      "title": "Update primary navigation (desktop header and mobile menu) to include the new top-level sections in a clean, organized order without overcrowding: Education News, School Education (Class 1–12), Competitive Exams, Scholarships, Government Schemes, Exam Results, Admit Cards, State-wise (link to an existing entry point), About/Contact; ensure the mobile menu remains scrollable and tap targets remain mobile-friendly.",
-      "reqIds": [
-        "REQ-18"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-extend-the-frontend-content-model-to-cover-the-new-platform-scope-by-adding-update-categories-and-seeded-content-for-a-education-news-b-school-education-class-1-12-boards-and-c-competitive-exams-upsc-ssc-railway-banking-neet-jee-cuet-state-level-while-keeping-content-fully-original-informational-and-adsense-suitable",
-      "title": "Extend the frontend content model to cover the new platform scope by adding update categories and seeded content for (a) Education News, (b) School Education (Class 1–12, boards), and (c) Competitive Exams (UPSC/SSC/Railway/Banking/NEET/JEE/CUET/state-level) while keeping content fully original, informational, and AdSense-suitable.",
-      "reqIds": [
-        "REQ-19"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-standardize-the-listing-card-and-post-detail-display-to-match-the-required-news-update-format-across-all-update-types-show-1-a-clear-headline-title-2-a-short-summary-excerpt-2-3-lines-3-date-and-4-a-category-tag-limited-to-school-exam-scholarship-news-ensure-existing-result-admit-card-scheme-categories-map-to-these-user-facing-tags-without-breaking-current-filtering-by-internal-categories",
-      "title": "Standardize the listing card and post detail display to match the required news/update format across all update types: show (1) a clear headline (title), (2) a short summary (excerpt, 2–3 lines), (3) date, and (4) a category tag limited to: School / Exam / Scholarship / News; ensure existing Result/Admit Card/Scheme categories map to these user-facing tags without breaking current filtering by internal categories.",
-      "reqIds": [
-        "REQ-20"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-the-education-news-page-education-news-as-a-clean-mobile-first-feed-using-the-existing-updatecard-component-showing-only-education-news-updates-add-clear-intro-copy-that-explains-the-content-is-informational-and-should-be-verified-via-official-sources",
-      "title": "Implement the Education News page (/education-news) as a clean, mobile-first feed using the existing UpdateCard component, showing only Education News updates; add clear intro copy that explains the content is informational and should be verified via official sources.",
-      "reqIds": [
-        "REQ-21"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-the-school-education-class-1-12-page-school-education-to-cover-class-level-updates-cbse-icse-state-boards-board-exam-dates-results-syllabus-timetables-and-school-scholarships-schemes-present-the-content-in-clearly-separated-sections-not-mixed-with-competitive-exams-and-include-relevant-school-updates-using-updatecard",
-      "title": "Implement the School Education (Class 1–12) page (/school-education) to cover: class-level updates, CBSE/ICSE/State Boards, board exam dates/results/syllabus/timetables, and school scholarships/schemes; present the content in clearly separated sections (not mixed with competitive exams) and include relevant School updates using UpdateCard.",
-      "reqIds": [
-        "REQ-22"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-the-competitive-exams-page-competitive-exams-to-cover-upsc-ssc-railway-banking-neet-jee-cuet-and-state-level-exams-include-sections-for-notifications-admit-cards-and-results-and-present-related-updates-via-updatecard-while-keeping-the-homepage-uncluttered-i-e-do-not-move-all-content-to-home",
-      "title": "Implement the Competitive Exams page (/competitive-exams) to cover: UPSC, SSC, Railway, Banking, NEET, JEE, CUET, and state-level exams; include sections for notifications, admit cards, and results, and present related updates via UpdateCard while keeping the homepage uncluttered (i.e., do not move all content to Home).",
-      "reqIds": [
-        "REQ-23"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-home-page-to-reflect-the-expanded-platform-scope-with-clean-separated-card-style-sections-entry-points-for-education-news-school-education-competitive-exams-scholarships-government-schemes-exam-results-and-admit-cards-keep-the-page-mobile-first-one-column-on-mobile-and-avoid-clutter-by-limiting-each-section-to-a-small-latest-subset-with-clear-links-to-the-dedicated-pages",
-      "title": "Update the Home page to reflect the expanded platform scope with clean, separated card-style sections/entry points for: Education News, School Education, Competitive Exams, Scholarships, Government Schemes, Exam Results, and Admit Cards; keep the page mobile-first, one-column on mobile, and avoid clutter by limiting each section to a small “latest” subset with clear links to the dedicated pages.",
-      "reqIds": [
-        "REQ-24"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-new-search-page-route-that-lets-students-search-across-all-seeded-updates-all-categories-and-view-matching-results-using-the-existing-updatecard-layout",
-      "title": "Add a new Search page route that lets students search across all seeded updates (all categories) and view matching results using the existing UpdateCard layout.",
-      "reqIds": [
-        "REQ-25"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-simple-search-bar-entry-point-in-the-site-header-for-both-desktop-and-mobile-that-navigates-to-the-search-page-and-pre-fills-the-query-using-a-url-query-parameter-e-g-search-q",
-      "title": "Add a simple search bar entry point in the site header for both desktop and mobile that navigates to the Search page and pre-fills the query using a URL query parameter (e.g., /search?q=...).",
-      "reqIds": [
-        "REQ-26"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-lightweight-client-side-search-logic-that-is-fast-for-the-current-dataset-and-does-not-add-heavy-dependencies",
-      "title": "Implement lightweight, client-side search logic that is fast for the current dataset and does not add heavy dependencies.",
-      "reqIds": [
-        "REQ-27"
       ],
       "version": 1
     }
@@ -231,63 +37,12 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Create website information architecture and navigation for student help portal (Home, Scholarships incl. India + state-wise, Govt Schemes, Exam Results, Admit Cards, State-wise pages, About, Contact, Privacy Policy, Disclaimer)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-2",
-      "summary": "Define UI/UX design guidelines: simple, clean, mobile-friendly, fast-loading, blog-style layout, easy navigation",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Generate sample SEO-friendly, student-friendly, original content for Home page and one Scholarship page (AdSense-suitable, no fake promises)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-10",
-      "summary": "Create backend support for contact submissions: define a Motoko type for contact messages, store them persistently, and expose methods to create a submission and list submissions (for future admin use).",
-      "reqIds": [
-        "REQ-7"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-11",
-      "summary": "Fix mobile layout/UI issues: eliminate overlapping text/buttons/labels, improve spacing/padding/line-height, convert categories to card sections (vertical on mobile), make buttons full-width on mobile, ensure single main heading per section, maintain fast-loading AdSense-friendly design without changing content meaning",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-12",
-      "summary": "Expand website scope + information architecture to include School Education (Class 1–12/boards), Competitive Exams, and Education News sections with clean organized navigation and dedicated pages while keeping the site’s main purpose as an all-in-one education information platform",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-13",
-      "summary": "Implement a standardized news/update post format across listings (headline, 2–3 line summary, date, category tag: School/Exam/Scholarship/News) and ensure homepage remains uncluttered with clearly separated topics",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-14",
-      "summary": "Add/adjust content guidelines for Simple English/Hinglish, original informational writing, no copied/misleading claims, AdSense-suitable across all new sections (school, exams, news, schemes, scholarships)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-15",
-      "summary": "Add a simple search bar to help students quickly find updates/posts across the site",
+      "summary": "Add Google Search Console verification meta tag to the <head> site-wide and publish without changing design/layout",
       "reqIds": [],
       "status": "pending"
     }
   ],
-  "gameProjectType": "none",
-  "projectName": "All-India Student Help Website (Scholarships, Schemes, Results, Admit Cards)",
+  "projectName": "Add Google Search Console site verification meta tag site-wide",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

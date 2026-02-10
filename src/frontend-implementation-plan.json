@@ -1,90 +1,49 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Site-wide client-side search for seeded updates",
+  "title": "Add Google Search Console verification meta tag site-wide",
   "requirements": [
     {
-      "id": "REQ-25",
-      "summary": "Add a /search route page that filters seeded updates and renders results using the existing UpdateCard layout with SEO metadata.",
+      "id": "REQ-1",
+      "summary": "Add the provided Google Search Console verification meta tag to the global HTML head so it is present on every route.",
       "acceptanceCriteria": [
-        "A new route exists (e.g., /search) and renders inside the existing SiteLayout.",
-        "The Search page includes a search input with a clear label/placeholder in English (e.g., \"Search updates...\").",
-        "Typing a query filters across all available updates from the existing seed data (at minimum: title + excerpt; body matching is optional but if implemented must not break performance).",
-        "Results are shown as a responsive grid/list of existing UpdateCard components, and clicking a card navigates to the existing /post/$postId detail page.",
-        "When the query is empty, the page shows a helpful empty state (e.g., instructions or popular/latest items) instead of a blank list.",
-        "When there are zero matches, the page shows a clear “No results found” state with a suggestion to try different keywords.",
-        "The page sets appropriate SEO title and meta description via the existing usePageMeta hook."
+        "The rendered document <head> includes exactly: <meta name=\"google-site-verification\" content=\"hym4U2k_e6Y32exhxiM5yIhLCPh_rYLDWpY5B2Mr9wQ\" />",
+        "The meta tag is present for all pages/routes (site-wide), not only a single page component",
+        "No other <head> metadata is removed or altered unintentionally (existing title/viewport/charset remain intact)"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/SearchPage.tsx",
-          "operation": "create",
-          "description": "Create a Search page that renders inside the existing SiteLayout, sets SEO via usePageMeta, reads the initial query from the URL (q=...), provides a labeled input (e.g., \"Search updates...\"), and shows: (1) helpful empty state when query is empty (e.g., instructions + latest updates), (2) responsive UpdateCard grid/list for matches, (3) clear “No results found” state when there are zero matches. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/index.html",
           "operation": "modify",
-          "description": "Register a new /search route that renders SearchPage under the existing root route (SiteLayout), ensuring it is navigable and not orphaned."
-        },
-        {
-          "path": "frontend/src/components/content/UpdateCard.tsx",
-          "operation": "modify",
-          "description": "Verify UpdateCard works seamlessly when rendered in a dense results grid/list (e.g., click target and spacing); if needed, make only non-breaking adjustments outside of frontend/src/components/ui to keep behavior consistent with /post/$postId navigation."
+          "description": "Insert <meta name=\"google-site-verification\" content=\"hym4U2k_e6Y32exhxiM5yIhLCPh_rYLDWpY5B2Mr9wQ\" /> into the global <head> so it is included site-wide across all routes, keeping existing charset/viewport/title tags intact."
         }
       ]
     },
     {
-      "id": "REQ-26",
-      "summary": "Add desktop and mobile header search entry points that navigate to /search and prefill the query via the URL parameter (q).",
+      "id": "REQ-2",
+      "summary": "Ensure the update introduces no design/styling/layout/routing/content changes beyond adding the verification meta tag.",
       "acceptanceCriteria": [
-        "Desktop header provides a visible search control (input or button) without overcrowding the existing navigation links.",
-        "Mobile navigation provides a search entry point that is easy to tap and does not reduce menu usability (menu remains scrollable).",
-        "Submitting a search from header/mobile navigates to the Search page and includes the query in the URL (e.g., q=term).",
-        "The Search page reads the URL query parameter on load and shows the corresponding filtered results.",
-        "The search UI is mobile-safe (no overlaps, input/button fits on small screens, appropriate spacing)."
+        "No visual/UI/layout changes are introduced across the site aside from the added head meta tag"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/navigation/SiteHeader.tsx",
+          "path": "frontend/index.html",
           "operation": "modify",
-          "description": "Add a lightweight desktop header search control (small input or input+icon button) that submits to /search with q=... without overcrowding existing nav links; ensure spacing and responsive behavior remain intact."
-        },
-        {
-          "path": "frontend/src/components/navigation/MobileNav.tsx",
-          "operation": "modify",
-          "description": "Add a mobile search entry point within the existing Sheet menu (e.g., a search input at the top or a dedicated Search link/button) that is easy to tap, keeps the menu scrollable, and navigates to /search with q=... when submitted."
-        },
-        {
-          "path": "frontend/src/pages/SearchPage.tsx",
-          "operation": "modify",
-          "description": "Ensure the Search page reads q from the URL on initial load and updates its input/results accordingly; optionally keep URL q in sync when the user submits/commits a new query from within the page."
+          "description": "Limit the change to adding the single Google Search Console verification meta tag only; do not alter existing head metadata, markup structure, scripts, or any app UI-related code."
         }
       ]
     },
     {
-      "id": "REQ-27",
-      "summary": "Implement fast, deterministic, dependency-light client-side string matching for searching seeded updates.",
+      "id": "REQ-3",
+      "summary": "Ensure the updated frontend build is published so production includes the new global head meta tag.",
       "acceptanceCriteria": [
-        "Search implementation uses simple string matching and does not introduce heavy third-party search libraries.",
-        "Search is case-insensitive and trims extra whitespace in the query.",
-        "Search results order is deterministic (e.g., newest first among matches or stable original order) and does not flicker between renders.",
-        "No backend changes are required for search; search works offline against the existing seeded content model."
+        "A new production build is deployed that includes the verification meta tag in the global <head>"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/utils/searchUpdates.ts",
-          "operation": "create",
-          "description": "Add lightweight search utilities for UpdateItem seeded content: normalize query (trim/collapse whitespace, lowercase), perform simple substring matching against at least title and excerpt (optionally body), and return deterministically ordered results (e.g., stable sort by date desc with tie-breaker by original index) to avoid render flicker."
-        },
-        {
-          "path": "frontend/src/pages/SearchPage.tsx",
+          "path": "frontend/index.html",
           "operation": "modify",
-          "description": "Use the new client-side search utility to filter across all seeded updates; memoize derived lists to keep search fast for the current dataset and ensure deterministic ordering."
-        },
-        {
-          "path": "frontend/src/content/seedUpdates.ts",
-          "operation": "modify",
-          "description": "If needed for clean composition, export a minimal helper to retrieve all seeded updates (or a pre-sorted view) for search without duplicating logic across pages; keep it offline and dependency-free."
+          "description": "After committing the global <head> meta tag change, run the normal frontend build-and-publish workflow for this project and verify the deployed production HTML <head> includes the verification meta tag."
         }
       ]
     }

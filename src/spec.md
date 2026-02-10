@@ -1,13 +1,10 @@
 # Specification
 
 ## Summary
-**Goal:** Add a lightweight, site-wide search experience so students can quickly find relevant updates/posts.
+**Goal:** Add the provided Google Search Console verification meta tag to the site-wide HTML document `<head>`.
 
 **Planned changes:**
-- Add a new Search page route (e.g., `/search`) rendered within the existing `SiteLayout`, with SEO title/meta set via the existing `usePageMeta` hook.
-- Implement a labeled search input on the Search page that filters across all seeded updates (at minimum: title + excerpt) and renders matches using the existing `UpdateCard` layout, linking to `/post/$postId`.
-- Add a header search entry point for desktop and mobile that navigates to `/search?q=...` and pre-fills the Search page from the URL query parameter.
-- Implement fast, client-side, case-insensitive string matching with trimmed whitespace, deterministic result ordering, and no heavy dependencies.
-- Add helpful empty states for (1) empty query and (2) zero matches (“No results found” with suggestion).
+- Add `<meta name="google-site-verification" content="hym4U2k_e6Y32exhxiM5yIhLCPh_rYLDWpY5B2Mr9wQ" />` to the global `<head>` so it renders on every route.
+- Publish/deploy a new production build containing the updated global `<head>` metadata.
 
-**User-visible outcome:** Students can use a search control from the header (desktop/mobile) to open a Search page, type a query, and see matching updates displayed as familiar cards; empty and no-result states clearly guide them.
+**User-visible outcome:** No visual changes; the site will include the Google Search Console verification meta tag in the document `<head>` across all pages/routes.
