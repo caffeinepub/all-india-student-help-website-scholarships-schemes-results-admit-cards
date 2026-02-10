@@ -8,10 +8,8 @@ import { getCategoryLabel } from '../content/updateTypes';
 export default function PostDetailPage() {
   const { postId } = useParams({ from: '/post/$postId' });
   
-  // Try backend first
   const { data: backendPost, isLoading } = useBackendPostById(postId);
   
-  // Fallback to seed updates
   const seedPost = getUpdateById(postId);
   
   const update = backendPost || seedPost;
@@ -55,22 +53,21 @@ export default function PostDetailPage() {
 
   const categoryLabel = getCategoryLabel(update.category);
 
-  // Hero/cover image with fallback
-  const fallbackHeroImage = '/assets/generated/hero-banner.dim_1600x600.png';
+  const fallbackHeroImage = '/assets/generated/ncert-sample-papers.dim_1600x900.jpg';
   const heroImage = update.imageUrl || fallbackHeroImage;
 
   return (
-    <div className="container py-6 sm:py-8 md:py-12 px-4">
+    <div className="container py-8 sm:py-12 md:py-16 px-4">
       <div className="max-w-4xl mx-auto">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-6 transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8 transition-colors"
         >
           <ArrowLeft className="h-4 w-4 flex-shrink-0" />
           Back to Home
         </Link>
 
-        <article className="bg-card border rounded-lg overflow-hidden">
+        <article className="bg-card border rounded-xl overflow-hidden shadow-paper">
           {/* Hero Image */}
           <div className="relative w-full h-64 sm:h-80 md:h-96 bg-muted overflow-hidden">
             <img
@@ -84,31 +81,23 @@ export default function PostDetailPage() {
           </div>
 
           {/* Content */}
-          <div className="p-5 sm:p-6 md:p-8">
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
-              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary whitespace-nowrap">
+          <div className="p-6 sm:p-8 md:p-10">
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <span className="text-xs font-semibold px-4 py-2 rounded-full bg-primary/15 text-primary border border-primary/20 whitespace-nowrap">
                 {categoryLabel}
               </span>
-              <div className="flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground">
-                <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Calendar className="h-4 w-4 flex-shrink-0" />
                 <time dateTime={update.date} className="whitespace-nowrap">{formattedDate}</time>
               </div>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 leading-tight break-words">{update.title}</h1>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 leading-tight break-words">{update.title}</h1>
 
             <div
-              className="prose prose-sm sm:prose-base lg:prose-lg max-w-none prose-headings:break-words prose-p:break-words prose-li:break-words"
+              className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-foreground prose-p:text-foreground prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-foreground prose-ul:text-foreground prose-ol:text-foreground"
               dangerouslySetInnerHTML={{ __html: update.body }}
             />
-
-            <div className="mt-8 pt-6 border-t">
-              <p className="text-xs sm:text-sm text-muted-foreground italic leading-relaxed">
-                Disclaimer: This information is provided for guidance purposes only. Please verify all details on 
-                official government websites before taking any action. We are not responsible for any changes in 
-                dates, eligibility criteria, or procedures.
-              </p>
-            </div>
           </div>
         </article>
       </div>

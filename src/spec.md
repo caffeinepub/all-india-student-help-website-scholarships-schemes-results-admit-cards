@@ -1,16 +1,14 @@
 # Specification
 
 ## Summary
-**Goal:** Upgrade the existing site to support hands-free ingestion, processing, categorization, image generation, and daily auto-publishing of education updates while preserving current URL/routing, design/layout, and Google Search Console verification.
+**Goal:** Automate daily ingestion of new content and hero images from admin-configured online sources, and enable centralized brand image updates plus a cohesive editorial visual refresh.
 
 **Planned changes:**
-- Preserve current frontend URL structure, routes, layout, and all existing meta tags (including the current `google-site-verification` tag in `frontend/index.html`).
-- Add backend persistent storage and query APIs for published posts (id, title, category, date, excerpt, body HTML, optional stateTags, image reference), including list/filter and single-post fetch.
-- Add a minimal, guarded owner ingestion flow (raw text and/or source URL + optional category/state tag hints) that queues submissions for processing without changing public navigation.
-- Implement backend processing to rewrite ingested items into student-friendly English (new title, excerpt, and HTML body with headings/bullets) and auto-assign categories using hints and/or deterministic rules.
-- Programmatically generate a simple, consistent, category-themed image per published post (no third-party AI services) and serve it for frontend rendering with a safe fallback if generation fails.
-- Add a daily backend scheduler to auto-publish processed queued items; ensure public pages never appear empty by falling back to existing seed content when backend has no posts.
-- Update frontend data sourcing so home/category/search and post detail pages prefer backend posts but fall back to `seedUpdates`, without changing existing routes or overall layout.
-- Ensure safe canister upgrade behavior: keep existing backend state intact and add new persistent post/queue state with migration only if required.
+- Add backend support to CRUD a list of admin-configured content sources (RSS/Atom/JSON), fetch enabled sources, deduplicate items, and convert new items into queued posts mapped to existing categories.
+- Add backend scheduling to run ingestion once per day and provide an admin-only “Run ingestion now” trigger, with queryable last-run status, counts, and recent errors.
+- Add backend logic to set/refresh ingested post hero images using source-provided image URLs when available, otherwise relying on existing category fallback behavior; normalize stored image URLs.
+- Add an admin-only frontend screen to manage sources, trigger ingestion, and view last run time, stats, and errors (reusing existing admin guard patterns).
+- Replace hardcoded branding image usage with a backend-configurable brand image reference, with safe frontend fallback to the existing static logo if unset or load fails.
+- Apply an editorial-style theme refresh (warm neutrals, high-contrast typography, subtle paper-like surfaces) across key pages (Home, list pages, Post detail, header/footer) without changing routes or site structure.
 
-**User-visible outcome:** The public site continues to look and behave the same (same URLs and layout) but automatically publishes new categorized posts with images daily; the owner can occasionally submit raw content or official links via a minimal form, and the site always shows content via fallback when no new backend posts exist.
+**User-visible outcome:** Admins can configure approved content sources and run or schedule daily ingestion to auto-add new posts with images; admins can update the site’s brand image centrally; users see a refreshed editorial theme across the site.

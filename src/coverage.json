@@ -1,196 +1,114 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-10T13:31:01.309Z",
+  "generatedAt": "2026-02-10T14:23:10.005Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 9,
-    "implemented": 5,
+    "total": 6,
+    "implemented": 3,
     "items": [
       {
-        "id": "REQ-1",
-        "summary": "Preserve the current site URL, routing, design, and layout, and keep Google Search Console verification intact by not removing or altering existing verification/meta tags (including the existing <meta name=\"google-site-verification\" ...> in frontend/index.html).",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/index.html",
-          "frontend/src/App.tsx",
-          "frontend/src/components/layout/SiteLayout.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/index.html",
-          "frontend/src/App.tsx"
-        ]
-      },
-      {
-        "id": "REQ-2",
-        "summary": "Add backend support for storing and serving dynamically published posts (education news/exam notifications/results/admit cards/scholarships) as persistent data, including fields needed by the existing frontend cards and detail pages (id, title, category, date, excerpt, body, optional stateTags, and an image reference).",
-        "status": "unknown",
-        "plannedFiles": [],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-3",
-        "summary": "Implement a minimal manual-ingestion mechanism (2–3 times/week) for the site owner to provide raw content or official-source links, which the backend queues for processing and future publishing without requiring ongoing dashboard work.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/OwnerIngestPage.tsx",
-          "frontend/src/hooks/useAdminGuard.ts",
-          "frontend/src/components/content/AccessDeniedScreen.tsx",
-          "frontend/src/App.tsx",
-          "frontend/src/components/content/FormStatusBanner.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/OwnerIngestPage.tsx",
-          "frontend/src/hooks/useAdminGuard.ts",
-          "frontend/src/components/content/AccessDeniedScreen.tsx",
-          "frontend/src/App.tsx",
-          "frontend/src/components/content/FormStatusBanner.tsx"
-        ]
-      },
-      {
         "id": "REQ-4",
-        "summary": "For each ingested item, automatically produce a student-friendly rewritten article in English that is clearly restructured (not a direct copy), including: a simplified title, a short excerpt, and an HTML body with headings and bullet points suitable for the existing PostDetailPage rendering.",
+        "summary": "Add backend support for automated content ingestion from admin-configured online sources (e.g., RSS/Atom feeds or JSON endpoints): store a list of sources, fetch and parse new items, and convert them into queued posts using the existing ingestion/publishing pipeline.",
         "status": "unknown",
         "plannedFiles": [],
         "matchedFiles": []
       },
       {
         "id": "REQ-5",
-        "summary": "Automatically assign each processed post to one of the existing site categories (education-news, competitive-exams, results, admit-cards, scholarships, schemes/school-education as applicable) using deterministic rules and/or optional owner-provided hints, and keep tags/stateTags when provided.",
+        "summary": "Implement a daily automated ingestion trigger in the backend that runs the fetch+ingest job once per day, and also expose an admin-only \"Run ingestion now\" method for manual triggering.",
         "status": "unknown",
         "plannedFiles": [],
         "matchedFiles": []
       },
       {
         "id": "REQ-6",
-        "summary": "Automatically generate and attach a relevant image for each published post without relying on third-party AI services, by generating a simple, consistent, category-themed image (e.g., SVG/PNG) derived from the post category and keywords, and make it retrievable by the frontend for display.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/content/updateTypes.ts",
-          "frontend/src/components/content/UpdateCard.tsx",
-          "frontend/src/pages/PostDetailPage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/content/updateTypes.ts",
-          "frontend/src/components/content/UpdateCard.tsx",
-          "frontend/src/pages/PostDetailPage.tsx"
-        ]
+        "summary": "Add backend support to automatically set or refresh post hero images based on admin-configured image rules: for each ingested item, derive an image URL (from the source item when available) or fall back to a category image; validate that the stored image URL is non-empty and usable by the frontend.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
       },
       {
         "id": "REQ-7",
-        "summary": "Add a daily backend scheduler that auto-publishes content from the processed queue every day (hands-free) while preserving site uptime and ensuring the public pages continue to show content (never empty) via fallback behavior.",
+        "summary": "Add a simple admin UI screen (owner/admin-only) to manage automation settings: content sources list, a \"Run ingestion now\" button, and a status panel showing last run time, counts, and recent errors.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/pages/EducationNewsPage.tsx",
-          "frontend/src/pages/ResultsPage.tsx",
-          "frontend/src/pages/AdmitCardsPage.tsx",
-          "frontend/src/pages/SchemesPage.tsx",
-          "frontend/src/pages/ScholarshipsPage.tsx",
-          "frontend/src/pages/CompetitiveExamsPage.tsx",
-          "frontend/src/pages/SchoolEducationPage.tsx",
-          "frontend/src/pages/StatePage.tsx"
+          "frontend/src/pages/AutomationSettingsPage.tsx",
+          "frontend/src/hooks/useAutomationSettings.ts",
+          "frontend/src/App.tsx",
+          "frontend/src/backend.d.ts"
         ],
         "matchedFiles": [
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/pages/EducationNewsPage.tsx",
-          "frontend/src/pages/ResultsPage.tsx",
-          "frontend/src/pages/AdmitCardsPage.tsx",
-          "frontend/src/pages/SchemesPage.tsx",
-          "frontend/src/pages/ScholarshipsPage.tsx",
-          "frontend/src/pages/CompetitiveExamsPage.tsx",
-          "frontend/src/pages/SchoolEducationPage.tsx",
-          "frontend/src/pages/StatePage.tsx"
+          "frontend/src/pages/AutomationSettingsPage.tsx",
+          "frontend/src/hooks/useAutomationSettings.ts",
+          "frontend/src/App.tsx",
+          "frontend/src/backend.d.ts"
         ]
       },
       {
         "id": "REQ-8",
-        "summary": "Update the frontend content sources so category pages, search, home 'latest' sections, and post detail pages use backend-published posts first and fall back to existing seedUpdates when backend has no content, without changing existing routes or overall layout.",
+        "summary": "Replace hardcoded site branding image usage with a backend-configurable \"brand image\" so the logo/brand image can be updated centrally (supporting the user’s request to update images wherever the brand name is used).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/utils/backendPostAdapters.ts",
-          "frontend/src/hooks/useBackendPosts.ts",
-          "frontend/src/hooks/useCombinedUpdates.ts",
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/pages/EducationNewsPage.tsx",
-          "frontend/src/pages/SchoolEducationPage.tsx",
-          "frontend/src/pages/CompetitiveExamsPage.tsx",
-          "frontend/src/pages/ScholarshipsPage.tsx",
-          "frontend/src/pages/SchemesPage.tsx",
-          "frontend/src/pages/ResultsPage.tsx",
-          "frontend/src/pages/AdmitCardsPage.tsx",
-          "frontend/src/pages/SearchPage.tsx",
-          "frontend/src/utils/searchUpdates.ts",
-          "frontend/src/pages/PostDetailPage.tsx"
+          "frontend/src/hooks/useBrandImage.ts",
+          "frontend/src/components/navigation/SiteHeader.tsx",
+          "frontend/src/pages/AutomationSettingsPage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/utils/backendPostAdapters.ts",
-          "frontend/src/hooks/useBackendPosts.ts",
-          "frontend/src/hooks/useCombinedUpdates.ts",
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/pages/EducationNewsPage.tsx",
-          "frontend/src/pages/SchoolEducationPage.tsx",
-          "frontend/src/pages/CompetitiveExamsPage.tsx",
-          "frontend/src/pages/ScholarshipsPage.tsx",
-          "frontend/src/pages/SchemesPage.tsx",
-          "frontend/src/pages/ResultsPage.tsx",
-          "frontend/src/pages/AdmitCardsPage.tsx",
-          "frontend/src/pages/SearchPage.tsx",
-          "frontend/src/utils/searchUpdates.ts",
-          "frontend/src/pages/PostDetailPage.tsx"
+          "frontend/src/components/navigation/SiteHeader.tsx",
+          "frontend/src/pages/AutomationSettingsPage.tsx"
         ]
       },
       {
         "id": "REQ-9",
-        "summary": "Add a safe upgrade path for new persistent content data structures in the single Motoko actor, using migration logic only if required to avoid resetting or losing any existing canister state (e.g., current contact submissions/user profiles).",
-        "status": "unknown",
-        "plannedFiles": [],
-        "matchedFiles": []
+        "summary": "Apply a cohesive, editorial-style visual theme refresh (warm neutrals, high-contrast typography, subtle paper-like surfaces) consistently across key pages (Home, list pages, Post detail, header/footer) without changing site structure or routes.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/components/content/UpdateCard.tsx",
+          "frontend/src/pages/PostDetailPage.tsx",
+          "frontend/src/components/layout/SiteLayout.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/components/content/UpdateCard.tsx",
+          "frontend/src/pages/PostDetailPage.tsx",
+          "frontend/src/components/layout/SiteLayout.tsx"
+        ]
       }
     ]
   },
   "changedFiles": [
-    "backend/blob-storage/Mixin.mo",
-    "backend/blob-storage/Storage.mo",
+    "backend/http-outcalls/outcall.mo",
     "backend/main.mo",
-    "backend/post-helper.mo",
+    "backend/migration.mo",
     "build-request.json",
     "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/index.html",
+    "frontend/public/assets/generated/ncert-sample-papers.dim_1600x900.jpg",
     "frontend/src/App.tsx",
     "frontend/src/backend.d.ts",
     "frontend/src/backend.ts",
-    "frontend/src/components/content/AccessDeniedScreen.tsx",
-    "frontend/src/components/content/FormStatusBanner.tsx",
     "frontend/src/components/content/UpdateCard.tsx",
-    "frontend/src/content/updateTypes.ts",
+    "frontend/src/components/layout/SiteLayout.tsx",
+    "frontend/src/components/navigation/SiteHeader.tsx",
     "frontend/src/declarations/backend.did.d.ts",
     "frontend/src/declarations/backend.did.js",
-    "frontend/src/hooks/useAdminGuard.ts",
-    "frontend/src/hooks/useBackendPosts.ts",
-    "frontend/src/hooks/useCombinedUpdates.ts",
-    "frontend/src/hooks/useQueries.ts",
-    "frontend/src/pages/AdmitCardsPage.tsx",
-    "frontend/src/pages/CompetitiveExamsPage.tsx",
-    "frontend/src/pages/ContactPage.tsx",
-    "frontend/src/pages/EducationNewsPage.tsx",
+    "frontend/src/hooks/useAutomationSettings.ts",
+    "frontend/src/index.css",
+    "frontend/src/pages/AutomationSettingsPage.tsx",
     "frontend/src/pages/HomePage.tsx",
-    "frontend/src/pages/OwnerIngestPage.tsx",
     "frontend/src/pages/PostDetailPage.tsx",
-    "frontend/src/pages/ResultsPage.tsx",
-    "frontend/src/pages/SchemesPage.tsx",
-    "frontend/src/pages/ScholarshipsPage.tsx",
-    "frontend/src/pages/SchoolEducationPage.tsx",
-    "frontend/src/pages/SearchPage.tsx",
-    "frontend/src/pages/StatePage.tsx",
-    "frontend/src/utils/backendPostAdapters.ts",
-    "frontend/src/utils/searchUpdates.ts",
+    "frontend/tailwind.config.js",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

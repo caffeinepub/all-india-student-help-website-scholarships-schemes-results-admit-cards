@@ -1,195 +1,133 @@
 {
   "kind": "build_request",
-  "title": "Add hands-free content ingestion, auto-rewrite, auto-categorize, image generation, and daily auto-publishing (upgrade without changing URL/design/Google verification)",
+  "title": "Automate daily content + image refresh via configured online sources",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-1",
-      "text": "Preserve the current site URL, routing, design, and layout, and keep Google Search Console verification intact by not removing or altering existing verification/meta tags (including the existing <meta name=\"google-site-verification\" ...> in frontend/index.html).",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Do NOT change URL, design, layout, or Google verification.",
-          "Do NOT remove or change any meta tags"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The file frontend/index.html still contains the existing google-site-verification meta tag with the same content value.",
-        "No routes in frontend/src/App.tsx are removed or renamed.",
-        "Header/footer/layout components remain present and visually consistent (no intentional redesign)."
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "text": "Add backend support for storing and serving dynamically published posts (education news/exam notifications/results/admit cards/scholarships) as persistent data, including fields needed by the existing frontend cards and detail pages (id, title, category, date, excerpt, body, optional stateTags, and an image reference).",
-      "target": "backend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Categorize correctly",
-          "Publish daily without manual work"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Backend exposes query methods to list posts (optionally filterable by category/state tag/search) and to fetch a single post by id.",
-        "Posts persist across canister upgrades (stable storage).",
-        "Returned post shape supports the existing frontend post listing and PostDetail views (title, excerpt, date, category, body)."
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Implement a minimal manual-ingestion mechanism (2–3 times/week) for the site owner to provide raw content or official-source links, which the backend queues for processing and future publishing without requiring ongoing dashboard work.",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "I will provide raw content or links from official sources 2–3 times per week",
-          "No manual work"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Backend provides an authenticated/guarded ingestion method that accepts: raw text and/or a source URL, optional hints (desired category/state tags), and stores the submission in a queue.",
-        "Frontend provides a minimal submission UI that is not disruptive to the public site experience (e.g., an unlinked route or a simple form page), and submitting shows a success/failure banner.",
-        "The ingestion flow does not require changing existing public navigation or layout."
-      ]
-    },
-    {
       "id": "REQ-4",
-      "text": "For each ingested item, automatically produce a student-friendly rewritten article in English that is clearly restructured (not a direct copy), including: a simplified title, a short excerpt, and an HTML body with headings and bullet points suitable for the existing PostDetailPage rendering.",
+      "text": "Add backend support for automated content ingestion from admin-configured online sources (e.g., RSS/Atom feeds or JSON endpoints): store a list of sources, fetch and parse new items, and convert them into queued posts using the existing ingestion/publishing pipeline.",
       "target": "backend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-9"
         ],
         "quotes": [
-          "Rewrite in simple student-friendly language",
-          "Rewrite in simple, original language for students"
+          "automate this website means online fetching images... every day you web is scrapping means online you search everything and automatically update and add every day daily news and educational use whatever the content related to my website."
         ]
       },
       "acceptanceCriteria": [
-        "Backend processing generates (or regenerates) title, excerpt, and body HTML from the ingested raw content/link metadata.",
-        "Generated body is valid HTML fragments compatible with the current frontend rendering approach.",
-        "The output is consistently simpler than the input: includes short sentences, clear steps/dates/eligibility sections when detectable, and avoids copying large contiguous spans from the input."
+        "Admin can create/read/update/delete (CRUD) a list of content sources (each source includes at minimum: name, URL, default category, enabled flag).",
+        "Backend can fetch enabled sources and ingest only new items (no duplicates on repeated runs).",
+        "Each ingested item produces a new queued post with title/body/excerpt populated and mapped to one of the site’s existing categories used by the frontend.",
+        "Failures to fetch/parse a single source do not prevent processing other sources; errors are recorded in a retrievable status log for admins."
       ]
     },
     {
       "id": "REQ-5",
-      "text": "Automatically assign each processed post to one of the existing site categories (education-news, competitive-exams, results, admit-cards, scholarships, schemes/school-education as applicable) using deterministic rules and/or optional owner-provided hints, and keep tags/stateTags when provided.",
+      "text": "Implement a daily automated ingestion trigger in the backend that runs the fetch+ingest job once per day, and also expose an admin-only \"Run ingestion now\" method for manual triggering.",
       "target": "backend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-9"
         ],
         "quotes": [
-          "Categorize content correctly into existing sections",
-          "Auto-assign correct categories and tags"
+          "every day you web is scrapping means online you search everything and automatically update and add every day daily news and educational use whatever the content related to my website."
         ]
       },
       "acceptanceCriteria": [
-        "If the owner provides a category hint, it is validated against existing categories and applied.",
-        "If no hint is provided, backend assigns a category using keyword/rule-based classification with a sensible fallback to education-news.",
-        "Assigned categories match the existing UpdateCategory values used on the frontend."
+        "There is a backend mechanism to run ingestion automatically on a daily cadence (best-effort).",
+        "Admins can manually trigger ingestion on-demand via an admin-only backend method.",
+        "The last run time and last run outcome (success/partial/failure + counts) are queryable by admins."
       ]
     },
     {
       "id": "REQ-6",
-      "text": "Automatically generate and attach a relevant image for each published post without relying on third-party AI services, by generating a simple, consistent, category-themed image (e.g., SVG/PNG) derived from the post category and keywords, and make it retrievable by the frontend for display.",
-      "target": "both",
+      "text": "Add backend support to automatically set or refresh post hero images based on admin-configured image rules: for each ingested item, derive an image URL (from the source item when available) or fall back to a category image; validate that the stored image URL is non-empty and usable by the frontend.",
+      "target": "backend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-9"
         ],
         "quotes": [
-          "Add AI-generated images automatically",
-          "Automatically fetch and upload relevant images for each article"
+          "online fetching images and automatically you update the images"
         ]
       },
       "acceptanceCriteria": [
-        "When a post is published, it has an associated image reference (id/URL/path) that the frontend can render.",
-        "Images are produced programmatically within the app stack (no external LLM/image-generation API integration required).",
-        "If image generation fails, the post still publishes and the frontend shows a safe fallback image state."
+        "When a source item includes an image URL (or equivalent), the ingested post’s imageUrl is set to it; otherwise, the post uses the existing category fallback behavior.",
+        "Image URLs saved to posts are normalized to a string that the frontend can load (http(s) URL or existing site asset path).",
+        "The frontend UpdateCard fallback behavior remains functional when an image fails to load."
       ]
     },
     {
       "id": "REQ-7",
-      "text": "Add a daily backend scheduler that auto-publishes content from the processed queue every day (hands-free) while preserving site uptime and ensuring the public pages continue to show content (never empty) via fallback behavior.",
-      "target": "both",
+      "text": "Add a simple admin UI screen (owner/admin-only) to manage automation settings: content sources list, a \"Run ingestion now\" button, and a status panel showing last run time, counts, and recent errors.",
+      "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-9"
         ],
         "quotes": [
-          "Publish daily without manual work",
-          "Website updates itself daily with text and images",
-          "Ensure all sections always show updated content (never empty)."
+          "automate this website... every day... automatically update and add every day daily news"
         ]
       },
       "acceptanceCriteria": [
-        "Backend runs a scheduled job daily that publishes at least one queued processed item when available.",
-        "If no queued items exist, the site still displays content on each category page (frontend falls back to existing seed content rather than showing empty states).",
-        "Publishing does not require manual triggers, logins, or dashboard actions beyond occasional ingestion submissions."
+        "Only authorized admins can access the automation settings screen (reuse existing admin guard patterns).",
+        "Admin can add/edit/enable/disable/remove content sources from the UI.",
+        "Admin can click \"Run ingestion now\" and see a success/error result in the UI.",
+        "The UI displays last run time and basic ingestion stats returned from the backend."
       ]
     },
     {
       "id": "REQ-8",
-      "text": "Update the frontend content sources so category pages, search, home 'latest' sections, and post detail pages use backend-published posts first and fall back to existing seedUpdates when backend has no content, without changing existing routes or overall layout.",
-      "target": "frontend",
+      "text": "Replace hardcoded site branding image usage with a backend-configurable \"brand image\" so the logo/brand image can be updated centrally (supporting the user’s request to update images wherever the brand name is used).",
+      "target": "both",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-9"
         ],
         "quotes": [
-          "Ensure all sections always show updated content",
-          "Do NOT change URL, design, layout"
+          "automatically you update the images wherever you have written the Aurora Studios"
         ]
       },
       "acceptanceCriteria": [
-        "HomePage and category pages show backend posts when available.",
-        "When backend returns zero posts for a category, the page renders seedUpdates content instead of 'No updates available' empty states.",
-        "Post detail route (/post/$postId) can resolve both backend post ids and seedUpdates ids without breaking navigation."
+        "Backend exposes admin-only methods to set/update a brand image reference (at minimum a URL string, optionally backed by stored asset bytes using existing storage mixins).",
+        "Frontend header logo uses the backend-configured brand image reference, with a safe fallback to the existing static logo if none is configured or load fails.",
+        "Brand image can be updated by an admin without redeploying the frontend."
       ]
     },
     {
       "id": "REQ-9",
-      "text": "Add a safe upgrade path for new persistent content data structures in the single Motoko actor, using migration logic only if required to avoid resetting or losing any existing canister state (e.g., current contact submissions/user profiles).",
-      "target": "backend",
+      "text": "Apply a cohesive, editorial-style visual theme refresh (warm neutrals, high-contrast typography, subtle paper-like surfaces) consistently across key pages (Home, list pages, Post detail, header/footer) without changing site structure or routes.",
+      "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "IMPORTANT: This is an upgrade request, NOT a rebuild. Do NOT change or reset anything already done."
+          "msg-9"
         ]
       },
       "acceptanceCriteria": [
-        "Existing backend state (contact submissions and user profiles) remains intact after upgrade.",
-        "New post/queue state persists across upgrades.",
-        "Migration is implemented only if necessary under the project’s conditional migration policy."
+        "Colors/typography/spacing feel consistent across header, footer, cards, and page sections.",
+        "No routes are removed; existing navigation remains intact.",
+        "Theme avoids blue/purple as the primary brand palette."
       ]
     }
   ],
   "constraints": [
-    "Do not remove or alter any Google Search Console verification/ownership/meta tags or require new verification (frontend/index.html must retain the existing verification meta tag).",
-    "Do not change the website URL structure or existing routes.",
-    "Do not redesign or change the existing layout; changes must be additive and minimal.",
-    "Backend must remain a single Motoko actor (all logic in backend/main.mo; migration only when needed).",
-    "Do not edit frontend immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui."
+    "Do not edit files under frontend/src/components/ui (read-only Shadcn components must be composed, not modified).",
+    "Do not edit frontend/src/hooks/useInternetIdentity.ts or frontend/src/hooks/useActor.ts or frontend/src/main.tsx (immutable paths).",
+    "Backend must remain a single Motoko actor with all core logic in backend/main.mo; only introduce backend/migration.mo if an upgrade-safe state migration is required.",
+    "Automation must not rely on unrestricted \"search the whole web\" scraping; ingestion must be limited to explicit admin-configured sources/endpoints that can be fetched over HTTPS and parsed deterministically.",
+    "Keep existing SEO verification meta tags intact (e.g., Google Search Console tag in frontend/index.html)."
   ],
   "nonGoals": [
-    "Do not implement automated scraping/crawling of arbitrary government/education sites beyond what the owner manually provides as raw content or links.",
-    "Do not add third-party authentication providers (only existing Internet Identity patterns if needed).",
-    "Do not integrate external LLM or external AI image-generation services/APIs.",
-    "Do not add a complex admin dashboard; keep owner input minimal and focused on occasional submissions."
+    "Building a general-purpose web crawler that searches arbitrary websites without configured feeds/APIs.",
+    "Integrating third-party AI/LLM services for rewriting or summarization.",
+    "Real-time updates via WebSockets/push notifications.",
+    "Circumventing copyright/terms-of-service restrictions for third-party content/images."
   ],
   "imageRequirements": {
     "required": [],
-    "edits": []
+    "edits": [
+      "Crop/resize for a wide hero/card-safe aspect ratio and export (ncert-launches-portal-for-home-delivery-of-books.jpg > ncert-sample-papers.dim_1600x900.jpg)"
+    ]
   }
 }

@@ -1,144 +1,80 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-10T13:31:01.306Z",
-  "summary": "The diff implements an admin-guarded manual ingestion UI route and updates the frontend to prefer backend posts while falling back to seed content. However, several backend requirements are either missing or only partially implemented based on the provided diff summary, including persistent/stable storage for posts/queue, backend query APIs for listing/fetching posts (not evidenced in main.mo snippet), automatic rewrite, deterministic categorization, true programmatic image generation/serving, and a hands-free daily scheduler. Google verification preservation and route/layout preservation cannot be fully verified from the diff summary (index.html not shown).",
+  "generatedAt": "2026-02-10T14:23:10.002Z",
+  "summary": "Diff implements parts of REQ-7/REQ-8/REQ-9 on the frontend (new admin automation page/route, brand image hooks + header logo binding, editorial theme styling, image fallbacks). Backend changes add new types/state placeholders (ingestionSources, brandImage, lastIngestionTimestamp) and a migration, but the core ingestion automation (fetch/parse/dedup/status/daily trigger) and full source CRUD schema required by REQ-4/5/6 are not evidenced in the diff summary.",
   "missing_requirements": [
     {
-      "id": "REQ-1",
-      "requirement": "Preserve Google Search Console verification meta tag in frontend/index.html with the same content value.",
-      "reason": "The diff summary does not include frontend/index.html, so there is no evidence the existing google-site-verification meta tag was preserved unchanged.",
-      "evidence": [
-        "File diff summary: frontend/index.html not shown/modified"
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "requirement": "Backend exposes query methods to list posts (optionally filterable by category/state tag/search) and fetch a single post by id.",
-      "reason": "Frontend calls actor.getPublishedPostsByCategory and actor.getPostById, but the backend/main.mo snippet provided is truncated and does not show these query methods being implemented.",
-      "evidence": [
-        "frontend/src/hooks/useBackendPosts.ts (calls getPublishedPostsByCategory, getPostById)",
-        "backend/main.mo (truncated; methods not visible)"
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "requirement": "Posts and processed queue persist across canister upgrades using stable storage.",
-      "reason": "backend/main.mo shows in-memory Map/List structures (posts, processedQueue, submissions, userProfiles) but the diff summary does not show stable variables, preupgrade/postupgrade hooks, or migration logic to persist the new post/queue data across upgrades.",
-      "evidence": [
-        "backend/main.mo (shows let posts = Map.empty..., let processedQueue = List.empty..., no stable/persistence shown in snippet)"
-      ]
-    },
-    {
       "id": "REQ-4",
-      "requirement": "Automatically rewrite ingested items into a student-friendly English article (simplified title, excerpt, and HTML body with headings/bullets), not a direct copy.",
-      "reason": "PostHelper.processRawContent appears to pass through title/excerpt/body from ingestion without evidence of rewriting, restructuring, or HTML generation logic.",
+      "requirement": "CRUD a list of content sources with at minimum: name, URL, default category, enabled flag; fetch enabled sources over HTTPS, parse deterministically, ingest only new items (no duplicates), enqueue as posts mapped to existing categories; per-source failures don't block others; errors recorded in a retrievable admin status log.",
+      "reason": "Backend source schema shown does not include required fields (name/default category/enabled), and the diff summary does not show any HTTPS fetching, RSS/JSON parsing, deduplication, category mapping, or admin-retrievable error/status logging implementation.",
       "evidence": [
-        "backend/post-helper.mo (processRawContent returns provided title/excerpt/body without transformation)",
-        "backend/main.mo (manualIngestContent passes owner-provided fields directly into processRawContent)"
+        "backend/main.mo",
+        "backend/migration.mo",
+        "frontend/src/hooks/useAutomationSettings.ts"
       ]
     },
     {
       "id": "REQ-5",
-      "requirement": "Automatically assign category using deterministic rules and/or validate and apply owner-provided hint with fallback to education-news.",
-      "reason": "manualIngestContent accepts a category string and uses it directly; no validation against allowed categories and no keyword/rule-based classification is evidenced.",
+      "requirement": "Daily automated ingestion trigger plus an admin-only manual trigger; last run time and last run outcome (success/partial/failure + counts) queryable by admins.",
+      "reason": "Frontend calls actor.triggerAutomatedIngestion(), but the diff summary does not show backend implementation of this method, any daily scheduling mechanism, nor any queryable last-run outcome/counts APIs; only a lastIngestionTimestamp variable is visible without outcome/stats.",
       "evidence": [
-        "backend/main.mo (manualIngestContent takes category: Text and passes it through)",
-        "backend/post-helper.mo (categoryFromContentType exists but is not evidenced as used for classification/validation)"
+        "frontend/src/hooks/useAutomationSettings.ts",
+        "backend/main.mo"
       ]
     },
     {
       "id": "REQ-6",
-      "requirement": "Programmatically generate and attach a relevant image per published post (SVG/PNG) within the app stack and make it retrievable by the frontend, with safe fallback if generation fails.",
-      "reason": "PostHelper sets imageUrl to a static path pattern (\"/backend/<category>.svg\"), but the diff summary provides no evidence of actual image generation, storage, or serving endpoints/files for these SVGs from the backend.",
+      "requirement": "For each ingested item, set/refresh hero image URL from item when available or fall back to category image; normalize/validate stored image URLs to frontend-loadable paths; keep frontend fallback behavior.",
+      "reason": "Frontend fallback behavior is implemented (onError fallback in UpdateCard/PostDetailPage), but there is no evidence of backend ingestion logic that derives image URLs from feed items, applies rules, normalizes/validates URLs, or sets post.imageUrl during ingestion.",
       "evidence": [
-        "backend/post-helper.mo (imageUrl = \"/backend/\" # category # \".svg\")",
-        "frontend/src/components/content/UpdateCard.tsx (renders imageUrl with fallback)",
-        "frontend/src/pages/PostDetailPage.tsx (renders hero image with fallback)"
+        "backend/main.mo",
+        "frontend/src/components/content/UpdateCard.tsx",
+        "frontend/src/pages/PostDetailPage.tsx"
       ]
     },
     {
       "id": "REQ-7",
-      "requirement": "Daily backend scheduler auto-publishes at least one processed item hands-free (no manual triggers/logins).",
-      "reason": "The diff shows a callable method autoPublishScheduledContent gated to admins, but no evidence of a daily timer/scheduler mechanism that runs automatically is present in the summary.",
+      "requirement": "Admin automation settings screen includes: manage sources (add/edit/enable/disable/remove), 'Run ingestion now', and a status panel showing last run time, counts, and recent errors.",
+      "reason": "A guarded AutomationSettingsPage and source add/remove + trigger ingestion hooks are shown, but there is no evidence of edit/enable/disable UI controls, nor any status panel that displays last run time/counts/recent errors returned from backend.",
       "evidence": [
-        "backend/main.mo (autoPublishScheduledContent requires admin; no scheduling/timer shown in snippet)"
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "requirement": "Ensure public pages never empty via fallback behavior when no queued items exist (fallback to seed content).",
-      "reason": "Category pages now use combined updates (backend + seed), but useCombinedUpdates always appends seedUpdates even when backend returns some posts; the specific AC mentions fallback when backend returns zero for a category. The diff does not show logic to avoid empty states in all relevant places (e.g., StatePage still shows an empty message when no state-tagged updates exist).",
-      "evidence": [
-        "frontend/src/hooks/useCombinedUpdates.ts (always returns [...backendPosts, ...seedUpdates])",
-        "frontend/src/pages/StatePage.tsx (shows 'No updates available...' when stateUpdates.length === 0)"
-      ]
-    },
-    {
-      "id": "REQ-9",
-      "requirement": "Add a safe upgrade path (migration only if needed) ensuring existing contact submissions/user profiles remain intact and new post/queue state persists across upgrades.",
-      "reason": "The diff summary does not show explicit preupgrade/postupgrade handling or stable state definitions to preserve both existing and newly-added structures across upgrades.",
-      "evidence": [
-        "backend/main.mo (truncated; no upgrade hooks/migration shown)"
+        "frontend/src/pages/AutomationSettingsPage.tsx",
+        "frontend/src/hooks/useAutomationSettings.ts"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Added an 'Access Denied' screen and admin guard flow for a restricted admin-only area.",
-      "reason": "While REQ-3 requires an authenticated/guarded ingestion method/UI, the specific AccessDeniedScreen UX component and admin-guard hook are not explicitly requested; they may be implementation detail but are additional beyond the minimal UI requirement.",
+      "description": "Added breadcrumb navigation UI across non-home pages.",
+      "reason": "BuildRequest did not request breadcrumbs; this changes site UI structure (even though routes remain intact).",
       "evidence": [
-        "frontend/src/components/content/AccessDeniedScreen.tsx",
-        "frontend/src/hooks/useAdminGuard.ts",
-        "frontend/src/pages/OwnerIngestPage.tsx"
+        "frontend/src/components/layout/SiteLayout.tsx",
+        "frontend-file-summaries.txt (Breadcrumbs component entry)"
       ]
     },
     {
-      "description": "Added/modified styling system details (OKLCH tokens, shadows, typography tweaks) that could constitute broader design changes.",
-      "reason": "The BuildRequest explicitly constrained changes to be additive and minimal and to avoid redesign; the diff summary indicates significant styling/theming updates, which were not requested as part of the ingestion/publishing feature set.",
+      "description": "Footer attribution and UTM tracking links (\"Caffeine.ai attribution with UTM tracking\").",
+      "reason": "Not requested by any REQ; could be considered unrelated/extra functionality.",
       "evidence": [
-        "frontend-file-summaries.txt (frontend/src/index.css: OKLCH color system, typography changes)",
-        "frontend-file-summaries.txt (frontend/tailwind.config.js: extended theme tokens, shadows, animations)"
-      ]
-    },
-    {
-      "description": "Footer attribution with UTM tracking.",
-      "reason": "Not requested in the BuildRequest requirements; appears as an added marketing/attribution element.",
-      "evidence": [
-        "frontend-file-summaries.txt (frontend/src/components/layout/SiteFooter.tsx: Caffeine.ai attribution with UTM tracking)"
+        "frontend-file-summaries.txt (SiteFooter.tsx entry)"
       ]
     }
   ],
-  "confidence": 0.72,
+  "confidence": 0.74,
   "changed_files": [
     "backend/main.mo",
-    "backend/post-helper.mo",
+    "backend/migration.mo",
     "frontend-file-summaries.txt",
-    "frontend/index.html",
     "frontend/src/App.tsx",
-    "frontend/src/components/content/AccessDeniedScreen.tsx",
-    "frontend/src/components/content/FormStatusBanner.tsx",
     "frontend/src/components/content/UpdateCard.tsx",
-    "frontend/src/content/updateTypes.ts",
-    "frontend/src/hooks/useAdminGuard.ts",
-    "frontend/src/hooks/useBackendPosts.ts",
-    "frontend/src/hooks/useCombinedUpdates.ts",
-    "frontend/src/hooks/useQueries.ts",
-    "frontend/src/pages/AdmitCardsPage.tsx",
-    "frontend/src/pages/CompetitiveExamsPage.tsx",
-    "frontend/src/pages/ContactPage.tsx",
-    "frontend/src/pages/EducationNewsPage.tsx",
+    "frontend/src/components/layout/SiteLayout.tsx",
+    "frontend/src/components/navigation/SiteHeader.tsx",
+    "frontend/src/hooks/useAutomationSettings.ts",
+    "frontend/src/index.css",
+    "frontend/src/pages/AutomationSettingsPage.tsx",
     "frontend/src/pages/HomePage.tsx",
-    "frontend/src/pages/OwnerIngestPage.tsx",
     "frontend/src/pages/PostDetailPage.tsx",
-    "frontend/src/pages/ResultsPage.tsx",
-    "frontend/src/pages/SchemesPage.tsx",
-    "frontend/src/pages/ScholarshipsPage.tsx",
-    "frontend/src/pages/SchoolEducationPage.tsx",
-    "frontend/src/pages/SearchPage.tsx",
-    "frontend/src/pages/StatePage.tsx",
-    "frontend/src/utils/backendPostAdapters.ts",
-    "frontend/src/utils/searchUpdates.ts",
+    "frontend/tailwind.config.js",
     "project_state.json"
   ]
 }

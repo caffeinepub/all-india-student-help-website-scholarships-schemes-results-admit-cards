@@ -19,6 +19,11 @@ export const _CaffeineStorageRefillResult = IDL.Record({
   'success' : IDL.Opt(IDL.Bool),
   'topped_up_amount' : IDL.Opt(IDL.Nat),
 });
+export const IngestionSource = IDL.Record({
+  'id' : IDL.Text,
+  'url' : IDL.Text,
+  'imageRule' : IDL.Text,
+});
 export const UserRole = IDL.Variant({
   'admin' : IDL.Null,
   'user' : IDL.Null,
@@ -28,6 +33,12 @@ export const ContactSubmission = IDL.Record({
   'name' : IDL.Text,
   'email' : IDL.Text,
   'message' : IDL.Text,
+});
+export const BrandImage = IDL.Record({
+  'url' : IDL.Text,
+  'thumbnail' : IDL.Text,
+  'color' : IDL.Text,
+  'lastUpdated' : IDL.Int,
 });
 export const UserProfile = IDL.Record({ 'name' : IDL.Text });
 export const PostType = IDL.Record({
@@ -78,11 +89,14 @@ export const idlService = IDL.Service({
     ),
   '_caffeineStorageUpdateGatewayPrincipals' : IDL.Func([], [], []),
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+  'addIngestionSource' : IDL.Func([IngestionSource], [], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
   'autoPublishScheduledContent' : IDL.Func([], [], []),
   'getAllSubmissions' : IDL.Func([], [IDL.Vec(ContactSubmission)], ['query']),
+  'getBrandImage' : IDL.Func([], [IDL.Opt(BrandImage)], ['query']),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getIngestionSources' : IDL.Func([], [IDL.Vec(IngestionSource)], ['query']),
   'getPostById' : IDL.Func([IDL.Text], [IDL.Opt(Post)], ['query']),
   'getPublishedPostsByCategory' : IDL.Func(
       [IDL.Text],
@@ -100,8 +114,11 @@ export const idlService = IDL.Service({
       [],
       [],
     ),
+  'removeIngestionSource' : IDL.Func([IDL.Text], [], []),
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
   'submitContactForm' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
+  'triggerAutomatedIngestion' : IDL.Func([], [], []),
+  'updateBrandImage' : IDL.Func([BrandImage], [], []),
 });
 
 export const idlInitArgs = [];
@@ -118,6 +135,11 @@ export const idlFactory = ({ IDL }) => {
     'success' : IDL.Opt(IDL.Bool),
     'topped_up_amount' : IDL.Opt(IDL.Nat),
   });
+  const IngestionSource = IDL.Record({
+    'id' : IDL.Text,
+    'url' : IDL.Text,
+    'imageRule' : IDL.Text,
+  });
   const UserRole = IDL.Variant({
     'admin' : IDL.Null,
     'user' : IDL.Null,
@@ -127,6 +149,12 @@ export const idlFactory = ({ IDL }) => {
     'name' : IDL.Text,
     'email' : IDL.Text,
     'message' : IDL.Text,
+  });
+  const BrandImage = IDL.Record({
+    'url' : IDL.Text,
+    'thumbnail' : IDL.Text,
+    'color' : IDL.Text,
+    'lastUpdated' : IDL.Int,
   });
   const UserProfile = IDL.Record({ 'name' : IDL.Text });
   const PostType = IDL.Record({
@@ -177,11 +205,14 @@ export const idlFactory = ({ IDL }) => {
       ),
     '_caffeineStorageUpdateGatewayPrincipals' : IDL.Func([], [], []),
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+    'addIngestionSource' : IDL.Func([IngestionSource], [], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
     'autoPublishScheduledContent' : IDL.Func([], [], []),
     'getAllSubmissions' : IDL.Func([], [IDL.Vec(ContactSubmission)], ['query']),
+    'getBrandImage' : IDL.Func([], [IDL.Opt(BrandImage)], ['query']),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getIngestionSources' : IDL.Func([], [IDL.Vec(IngestionSource)], ['query']),
     'getPostById' : IDL.Func([IDL.Text], [IDL.Opt(Post)], ['query']),
     'getPublishedPostsByCategory' : IDL.Func(
         [IDL.Text],
@@ -199,8 +230,11 @@ export const idlFactory = ({ IDL }) => {
         [],
         [],
       ),
+    'removeIngestionSource' : IDL.Func([IDL.Text], [], []),
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
     'submitContactForm' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
+    'triggerAutomatedIngestion' : IDL.Func([], [], []),
+    'updateBrandImage' : IDL.Func([BrandImage], [], []),
   });
 };
 

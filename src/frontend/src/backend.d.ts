@@ -44,6 +44,17 @@ export interface PostType {
     imageUrl: string;
     excerpt: string;
 }
+export interface IngestionSource {
+    id: string;
+    url: string;
+    imageRule: string;
+}
+export interface BrandImage {
+    url: string;
+    thumbnail: string;
+    color: string;
+    lastUpdated: bigint;
+}
 export interface UserProfile {
     name: string;
 }
@@ -53,16 +64,22 @@ export enum UserRole {
     guest = "guest"
 }
 export interface backendInterface {
+    addIngestionSource(source: IngestionSource): Promise<void>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     autoPublishScheduledContent(): Promise<void>;
     getAllSubmissions(): Promise<Array<ContactSubmission>>;
+    getBrandImage(): Promise<BrandImage | null>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
+    getIngestionSources(): Promise<Array<IngestionSource>>;
     getPostById(id: string): Promise<Post | null>;
     getPublishedPostsByCategory(arg0: string): Promise<Array<Post>>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isCallerAdmin(): Promise<boolean>;
     manualIngestContent(title: string, category: string, body: string, excerpt: string, stateTags: Array<string>): Promise<void>;
+    removeIngestionSource(id: string): Promise<void>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
     submitContactForm(name: string, email: string, message: string): Promise<void>;
+    triggerAutomatedIngestion(): Promise<void>;
+    updateBrandImage(image: BrandImage): Promise<void>;
 }

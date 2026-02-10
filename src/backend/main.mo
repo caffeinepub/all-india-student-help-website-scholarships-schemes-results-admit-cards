@@ -3,13 +3,17 @@ import List "mo:core/List";
 import Text "mo:core/Text";
 import Nat "mo:core/Nat";
 import Iter "mo:core/Iter";
+import Int "mo:core/Int";
+import Time "mo:core/Time";
 import Principal "mo:core/Principal";
 import Runtime "mo:core/Runtime";
-import MixinStorage "blob-storage/Mixin";
 import PostHelper "post-helper";
+import MixinStorage "blob-storage/Mixin";
 import AccessControl "authorization/access-control";
 import MixinAuthorization "authorization/MixinAuthorization";
+import Migration "migration";
 
+(with migration = Migration.run)
 actor {
   type ContactSubmission = {
     name : Text;
@@ -17,18 +21,34 @@ actor {
     message : Text;
   };
 
+  public type Post = PostHelper.Post;
+  public type ProcessedPost = PostHelper.ProcessedPost;
+
+  public type IngestionSource = {
+    id : Text;
+    url : Text;
+    imageRule : Text;
+  };
+
+  public type BrandImage = {
+    url : Text;
+    lastUpdated : Int;
+    thumbnail : Text;
+    color : Text;
+  };
+
   public type UserProfile = {
     name : Text;
   };
 
-  public type Post = PostHelper.Post;
-  public type ProcessedPost = PostHelper.ProcessedPost;
-
   let submissions = Map.empty<Text, ContactSubmission>();
   let posts = Map.empty<Text, PostHelper.Post>();
+  let ingestionSources = Map.empty<Text, IngestionSource>();
   let processedQueue = List.empty<PostHelper.ProcessedPost>();
   var nextPostId = 1;
+  var lastIngestionTimestamp = 0;
   let userProfiles = Map.empty<Principal, UserProfile>();
+  var brandImage : ?BrandImage = null;
   let accessControlState = AccessControl.initState();
   include MixinAuthorization(accessControlState);
   include MixinStorage();
@@ -128,11 +148,96 @@ actor {
     };
   };
 
+  private func isPostPublished(post : PostHelper.Post) : Bool {
+    switch (post) {
+      case (#examNotification(p)) { p.published };
+      case (#result(p)) { p.published };
+      case (#admitCard(p)) { p.published };
+      case (#scholarship(p)) { p.published };
+      case (#educationNews(p)) { p.published };
+      case (#generalInfo(p)) { p.published };
+      case (#stateScheme(p)) { p.published };
+    };
+  };
+
   public query ({ caller }) func getPublishedPostsByCategory(_ : Text) : async [PostHelper.Post] {
-    posts.values().toArray();
+    // Public access - anyone including guests can view published posts
+    // Filter to only return published posts
+    let allPosts = posts.values().toArray();
+    let publishedPosts = List.empty<PostHelper.Post>();
+
+    for (post in allPosts.values()) {
+      if (isPostPublished(post)) {
+        publishedPosts.add(post);
+      };
+    };
+
+    publishedPosts.values().toArray();
   };
 
   public query ({ caller }) func getPostById(id : Text) : async ?PostHelper.Post {
-    posts.get(id);
+    // Public access for published posts, admin access for unpublished
+    switch (posts.get(id)) {
+      case (null) { null };
+      case (?post) {
+        if (isPostPublished(post)) {
+          // Published posts are accessible to everyone
+          ?post;
+        } else {
+          // Unpublished posts require admin access
+          if (AccessControl.isAdmin(accessControlState, caller)) {
+            ?post;
+          } else {
+            null; // Return null instead of trapping for better UX
+          };
+        };
+      };
+    };
+  };
+
+  public query ({ caller }) func getBrandImage() : async ?BrandImage {
+    brandImage;
+  };
+
+  public shared ({ caller }) func updateBrandImage(image : BrandImage) : async () {
+    if (not AccessControl.isAdmin(accessControlState, caller)) {
+      Runtime.trap("Unauthorized: Only admins can update the brand image");
+    };
+    brandImage := ?image;
+  };
+
+  public shared ({ caller }) func addIngestionSource(source : IngestionSource) : async () {
+    if (not AccessControl.isAdmin(accessControlState, caller)) {
+      Runtime.trap("Unauthorized: Only admins can add ingestion sources");
+    };
+    ingestionSources.add(source.id, source);
+  };
+
+  public shared ({ caller }) func removeIngestionSource(id : Text) : async () {
+    if (not AccessControl.isAdmin(accessControlState, caller)) {
+      Runtime.trap("Unauthorized: Only admins can remove ingestion sources");
+    };
+    ingestionSources.remove(id);
+  };
+
+  public shared ({ caller }) func triggerAutomatedIngestion() : async () {
+    if (not AccessControl.isAdmin(accessControlState, caller)) {
+      Runtime.trap("Unauthorized: Only admins can manually trigger ingestion");
+    };
+    let currentTime = Time.now();
+    let timeDifference = currentTime - lastIngestionTimestamp;
+
+    if (Int.abs(timeDifference) >= 86400000000) {
+      // 24 hours in nanoseconds equals 86400000000
+      // Implement content fetching and processing here
+      lastIngestionTimestamp := currentTime.toNat();
+    };
+  };
+
+  public query ({ caller }) func getIngestionSources() : async [IngestionSource] {
+    if (not AccessControl.isAdmin(accessControlState, caller)) {
+      Runtime.trap("Unauthorized: Only admins can view ingestion sources");
+    };
+    ingestionSources.values().toArray();
   };
 };

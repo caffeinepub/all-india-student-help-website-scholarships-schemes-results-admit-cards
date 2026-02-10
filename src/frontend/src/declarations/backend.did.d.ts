@@ -10,10 +10,21 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
+export interface BrandImage {
+  'url' : string,
+  'thumbnail' : string,
+  'color' : string,
+  'lastUpdated' : bigint,
+}
 export interface ContactSubmission {
   'name' : string,
   'email' : string,
   'message' : string,
+}
+export interface IngestionSource {
+  'id' : string,
+  'url' : string,
+  'imageRule' : string,
 }
 export type Post = { 'scholarship' : PostType } |
   { 'examNotification' : PostType } |
@@ -64,11 +75,14 @@ export interface _SERVICE {
   >,
   '_caffeineStorageUpdateGatewayPrincipals' : ActorMethod<[], undefined>,
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
+  'addIngestionSource' : ActorMethod<[IngestionSource], undefined>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
   'autoPublishScheduledContent' : ActorMethod<[], undefined>,
   'getAllSubmissions' : ActorMethod<[], Array<ContactSubmission>>,
+  'getBrandImage' : ActorMethod<[], [] | [BrandImage]>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
+  'getIngestionSources' : ActorMethod<[], Array<IngestionSource>>,
   'getPostById' : ActorMethod<[string], [] | [Post]>,
   'getPublishedPostsByCategory' : ActorMethod<[string], Array<Post>>,
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
@@ -77,8 +91,11 @@ export interface _SERVICE {
     [string, string, string, string, Array<string>],
     undefined
   >,
+  'removeIngestionSource' : ActorMethod<[string], undefined>,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
   'submitContactForm' : ActorMethod<[string, string, string], undefined>,
+  'triggerAutomatedIngestion' : ActorMethod<[], undefined>,
+  'updateBrandImage' : ActorMethod<[BrandImage], undefined>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

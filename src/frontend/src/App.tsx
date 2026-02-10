@@ -17,6 +17,7 @@ import DisclaimerPage from './pages/DisclaimerPage';
 import PostDetailPage from './pages/PostDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 import OwnerIngestPage from './pages/OwnerIngestPage';
+import AutomationSettingsPage from './pages/AutomationSettingsPage';
 
 const rootRoute = createRootRoute({
   component: SiteLayout,
@@ -119,6 +120,13 @@ const ownerIngestRoute = createRoute({
   component: OwnerIngestPage,
 });
 
+// Admin-only automation settings route
+const automationSettingsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/owner/automation',
+  component: AutomationSettingsPage,
+});
+
 const notFoundRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '*',
@@ -142,6 +150,7 @@ const routeTree = rootRoute.addChildren([
   disclaimerRoute,
   postDetailRoute,
   ownerIngestRoute,
+  automationSettingsRoute,
   notFoundRoute,
 ]);
 

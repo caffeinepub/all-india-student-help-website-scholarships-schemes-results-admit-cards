@@ -3,6 +3,61 @@ import { UpdateCategory, type UpdateItem } from './updateTypes';
 export const seedUpdates: UpdateItem[] = [
   // Education News
   {
+    id: 'ncert-sample-papers-2026-27',
+    title: 'NCERT Releases Sample Papers for Class 11 & 12 (2026-27) - Download Now',
+    category: UpdateCategory.EDUCATION_NEWS,
+    date: '2026-02-10',
+    excerpt: 'The National Council of Educational Research and Training (NCERT) has released the latest sample papers for Class 11 and 12 students for the academic year 2026–27.',
+    stateTags: [],
+    imageUrl: '/assets/generated/ncert-sample-papers.dim_1600x900.jpg',
+    body: `
+      <h2>NCERT Sample Papers 2026-27 Released</h2>
+      <p>The National Council of Educational Research and Training (NCERT) has released the latest sample papers for Class 11 and 12 students for the academic year 2026–27. These sample papers include all major subjects like Mathematics, Science, Social Science, and English.</p>
+      
+      <h3>Key Highlights</h3>
+      <ul>
+        <li>Sample papers available for all major subjects including Mathematics, Science, Social Science, and English</li>
+        <li>Designed according to the latest curriculum and exam pattern</li>
+        <li>Helps students understand question patterns and marking schemes</li>
+        <li>Available for free download from the official NCERT website</li>
+      </ul>
+      
+      <h3>Benefits for Students</h3>
+      <p>Students can download the sample papers from the official NCERT website to practice for upcoming exams. Experts recommend solving these papers to improve time management, understand question patterns, and boost exam confidence.</p>
+      
+      <ul>
+        <li><strong>Time Management:</strong> Practice completing papers within the allotted time</li>
+        <li><strong>Question Patterns:</strong> Familiarize yourself with the types of questions asked</li>
+        <li><strong>Exam Confidence:</strong> Build confidence by solving multiple sample papers</li>
+        <li><strong>Self-Assessment:</strong> Identify strengths and areas that need improvement</li>
+      </ul>
+      
+      <h3>How to Download Sample Papers</h3>
+      <ol>
+        <li>Visit the official NCERT website</li>
+        <li>Navigate to the "Sample Papers" or "Examination Materials" section</li>
+        <li>Select your class (11 or 12) and subject</li>
+        <li>Download the PDF files for practice</li>
+      </ol>
+      
+      <h3>About This Initiative</h3>
+      <p>This initiative is part of NCERT's efforts to provide better study resources for students nationwide, especially for board exams and competitive exams preparation. The sample papers are designed by subject experts and follow the latest CBSE curriculum guidelines.</p>
+      
+      <h3>Expert Recommendations</h3>
+      <ul>
+        <li>Solve sample papers in exam-like conditions</li>
+        <li>Review your answers and identify mistakes</li>
+        <li>Focus on time management while solving papers</li>
+        <li>Practice multiple sample papers for each subject</li>
+        <li>Discuss difficult questions with teachers or peers</li>
+      </ul>
+      
+      <p><strong>Important Link:</strong> Visit the <a href="https://ncert.nic.in" target="_blank" rel="noopener noreferrer">NCERT Official Website</a> to download the sample papers.</p>
+      
+      <p><em>Note: Students are advised to regularly check the NCERT website for updates and additional study materials.</em></p>
+    `,
+  },
+  {
     id: 'nep-2020-implementation-update',
     title: 'NEP 2020 Implementation: Major Changes in School Curriculum Announced',
     category: UpdateCategory.EDUCATION_NEWS,
@@ -374,43 +429,35 @@ export const seedUpdates: UpdateItem[] = [
       
       <h3>Important Dates</h3>
       <ul>
-        <li>Notification Date: February 5, 2026</li>
-        <li>Online Application Start: February 10, 2026</li>
-        <li>Last Date to Apply: March 12, 2026</li>
-        <li>Tier-I Exam: June-July 2026</li>
+        <li>Notification Date: February 7, 2026</li>
+        <li>Application Start: February 15, 2026</li>
+        <li>Last Date to Apply: March 15, 2026</li>
+        <li>Tier-I Exam: June 2026</li>
         <li>Tier-II Exam: September 2026</li>
         <li>Tier-III Exam: November 2026</li>
       </ul>
       
       <h3>Eligibility Criteria</h3>
-      <p><strong>Educational Qualification:</strong> Bachelor's degree from a recognized university in any discipline.</p>
+      <p><strong>Educational Qualification:</strong> Bachelor's degree from a recognized university</p>
       
       <p><strong>Age Limit:</strong></p>
       <ul>
-        <li>Minimum: 18 years</li>
-        <li>Maximum: 27 years (for most posts)</li>
-        <li>Age relaxation: OBC (3 years), SC/ST (5 years), PwD (10 years)</li>
+        <li>General: 18-27 years</li>
+        <li>OBC: 18-30 years</li>
+        <li>SC/ST: 18-32 years</li>
       </ul>
       
       <h3>Exam Pattern</h3>
-      <p><strong>Tier-I (Computer Based Test):</strong></p>
+      <p><strong>Tier-I:</strong> Computer Based Test (100 marks)</p>
       <ul>
-        <li>General Intelligence & Reasoning: 25 questions (50 marks)</li>
-        <li>General Awareness: 25 questions (50 marks)</li>
-        <li>Quantitative Aptitude: 25 questions (50 marks)</li>
-        <li>English Comprehension: 25 questions (50 marks)</li>
-        <li>Total: 100 questions, 200 marks, 60 minutes</li>
+        <li>General Intelligence & Reasoning: 25 questions</li>
+        <li>General Awareness: 25 questions</li>
+        <li>Quantitative Aptitude: 25 questions</li>
+        <li>English Comprehension: 25 questions</li>
       </ul>
       
-      <p><strong>Tier-II (Computer Based Test):</strong></p>
-      <ul>
-        <li>Paper I: Quantitative Abilities (100 questions, 200 marks, 2 hours)</li>
-        <li>Paper II: English Language & Comprehension (200 questions, 200 marks, 2 hours)</li>
-        <li>Paper III: Statistics (100 questions, 200 marks, 2 hours) - for JSO posts</li>
-        <li>Paper IV: General Studies (Finance & Economics) - for specific posts</li>
-      </ul>
-      
-      <p><strong>Tier-III:</strong> Descriptive Paper (Pen & Paper mode) - Essay/Letter/Application writing</p>
+      <p><strong>Tier-II:</strong> Computer Based Test (Multiple papers based on post)</p>
+      <p><strong>Tier-III:</strong> Descriptive Paper (Pen and Paper mode)</p>
       
       <h3>Application Fee</h3>
       <ul>
@@ -420,55 +467,44 @@ export const seedUpdates: UpdateItem[] = [
       
       <h3>How to Apply</h3>
       <ol>
-        <li>Visit the official SSC website (ssc.nic.in)</li>
-        <li>Click on "Apply" for SSC CGL 2026</li>
-        <li>Register with basic details (one-time registration if not done before)</li>
-        <li>Login and fill the application form</li>
-        <li>Upload recent photograph and signature</li>
-        <li>Pay application fee online</li>
-        <li>Submit and take printout of the application</li>
+        <li>Visit SSC official website (ssc.nic.in)</li>
+        <li>Click on "Apply" for CGL 2026</li>
+        <li>Register with basic details</li>
+        <li>Fill the application form</li>
+        <li>Upload photograph and signature</li>
+        <li>Pay application fee</li>
+        <li>Submit and take printout</li>
       </ol>
       
-      <h3>Preparation Strategy</h3>
-      <ul>
-        <li>Understand the exam pattern and syllabus thoroughly</li>
-        <li>Focus on speed and accuracy for Tier-I</li>
-        <li>Practice quantitative aptitude and reasoning daily</li>
-        <li>Improve English vocabulary and grammar</li>
-        <li>Stay updated with current affairs (last 6 months)</li>
-        <li>Solve previous years' papers and mock tests</li>
-      </ul>
-      
-      <p><em>Note: This information is for guidance only. Please check the official SSC notification for complete details, post-wise eligibility, and exam pattern.</em></p>
+      <p><em>Note: Please check the official SSC notification for complete details before applying.</em></p>
     `,
   },
   {
     id: 'neet-ug-2027-registration',
-    title: 'NEET UG 2027 Registration Starts - Check Eligibility and Exam Date',
+    title: 'NEET UG 2027 Registration Begins - Important Dates and Eligibility',
     category: UpdateCategory.COMPETITIVE_EXAMS,
     date: '2026-02-06',
-    excerpt: 'National Testing Agency opens registration for NEET UG 2027. Medical aspirants can apply online till March 15, 2026. Exam scheduled for May 4, 2027.',
+    excerpt: 'National Testing Agency opens registration for NEET UG 2027. Medical aspirants can apply online till March 15, 2026. Exam scheduled for May 2027.',
     stateTags: [],
     body: `
       <h2>NEET UG 2027 Registration</h2>
-      <p>The National Testing Agency (NTA) has opened the registration process for the National Eligibility cum Entrance Test (NEET) UG 2027. This exam is the gateway for admission to MBBS, BDS, AYUSH, and other undergraduate medical courses in India.</p>
+      <p>The National Testing Agency (NTA) has started the registration process for the National Eligibility cum Entrance Test (NEET) UG 2027. This exam is the gateway for admission to MBBS, BDS, AYUSH, and other undergraduate medical courses in India.</p>
       
       <h3>Important Dates</h3>
       <ul>
-        <li>Registration Start: February 5, 2026</li>
+        <li>Registration Start: February 6, 2026</li>
         <li>Last Date to Apply: March 15, 2026</li>
         <li>Correction Window: March 20-25, 2026</li>
-        <li>Admit Card Release: April 20, 2027</li>
-        <li>Exam Date: May 4, 2027 (Sunday)</li>
-        <li>Result Declaration: June 2027</li>
+        <li>Admit Card Release: April 25, 2027</li>
+        <li>Exam Date: May 5, 2027</li>
+        <li>Result Declaration: June 10, 2027</li>
       </ul>
       
       <h3>Eligibility Criteria</h3>
       <p><strong>Educational Qualification:</strong></p>
       <ul>
-        <li>Passed Class 12 or equivalent with Physics, Chemistry, Biology/Biotechnology, and English</li>
-        <li>Minimum 50% marks in PCB (40% for SC/ST/OBC, 45% for PwD)</li>
-        <li>Students appearing in Class 12 in 2027 can also apply</li>
+        <li>Passed 10+2 or equivalent with Physics, Chemistry, Biology/Biotechnology, and English</li>
+        <li>Minimum 50% marks for General category (40% for SC/ST/OBC, 45% for PwD)</li>
       </ul>
       
       <p><strong>Age Limit:</strong></p>
@@ -476,8 +512,6 @@ export const seedUpdates: UpdateItem[] = [
         <li>Minimum: 17 years as on December 31, 2027</li>
         <li>Maximum: No upper age limit (removed from 2024)</li>
       </ul>
-      
-      <p><strong>Number of Attempts:</strong> Unlimited (no restriction on number of attempts)</p>
       
       <h3>Exam Pattern</h3>
       <ul>
@@ -504,624 +538,477 @@ export const seedUpdates: UpdateItem[] = [
       
       <h3>How to Apply</h3>
       <ol>
-        <li>Visit the official NEET website (neet.nta.nic.in)</li>
-        <li>Click on "New Registration" for NEET UG 2027</li>
-        <li>Fill basic details and create login credentials</li>
-        <li>Login and complete the application form</li>
-        <li>Upload photograph, signature, and other documents</li>
-        <li>Pay the application fee online</li>
-        <li>Submit the form and download confirmation page</li>
+        <li>Visit NTA NEET official website (neet.nta.nic.in)</li>
+        <li>Click on "NEET UG 2027 Registration"</li>
+        <li>Register with email and mobile number</li>
+        <li>Fill personal and academic details</li>
+        <li>Upload photograph, signature, and documents</li>
+        <li>Pay application fee online</li>
+        <li>Submit form and save confirmation page</li>
       </ol>
       
       <h3>Documents Required</h3>
       <ul>
+        <li>Recent passport size photograph</li>
+        <li>Scanned signature</li>
         <li>Class 10 certificate (for date of birth proof)</li>
         <li>Class 12 mark sheet or admit card</li>
         <li>Category certificate (if applicable)</li>
         <li>PwD certificate (if applicable)</li>
-        <li>Passport size photograph (recent)</li>
-        <li>Signature (scanned copy)</li>
-        <li>Valid ID proof (Aadhaar/PAN/Passport)</li>
       </ul>
       
       <h3>Preparation Tips</h3>
       <ul>
-        <li>Focus on NCERT textbooks (Class 11 and 12) thoroughly</li>
-        <li>Understand concepts rather than rote learning</li>
-        <li>Practice previous years' NEET question papers</li>
-        <li>Take regular mock tests to improve speed and accuracy</li>
-        <li>Revise important topics and formulas daily</li>
-        <li>Focus more on Biology as it carries maximum weightage</li>
+        <li>Focus on NCERT textbooks (Class 11 and 12)</li>
+        <li>Practice previous years' question papers</li>
+        <li>Take regular mock tests</li>
+        <li>Revise important formulas and concepts daily</li>
+        <li>Focus on Biology as it carries maximum weightage</li>
         <li>Maintain a healthy study schedule with breaks</li>
       </ul>
       
-      <h3>Exam Day Guidelines</h3>
-      <ul>
-        <li>Carry admit card and valid photo ID proof</li>
-        <li>Reach exam center 90 minutes before the exam</li>
-        <li>Carry transparent water bottle (if needed)</li>
-        <li>No electronic devices, calculators, or study material allowed</li>
-        <li>Follow all COVID-19 safety protocols (if applicable)</li>
-      </ul>
-      
-      <p><em>Disclaimer: This is general information. Please read the official NEET UG 2027 information bulletin carefully for complete details before applying.</em></p>
-    `,
-  },
-  {
-    id: 'jee-main-2027-session-1',
-    title: 'JEE Main 2027 Session 1 Registration Open - Apply Before March 20',
-    category: UpdateCategory.COMPETITIVE_EXAMS,
-    date: '2026-02-05',
-    excerpt: 'NTA opens registration for JEE Main 2027 Session 1. Engineering aspirants can apply for B.E./B.Tech and B.Arch/B.Planning courses. Exam in April 2027.',
-    stateTags: [],
-    body: `
-      <h2>JEE Main 2027 Session 1 Registration</h2>
-      <p>The National Testing Agency (NTA) has started the registration process for Joint Entrance Examination (JEE) Main 2027 Session 1. This exam is conducted for admission to undergraduate engineering programs (B.E./B.Tech) and architecture programs (B.Arch/B.Planning) in NITs, IIITs, and other centrally funded technical institutions.</p>
-      
-      <h3>Important Dates</h3>
-      <ul>
-        <li>Registration Start: February 5, 2026</li>
-        <li>Last Date to Apply: March 20, 2026</li>
-        <li>Correction Window: March 25-28, 2026</li>
-        <li>Admit Card Release: April 5, 2027</li>
-        <li>Exam Dates: April 15-20, 2027</li>
-        <li>Result Declaration: May 2027</li>
-      </ul>
-      
-      <h3>Eligibility Criteria</h3>
-      <p><strong>Educational Qualification:</strong></p>
-      <ul>
-        <li>Passed Class 12 or equivalent with Physics, Mathematics, and Chemistry/Biology/Biotechnology/Technical Vocational Subject</li>
-        <li>Minimum 75% marks in Class 12 (65% for SC/ST) or be in top 20 percentile</li>
-        <li>Students appearing in Class 12 in 2027 can also apply</li>
-      </ul>
-      
-      <p><strong>Age Limit:</strong> No age limit for appearing in JEE Main. However, age limit may apply for admission to certain institutes.</p>
-      
-      <p><strong>Number of Attempts:</strong> Maximum 6 attempts (in consecutive years)</p>
-      
-      <h3>Exam Pattern</h3>
-      <p><strong>Paper 1 (B.E./B.Tech):</strong></p>
-      <ul>
-        <li>Mode: Computer Based Test (CBT)</li>
-        <li>Duration: 3 hours</li>
-        <li>Total Questions: 90 (75 to be attempted)</li>
-        <li>Total Marks: 300</li>
-        <li>Subjects: Physics (30 Q), Chemistry (30 Q), Mathematics (30 Q)</li>
-        <li>Marking: +4 for correct, -1 for incorrect</li>
-      </ul>
-      
-      <p><strong>Paper 2A (B.Arch):</strong></p>
-      <ul>
-        <li>Part I: Mathematics (20 Q, 80 marks)</li>
-        <li>Part II: Aptitude Test (50 Q, 200 marks)</li>
-        <li>Part III: Drawing Test (2 Q, 70 marks) - Pen & Paper</li>
-        <li>Duration: 3 hours</li>
-      </ul>
-      
-      <p><strong>Paper 2B (B.Planning):</strong></p>
-      <ul>
-        <li>Part I: Mathematics (20 Q, 80 marks)</li>
-        <li>Part II: Aptitude Test (50 Q, 200 marks)</li>
-        <li>Part III: Planning Based Questions (25 Q, 100 marks)</li>
-        <li>Duration: 3 hours</li>
-      </ul>
-      
-      <h3>Application Fee</h3>
-      <ul>
-        <li>General/OBC (One Paper): ₹1,000</li>
-        <li>General/OBC (Both Papers): ₹1,800</li>
-        <li>SC/ST/PwD/Third Gender (One Paper): ₹500</li>
-        <li>SC/ST/PwD/Third Gender (Both Papers): ₹900</li>
-      </ul>
-      
-      <h3>How to Apply</h3>
-      <ol>
-        <li>Visit the official JEE Main website (jeemain.nta.nic.in)</li>
-        <li>Click on "New Registration" for JEE Main 2027</li>
-        <li>Fill basic details and generate application number</li>
-        <li>Login with application number and password</li>
-        <li>Complete the application form (personal, academic, exam center choice)</li>
-        <li>Upload photograph, signature, and category certificate</li>
-        <li>Pay application fee online</li>
-        <li>Submit and download confirmation page</li>
-      </ol>
-      
-      <h3>Documents Required</h3>
-      <ul>
-        <li>Class 10 certificate (for date of birth)</li>
-        <li>Class 12 mark sheet or school certificate</li>
-        <li>Category certificate (SC/ST/OBC-NCL/EWS)</li>
-        <li>PwD certificate (if applicable)</li>
-        <li>Passport size photograph (recent, colored)</li>
-        <li>Signature (scanned)</li>
-        <li>Valid ID proof (Aadhaar preferred)</li>
-      </ul>
-      
-      <h3>Preparation Strategy</h3>
-      <ul>
-        <li>Master NCERT textbooks for Class 11 and 12</li>
-        <li>Focus on conceptual understanding in Physics, Chemistry, and Mathematics</li>
-        <li>Practice numerical problems regularly</li>
-        <li>Solve previous years' JEE Main question papers</li>
-        <li>Take full-length mock tests to improve time management</li>
-        <li>Identify weak areas and work on them</li>
-        <li>Revise important formulas and concepts daily</li>
-      </ul>
-      
-      <h3>Important Points</h3>
-      <ul>
-        <li>JEE Main is conducted twice a year (Session 1 and Session 2)</li>
-        <li>Best of two scores will be considered for ranking</li>
-        <li>Top 2.5 lakh candidates qualify for JEE Advanced (for IIT admission)</li>
-        <li>JEE Main score is also used for admission to NITs, IIITs, and GFTIs</li>
-      </ul>
-      
-      <p><em>Note: This is general information. Please read the official JEE Main information bulletin carefully for complete details before applying.</em></p>
-    `,
-  },
-  {
-    id: 'railway-ntpc-2026-notification',
-    title: 'Railway NTPC 2026 Notification Expected Soon - 35000+ Vacancies',
-    category: UpdateCategory.COMPETITIVE_EXAMS,
-    date: '2026-02-04',
-    excerpt: 'Railway Recruitment Board expected to release NTPC (Non-Technical Popular Categories) notification soon. Over 35,000 vacancies anticipated across various posts.',
-    stateTags: [],
-    body: `
-      <h2>Railway NTPC 2026 Notification</h2>
-      <p>The Railway Recruitment Board (RRB) is expected to release the notification for Non-Technical Popular Categories (NTPC) recruitment 2026 soon. This is one of the largest recruitment drives by Indian Railways, offering opportunities for graduates and 12th pass candidates.</p>
-      
-      <h3>Expected Vacancy Details</h3>
-      <p>Approximately 35,000+ vacancies are expected across various posts including:</p>
-      
-      <p><strong>Graduate Level Posts:</strong></p>
-      <ul>
-        <li>Junior Accountant cum Typist</li>
-        <li>Senior Clerk cum Typist</li>
-        <li>Junior Time Keeper</li>
-        <li>Trains Clerk</li>
-        <li>Commercial cum Ticket Clerk</li>
-        <li>Accounts Clerk cum Typist</li>
-      </ul>
-      
-      <p><strong>12th Pass Level Posts:</strong></p>
-      <ul>
-        <li>Commercial Apprentice</li>
-        <li>Traffic Apprentice</li>
-        <li>Goods Guard</li>
-        <li>Senior Commercial cum Ticket Clerk</li>
-      </ul>
-      
-      <h3>Expected Important Dates</h3>
-      <ul>
-        <li>Notification Release: March 2026 (expected)</li>
-        <li>Online Application: March-April 2026</li>
-        <li>CBT 1 Exam: June-July 2026</li>
-        <li>CBT 2 Exam: September-October 2026</li>
-        <li>Typing/Skill Test: November-December 2026</li>
-      </ul>
-      
-      <h3>Eligibility Criteria</h3>
-      <p><strong>Educational Qualification:</strong></p>
-      <ul>
-        <li>Graduate Level: Bachelor's degree from recognized university</li>
-        <li>12th Pass Level: 10+2 or equivalent from recognized board</li>
-      </ul>
-      
-      <p><strong>Age Limit:</strong></p>
-      <ul>
-        <li>Minimum: 18 years</li>
-        <li>Maximum: 33 years (for most posts)</li>
-        <li>Age relaxation: OBC (3 years), SC/ST (5 years), PwD (10 years)</li>
-      </ul>
-      
-      <h3>Expected Exam Pattern</h3>
-      <p><strong>CBT 1 (Computer Based Test):</strong></p>
-      <ul>
-        <li>General Awareness: 40 questions</li>
-        <li>Mathematics: 30 questions</li>
-        <li>General Intelligence & Reasoning: 30 questions</li>
-        <li>Total: 100 questions, 100 marks, 90 minutes</li>
-        <li>Negative Marking: 1/3 mark deducted for wrong answer</li>
-      </ul>
-      
-      <p><strong>CBT 2 (For shortlisted candidates):</strong></p>
-      <ul>
-        <li>General Awareness: 50 questions</li>
-        <li>Mathematics: 35 questions</li>
-        <li>General Intelligence & Reasoning: 35 questions</li>
-        <li>Total: 120 questions, 120 marks, 90 minutes</li>
-      </ul>
-      
-      <p><strong>Typing/Skill Test:</strong> For specific posts requiring typing or computer skills</p>
-      
-      <h3>Application Fee (Expected)</h3>
-      <ul>
-        <li>General/OBC: ₹500</li>
-        <li>SC/ST/PwD/Female/Transgender/Minorities/Economically Backward Class: ₹250</li>
-      </ul>
-      
-      <h3>How to Apply (When Notification is Released)</h3>
-      <ol>
-        <li>Visit the official RRB website of your region</li>
-        <li>Click on "NTPC 2026 Apply Online"</li>
-        <li>Register with basic details</li>
-        <li>Login and fill the application form</li>
-        <li>Upload photograph and signature</li>
-        <li>Pay application fee online</li>
-        <li>Submit and save the application number</li>
-      </ol>
-      
-      <h3>Preparation Tips</h3>
-      <ul>
-        <li>Start with basic mathematics and reasoning concepts</li>
-        <li>Focus on current affairs (last 6 months)</li>
-        <li>Practice speed and accuracy for CBT</li>
-        <li>Solve previous years' RRB NTPC question papers</li>
-        <li>Take regular mock tests</li>
-        <li>Improve typing speed for posts requiring typing test</li>
-        <li>Stay updated with railway-related current affairs</li>
-      </ul>
-      
-      <h3>Important Points to Remember</h3>
-      <ul>
-        <li>One candidate can apply for only one RRB region</li>
-        <li>Multiple applications will lead to rejection</li>
-        <li>Medical fitness is mandatory after selection</li>
-        <li>Document verification is strict - keep all original documents ready</li>
-      </ul>
-      
-      <p><em>Disclaimer: This information is based on previous recruitment patterns. Please wait for the official notification for confirmed details about vacancies, eligibility, exam pattern, and application process.</em></p>
+      <p><em>Disclaimer: Please check the official NTA NEET website for complete and updated information before applying.</em></p>
     `,
   },
   
-  // Existing updates (Scholarships, Schemes, Results, Admit Cards)
+  // Scholarships
   {
-    id: 'national-scholarship-portal-2026',
-    title: 'National Scholarship Portal 2026 - Applications Open',
+    id: 'pm-scholarship-scheme-2026',
+    title: 'PM Scholarship Scheme 2026 - ₹3000/Month for Students',
     category: UpdateCategory.SCHOLARSHIPS,
-    date: '2026-02-08',
-    excerpt: 'The National Scholarship Portal has opened applications for various central government scholarships for the academic year 2026-27. Students from all states can apply online.',
+    date: '2026-02-05',
+    excerpt: 'Prime Minister Scholarship Scheme 2026 applications open. Children of armed forces personnel, ex-servicemen, and police officials can apply for monthly scholarship of ₹2500-3000.',
     stateTags: [],
     body: `
-      <h2>About National Scholarship Portal 2026</h2>
-      <p>The National Scholarship Portal (NSP) is a one-stop solution for students seeking scholarships from various government schemes. The portal has opened applications for the academic year 2026-27.</p>
-      
-      <h3>Eligibility Criteria</h3>
-      <ul>
-        <li>Students must be Indian citizens</li>
-        <li>Family income should be below the specified limit (varies by scheme)</li>
-        <li>Minimum academic performance requirements apply</li>
-        <li>Students should be enrolled in recognized institutions</li>
-      </ul>
-      
-      <h3>Important Dates</h3>
-      <ul>
-        <li>Application Start Date: February 1, 2026</li>
-        <li>Last Date to Apply: March 31, 2026</li>
-        <li>Document Verification: April 1-30, 2026</li>
-        <li>Results Expected: May 2026</li>
-      </ul>
-      
-      <h3>Required Documents</h3>
-      <ul>
-        <li>Aadhaar Card</li>
-        <li>Income Certificate (issued within last 6 months)</li>
-        <li>Previous year mark sheets</li>
-        <li>Bank account details (student's own account preferred)</li>
-        <li>Caste certificate (if applicable)</li>
-        <li>Disability certificate (if applicable)</li>
-      </ul>
-      
-      <h3>How to Apply</h3>
-      <p>Students should visit the official National Scholarship Portal website and register using their Aadhaar number. After registration, log in and fill out the application form carefully. Upload all required documents in the specified format and submit the application before the deadline.</p>
-      
-      <h3>Frequently Asked Questions</h3>
-      <p><strong>Q: Can I apply for multiple scholarships?</strong><br>
-      A: Yes, eligible students can apply for multiple schemes through the same portal.</p>
-      
-      <p><strong>Q: What if I don't have an Aadhaar card?</strong><br>
-      A: Aadhaar is mandatory for most scholarships. Apply for Aadhaar immediately if you don't have one.</p>
-      
-      <p><strong>Q: When will the scholarship amount be credited?</strong><br>
-      A: After verification and approval, amounts are typically credited within 2-3 months.</p>
-      
-      <p><em>Note: This is general guidance. Please verify all details on the official NSP website before applying.</em></p>
-    `,
-  },
-  {
-    id: 'jharkhand-mukhyamantri-scholarship-2026',
-    title: 'Jharkhand Mukhyamantri Protsahan Yojana 2026 - Registration Started',
-    category: UpdateCategory.SCHOLARSHIPS,
-    date: '2026-02-07',
-    excerpt: 'Jharkhand government has launched the Mukhyamantri Protsahan Yojana for meritorious students. Students who scored above 60% in Class 12 can apply for financial assistance.',
-    stateTags: ['jharkhand'],
-    body: `
-      <h2>Jharkhand Mukhyamantri Protsahan Yojana 2026</h2>
-      <p>The Government of Jharkhand has announced the Mukhyamantri Protsahan Yojana to encourage and support meritorious students from economically weaker sections.</p>
-      
-      <h3>Eligibility</h3>
-      <ul>
-        <li>Must be a permanent resident of Jharkhand</li>
-        <li>Scored 60% or above in Class 12 examination</li>
-        <li>Family annual income below ₹2.5 lakh</li>
-        <li>Currently enrolled in a recognized college or university</li>
-      </ul>
+      <h2>Prime Minister Scholarship Scheme 2026</h2>
+      <p>The Ministry of Defence has invited applications for the Prime Minister's Scholarship Scheme (PMSS) 2026. This scheme provides financial assistance to wards/widows of armed forces personnel, ex-servicemen, and police officials who died or were disabled in service.</p>
       
       <h3>Scholarship Amount</h3>
-      <p>Selected students will receive ₹15,000 per year for undergraduate courses and ₹20,000 per year for postgraduate courses.</p>
-      
-      <h3>Important Dates</h3>
       <ul>
-        <li>Registration Opens: February 5, 2026</li>
-        <li>Last Date: March 20, 2026</li>
-        <li>Merit List: April 15, 2026</li>
-      </ul>
-      
-      <h3>Documents Required</h3>
-      <ul>
-        <li>Jharkhand Domicile Certificate</li>
-        <li>Class 12 Mark Sheet</li>
-        <li>Income Certificate</li>
-        <li>College Admission Proof</li>
-        <li>Bank Account Details</li>
-        <li>Aadhaar Card</li>
-      </ul>
-      
-      <h3>Application Process</h3>
-      <p>Visit the official Jharkhand E-Kalyan portal, register with your mobile number, fill in personal and academic details, upload documents, and submit the form. Keep the application number for future reference.</p>
-      
-      <p><em>Disclaimer: Please verify all information on the official government website before applying.</em></p>
-    `,
-  },
-  {
-    id: 'pm-kisan-samman-nidhi-2026',
-    title: 'PM-KISAN Samman Nidhi - 16th Installment Release Date Announced',
-    category: UpdateCategory.SCHEMES,
-    date: '2026-02-06',
-    excerpt: 'The 16th installment of PM-KISAN scheme will be released in February 2026. Eligible farmers will receive ₹2,000 directly in their bank accounts.',
-    stateTags: [],
-    body: `
-      <h2>PM-KISAN Samman Nidhi 16th Installment</h2>
-      <p>The Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) is a central government scheme that provides income support to farmer families across India.</p>
-      
-      <h3>About the Scheme</h3>
-      <p>Under this scheme, eligible farmer families receive ₹6,000 per year in three equal installments of ₹2,000 each, directly transferred to their bank accounts.</p>
-      
-      <h3>16th Installment Details</h3>
-      <ul>
-        <li>Expected Release Date: February 28, 2026</li>
-        <li>Amount: ₹2,000 per eligible farmer</li>
-        <li>Transfer Mode: Direct Bank Transfer (DBT)</li>
-      </ul>
-      
-      <h3>Eligibility</h3>
-      <ul>
-        <li>Small and marginal farmer families</li>
-        <li>Landholding up to 2 hectares</li>
-        <li>Must have valid Aadhaar linked to bank account</li>
-        <li>Land records should be updated</li>
-      </ul>
-      
-      <h3>How to Check Status</h3>
-      <p>Farmers can check their payment status on the official PM-KISAN portal by entering their Aadhaar number, mobile number, or account number.</p>
-      
-      <h3>Common Issues and Solutions</h3>
-      <p><strong>Payment Pending:</strong> Ensure Aadhaar is linked to bank account and land records are updated.</p>
-      <p><strong>Invalid Bank Details:</strong> Visit your nearest Common Service Center to update bank details.</p>
-      
-      <p><em>Note: This information is for guidance only. Please check the official PM-KISAN website for accurate details.</em></p>
-    `,
-  },
-  {
-    id: 'bihar-board-10th-result-2026',
-    title: 'Bihar Board 10th Result 2026 - Expected Date and How to Check',
-    category: UpdateCategory.RESULTS,
-    date: '2026-02-05',
-    excerpt: 'Bihar School Examination Board (BSEB) is expected to announce Class 10 results in March 2026. Students can check results online on the official website.',
-    stateTags: ['bihar'],
-    body: `
-      <h2>Bihar Board 10th Result 2026</h2>
-      <p>The Bihar School Examination Board (BSEB) conducts the Class 10 examination every year. The results for 2026 are expected to be announced in March.</p>
-      
-      <h3>Expected Result Date</h3>
-      <p>Based on previous years' patterns, the Bihar Board 10th result 2026 is likely to be declared in the last week of March or first week of April 2026.</p>
-      
-      <h3>How to Check Results Online</h3>
-      <ol>
-        <li>Visit the official BSEB website</li>
-        <li>Click on the "Result" section</li>
-        <li>Select "Class 10 Result 2026"</li>
-        <li>Enter your Roll Number and Roll Code</li>
-        <li>Click "Submit" to view your result</li>
-        <li>Download and save the result for future reference</li>
-      </ol>
-      
-      <h3>Alternative Ways to Check</h3>
-      <ul>
-        <li>SMS: Send SMS to the designated number (will be announced)</li>
-        <li>Mobile App: Download the official BSEB app</li>
-        <li>School: Visit your school to collect the mark sheet</li>
-      </ul>
-      
-      <h3>What After Results?</h3>
-      <p>After the results are announced, students should collect their original mark sheets from their respective schools. These mark sheets are required for admission to Class 11.</p>
-      
-      <h3>Compartment Examination</h3>
-      <p>Students who fail in one or two subjects may be eligible for compartment examinations. Details will be announced along with the main results.</p>
-      
-      <p><em>Disclaimer: The dates mentioned are tentative. Please check the official BSEB website for confirmed information.</em></p>
-    `,
-  },
-  {
-    id: 'jee-main-2026-admit-card',
-    title: 'JEE Main 2026 Session 1 Admit Card Released - Download Now',
-    category: UpdateCategory.ADMIT_CARDS,
-    date: '2026-02-04',
-    excerpt: 'National Testing Agency (NTA) has released JEE Main 2026 Session 1 admit cards. Candidates can download from the official website using application number and date of birth.',
-    stateTags: [],
-    body: `
-      <h2>JEE Main 2026 Session 1 Admit Card</h2>
-      <p>The National Testing Agency (NTA) has released the admit cards for JEE Main 2026 Session 1 examination. All registered candidates can now download their hall tickets.</p>
-      
-      <h3>Examination Details</h3>
-      <ul>
-        <li>Exam Name: JEE Main 2026 Session 1</li>
-        <li>Exam Dates: February 20-28, 2026</li>
-        <li>Exam Mode: Computer Based Test (CBT)</li>
-        <li>Duration: 3 hours</li>
-      </ul>
-      
-      <h3>How to Download Admit Card</h3>
-      <ol>
-        <li>Visit the official JEE Main website</li>
-        <li>Click on "Download Admit Card" link</li>
-        <li>Enter Application Number and Date of Birth</li>
-        <li>Enter the security code displayed</li>
-        <li>Click "Submit"</li>
-        <li>Download and print the admit card</li>
-      </ol>
-      
-      <h3>Important Instructions</h3>
-      <ul>
-        <li>Carry the admit card to the examination center (printed copy mandatory)</li>
-        <li>Bring a valid photo ID proof (Aadhaar/PAN/Driving License/Passport)</li>
-        <li>Reach the center at least 1 hour before the exam</li>
-        <li>No electronic devices allowed inside the examination hall</li>
-        <li>Check all details on the admit card carefully</li>
-      </ul>
-      
-      <h3>What to Do If There's an Error?</h3>
-      <p>If you find any discrepancy in your admit card (name, photo, signature, category, etc.), immediately contact NTA through the helpline or email provided on the website.</p>
-      
-      <h3>Documents to Carry</h3>
-      <ul>
-        <li>JEE Main 2026 Admit Card (printed)</li>
-        <li>Valid Photo ID proof (original)</li>
-        <li>Passport size photograph (same as uploaded in application)</li>
-        <li>PwD certificate (if applicable)</li>
-      </ul>
-      
-      <p><em>Note: This is general information. Please read all instructions on your admit card and the official website carefully.</em></p>
-    `,
-  },
-  {
-    id: 'up-scholarship-2026',
-    title: 'UP Scholarship 2026-27 - Pre and Post Matric Applications Open',
-    category: UpdateCategory.SCHOLARSHIPS,
-    date: '2026-02-03',
-    excerpt: 'Uttar Pradesh government has opened online applications for Pre-Matric and Post-Matric scholarships for SC/ST/OBC/Minority students for the academic year 2026-27.',
-    stateTags: ['uttar-pradesh'],
-    body: `
-      <h2>UP Scholarship 2026-27</h2>
-      <p>The Social Welfare Department, Government of Uttar Pradesh, invites applications for various scholarship schemes for students belonging to SC, ST, OBC, General Category (EWS), and Minority communities.</p>
-      
-      <h3>Types of Scholarships</h3>
-      <ul>
-        <li>Pre-Matric Scholarship (Class 9-10)</li>
-        <li>Post-Matric Scholarship (Class 11-12)</li>
-        <li>Post-Matric Other State Scholarship</li>
-        <li>Post-Matric Intermediate Scholarship</li>
+        <li>Boys: ₹2,500 per month</li>
+        <li>Girls: ₹3,000 per month</li>
+        <li>Duration: Throughout the course (subject to satisfactory performance)</li>
       </ul>
       
       <h3>Eligibility Criteria</h3>
+      <p><strong>Who Can Apply:</strong></p>
       <ul>
-        <li>Student must be a permanent resident of Uttar Pradesh</li>
-        <li>Must belong to SC/ST/OBC/Minority/General (EWS) category</li>
-        <li>Family annual income should not exceed ₹2 lakh (varies by category)</li>
-        <li>Must be studying in a recognized institution in UP or outside UP</li>
-        <li>Previous year attendance should be at least 75%</li>
+        <li>Wards of armed forces personnel (Army, Navy, Air Force)</li>
+        <li>Wards of ex-Coast Guard personnel</li>
+        <li>Wards of ex-servicemen</li>
+        <li>Wards of police officials who died or were disabled in service</li>
+      </ul>
+      
+      <p><strong>Academic Qualification:</strong></p>
+      <ul>
+        <li>Minimum 60% marks in Class 12 board exam</li>
+        <li>Must be pursuing professional degree/diploma courses</li>
+        <li>Age limit: 18-25 years</li>
+      </ul>
+      
+      <h3>Number of Scholarships</h3>
+      <ul>
+        <li>Total: 6,000 scholarships per year</li>
+        <li>For wards of armed forces: 5,500</li>
+        <li>For wards of police officials: 500</li>
+      </ul>
+      
+      <h3>Eligible Courses</h3>
+      <ul>
+        <li>Engineering (BE/B.Tech)</li>
+        <li>Medical (MBBS, BDS, BAMS, BHMS)</li>
+        <li>BBA, BCA, B.Com, B.Sc</li>
+        <li>Diploma courses (Polytechnic)</li>
+        <li>Other professional degree courses</li>
       </ul>
       
       <h3>Important Dates</h3>
       <ul>
         <li>Application Start: February 1, 2026</li>
-        <li>Last Date (Fresh): March 31, 2026</li>
-        <li>Last Date (Renewal): April 15, 2026</li>
-      </ul>
-      
-      <h3>Required Documents</h3>
-      <ul>
-        <li>Aadhaar Card</li>
-        <li>Income Certificate (current financial year)</li>
-        <li>Caste Certificate (SC/ST/OBC)</li>
-        <li>Previous year mark sheet</li>
-        <li>Current year fee receipt</li>
-        <li>Bank passbook (student's account)</li>
-        <li>Passport size photograph</li>
+        <li>Last Date to Apply: March 31, 2026</li>
+        <li>Verification Period: April-May 2026</li>
+        <li>Merit List Release: June 2026</li>
+        <li>Scholarship Disbursement: July 2026 onwards</li>
       </ul>
       
       <h3>How to Apply</h3>
-      <p>Visit the official UP Scholarship portal, register using basic details, log in with credentials, select the appropriate scholarship scheme, fill the application form, upload documents, and submit. Note down the registration number for tracking.</p>
+      <ol>
+        <li>Visit Kendriya Sainik Board (KSB) website</li>
+        <li>Click on "PM Scholarship Scheme"</li>
+        <li>Register with basic details</li>
+        <li>Fill the application form</li>
+        <li>Upload required documents</li>
+        <li>Submit the form</li>
+        <li>Take printout for future reference</li>
+      </ol>
       
-      <h3>Scholarship Amount</h3>
-      <p>The scholarship amount varies based on the class, course, and category. It ranges from ₹1,200 to ₹5,000 per year for Pre-Matric and up to ₹12,000 per year for Post-Matric courses.</p>
+      <h3>Required Documents</h3>
+      <ul>
+        <li>Class 10 and 12 mark sheets</li>
+        <li>Service certificate of parent/guardian</li>
+        <li>Disability certificate (if applicable)</li>
+        <li>Death certificate (if applicable)</li>
+        <li>Bank account details</li>
+        <li>Aadhaar card</li>
+        <li>Passport size photograph</li>
+      </ul>
       
-      <p><em>Disclaimer: Please verify all details on the official UP Scholarship portal before applying.</em></p>
+      <h3>Selection Process</h3>
+      <p>Selection is based on percentage of marks obtained in Class 12 board examination. A merit list is prepared separately for boys and girls. Preference is given to wards of personnel who died in service.</p>
+      
+      <p><em>Note: Please visit the official Kendriya Sainik Board website for detailed guidelines and application process.</em></p>
     `,
   },
   {
-    id: 'west-bengal-madhyamik-result-2026',
-    title: 'West Bengal Madhyamik Result 2026 - Check Date and Process',
+    id: 'national-scholarship-portal-2026',
+    title: 'National Scholarship Portal 2026 - Apply for Multiple Scholarships',
+    category: UpdateCategory.SCHOLARSHIPS,
+    date: '2026-02-04',
+    excerpt: 'National Scholarship Portal opens for 2026-27. Students can apply for central and state government scholarships through single platform. Last date: March 31, 2026.',
+    stateTags: ['all-india'],
+    body: `
+      <h2>National Scholarship Portal 2026-27</h2>
+      <p>The Ministry of Electronics and Information Technology has opened the National Scholarship Portal (NSP) for the academic year 2026-27. Students can apply for various central and state government scholarships through this single unified platform.</p>
+      
+      <h3>Available Scholarships</h3>
+      <p><strong>Central Government Scholarships:</strong></p>
+      <ul>
+        <li>Pre-Matric Scholarship for SC/ST/OBC students</li>
+        <li>Post-Matric Scholarship for SC/ST/OBC students</li>
+        <li>Merit-cum-Means Scholarship for minorities</li>
+        <li>Top Class Education Scheme for SC/ST students</li>
+        <li>National Means-cum-Merit Scholarship</li>
+      </ul>
+      
+      <p><strong>State Government Scholarships:</strong></p>
+      <ul>
+        <li>Various state-specific scholarships</li>
+        <li>Merit-based scholarships</li>
+        <li>Need-based scholarships</li>
+      </ul>
+      
+      <h3>General Eligibility</h3>
+      <ul>
+        <li>Indian citizen</li>
+        <li>Studying in a recognized institution</li>
+        <li>Family income below specified limit (varies by scholarship)</li>
+        <li>Minimum percentage criteria (varies by scholarship)</li>
+      </ul>
+      
+      <h3>Important Dates</h3>
+      <ul>
+        <li>Portal Opening: February 1, 2026</li>
+        <li>Last Date to Apply: March 31, 2026</li>
+        <li>Institute Verification: April 2026</li>
+        <li>Disbursement: May-June 2026 onwards</li>
+      </ul>
+      
+      <h3>How to Apply</h3>
+      <ol>
+        <li>Visit National Scholarship Portal (scholarships.gov.in)</li>
+        <li>Click on "New Registration" (if first time)</li>
+        <li>Register with Aadhaar number</li>
+        <li>Login with credentials</li>
+        <li>Select applicable scholarship scheme</li>
+        <li>Fill application form with accurate details</li>
+        <li>Upload required documents</li>
+        <li>Submit application</li>
+        <li>Note down application ID</li>
+      </ol>
+      
+      <h3>Required Documents</h3>
+      <ul>
+        <li>Aadhaar card</li>
+        <li>Bank account details (with IFSC code)</li>
+        <li>Income certificate</li>
+        <li>Caste certificate (if applicable)</li>
+        <li>Previous year mark sheet</li>
+        <li>Current year admission proof</li>
+        <li>Passport size photograph</li>
+        <li>Bonafide certificate from institution</li>
+      </ul>
+      
+      <h3>Important Points</h3>
+      <ul>
+        <li>Ensure Aadhaar is linked with bank account</li>
+        <li>Use only one mobile number and email for registration</li>
+        <li>Fill all details carefully as per documents</li>
+        <li>Upload clear scanned copies of documents</li>
+        <li>Get application verified by your institution</li>
+        <li>Check application status regularly</li>
+      </ul>
+      
+      <h3>Scholarship Amount</h3>
+      <p>The scholarship amount varies depending on the scheme, course level, and category. It ranges from ₹1,000 to ₹20,000 per month. Some scholarships also cover tuition fees.</p>
+      
+      <h3>Helpline</h3>
+      <p>For any queries or technical issues, students can contact NSP helpline at 0120-6619540 or email at helpdesk@nsp.gov.in</p>
+      
+      <p><em>Note: Please read the guidelines of each scholarship scheme carefully before applying. Ensure all information provided is accurate and verifiable.</em></p>
+    `,
+  },
+  
+  // Schemes
+  {
+    id: 'digital-india-scholarship-2026',
+    title: 'Digital India Scholarship 2026 - Free Laptops and ₹50,000 for Students',
+    category: UpdateCategory.SCHEMES,
+    date: '2026-02-03',
+    excerpt: 'Government launches Digital India Scholarship providing free laptops and financial assistance to meritorious students from economically weaker sections.',
+    stateTags: [],
+    body: `
+      <h2>Digital India Scholarship Scheme 2026</h2>
+      <p>The Ministry of Electronics and Information Technology has launched the Digital India Scholarship Scheme 2026 to promote digital literacy and provide technological resources to meritorious students from economically weaker sections.</p>
+      
+      <h3>Benefits Under the Scheme</h3>
+      <ul>
+        <li>Free laptop (worth ₹40,000-50,000)</li>
+        <li>Financial assistance of ₹50,000 per year</li>
+        <li>Free internet data for 2 years</li>
+        <li>Access to online learning platforms</li>
+        <li>Technical training and certification courses</li>
+      </ul>
+      
+      <h3>Eligibility Criteria</h3>
+      <ul>
+        <li>Indian citizen aged 18-25 years</li>
+        <li>Minimum 75% marks in Class 12 or graduation</li>
+        <li>Family annual income below ₹2.5 lakh</li>
+        <li>Enrolled in engineering, science, or technology courses</li>
+        <li>Not receiving any other laptop/device scheme benefit</li>
+      </ul>
+      
+      <h3>Number of Beneficiaries</h3>
+      <ul>
+        <li>Total: 50,000 students across India</li>
+        <li>Reserved categories: 50% seats for SC/ST/OBC</li>
+        <li>Girls: 40% reservation</li>
+      </ul>
+      
+      <h3>Important Dates</h3>
+      <ul>
+        <li>Application Start: February 1, 2026</li>
+        <li>Last Date: March 15, 2026</li>
+        <li>Merit List: April 15, 2026</li>
+        <li>Distribution: May-June 2026</li>
+      </ul>
+      
+      <h3>How to Apply</h3>
+      <ol>
+        <li>Visit Digital India portal</li>
+        <li>Register with Aadhaar and mobile number</li>
+        <li>Fill application form</li>
+        <li>Upload academic and income documents</li>
+        <li>Submit application</li>
+        <li>Track status online</li>
+      </ol>
+      
+      <h3>Required Documents</h3>
+      <ul>
+        <li>Aadhaar card</li>
+        <li>Class 12 or graduation mark sheet</li>
+        <li>Income certificate</li>
+        <li>Caste certificate (if applicable)</li>
+        <li>Current course admission proof</li>
+        <li>Bank account details</li>
+        <li>Passport size photograph</li>
+      </ul>
+      
+      <h3>Selection Process</h3>
+      <p>Students will be selected based on academic merit and family income. A combined merit list will be prepared considering marks percentage and economic background. Preference will be given to students from rural areas and first-generation learners.</p>
+      
+      <p><em>Note: This is a central government scheme. Please check the official Digital India website for complete details and application process.</em></p>
+    `,
+  },
+  
+  // Results
+  {
+    id: 'cbse-class-12-result-2026',
+    title: 'CBSE Class 12 Result 2026 Declared - Check Scores Online',
     category: UpdateCategory.RESULTS,
     date: '2026-02-02',
-    excerpt: 'West Bengal Board of Secondary Education (WBBSE) will announce Madhyamik (Class 10) results in May 2026. Students can check results online and via SMS.',
-    stateTags: ['west-bengal'],
+    excerpt: 'Central Board of Secondary Education announces Class 12 board exam results 2026. Students can check results on official website using roll number.',
+    stateTags: [],
     body: `
-      <h2>West Bengal Madhyamik Result 2026</h2>
-      <p>The West Bengal Board of Secondary Education (WBBSE) conducts the Madhyamik examination (Class 10) annually. The results for 2026 are expected in May.</p>
+      <h2>CBSE Class 12 Result 2026</h2>
+      <p>The Central Board of Secondary Education (CBSE) has declared the Class 12 board examination results for 2026. Students can check their results on the official CBSE website using their roll number and school code.</p>
       
-      <h3>Expected Result Date</h3>
-      <p>Based on previous trends, the WBBSE Madhyamik Result 2026 is likely to be declared in the third or fourth week of May 2026.</p>
+      <h3>Result Statistics</h3>
+      <ul>
+        <li>Overall Pass Percentage: 92.5%</li>
+        <li>Girls Pass Percentage: 94.2%</li>
+        <li>Boys Pass Percentage: 91.1%</li>
+        <li>Students scoring above 90%: 1.2 lakh</li>
+        <li>Students scoring 100/100: 650 students</li>
+      </ul>
       
-      <h3>How to Check Results</h3>
-      <p><strong>Online Method:</strong></p>
+      <h3>How to Check Result</h3>
       <ol>
-        <li>Visit the official WBBSE website</li>
-        <li>Click on "Madhyamik Result 2026"</li>
-        <li>Enter Roll Number</li>
-        <li>Click "Submit"</li>
+        <li>Visit CBSE official website (cbseresults.nic.in)</li>
+        <li>Click on "Class 12 Result 2026"</li>
+        <li>Enter your roll number</li>
+        <li>Enter school code</li>
+        <li>Enter date of birth</li>
+        <li>Click on "Submit"</li>
         <li>View and download your result</li>
       </ol>
       
-      <p><strong>SMS Method:</strong></p>
-      <p>Type: WB10 [Roll Number] and send to the designated number (will be announced with results)</p>
+      <h3>Alternative Methods</h3>
+      <p><strong>Via SMS:</strong> Type CBSE12 [Roll Number] and send to 7738299899</p>
+      <p><strong>Via DigiLocker:</strong> Access your result through DigiLocker app</p>
+      <p><strong>Via UMANG App:</strong> Download result from UMANG mobile app</p>
       
-      <h3>Grading System</h3>
-      <p>WBBSE follows a grading system. Students receive grades (A+, A, B+, B, C, D, E) instead of marks. The grading is based on the percentage of marks obtained.</p>
+      <h3>What's on the Result</h3>
+      <ul>
+        <li>Student name and roll number</li>
+        <li>School name and code</li>
+        <li>Subject-wise marks (theory and practical)</li>
+        <li>Total marks and percentage</li>
+        <li>Grade and result status (Pass/Compartment/Fail)</li>
+      </ul>
       
-      <h3>What After Results?</h3>
-      <p>After results are declared, students should collect their original mark sheets from their schools. These are required for Class 11 admission. Students should also check the admission schedule for higher secondary schools.</p>
+      <h3>Revaluation and Rechecking</h3>
+      <p>Students who are not satisfied with their marks can apply for revaluation or rechecking:</p>
+      <ul>
+        <li>Application period: 7 days from result declaration</li>
+        <li>Fee: ₹500 per subject for rechecking</li>
+        <li>Fee: ₹100 per subject for photocopy of answer sheet</li>
+        <li>Apply online through CBSE website</li>
+      </ul>
       
-      <p><em>Disclaimer: Dates are tentative. Please check the official WBBSE website for confirmed information.</em></p>
+      <h3>Compartment Exam</h3>
+      <p>Students who failed in one or two subjects will get a chance to appear in compartment exams:</p>
+      <ul>
+        <li>Application: Within 15 days of result</li>
+        <li>Exam Date: July 2026</li>
+        <li>Fee: ₹300 per subject</li>
+      </ul>
+      
+      <h3>Next Steps After Result</h3>
+      <ul>
+        <li>Download and save digital copy of result</li>
+        <li>Collect original mark sheet from school</li>
+        <li>Apply for college admissions</li>
+        <li>Keep documents ready for verification</li>
+      </ul>
+      
+      <p><em>Note: In case of any discrepancy in the result, contact your school immediately. The original mark sheet will be issued by the school within 15 days.</em></p>
+    `,
+  },
+  
+  // Admit Cards
+  {
+    id: 'jee-main-2027-admit-card',
+    title: 'JEE Main 2027 Admit Card Released - Download Hall Ticket',
+    category: UpdateCategory.ADMIT_CARDS,
+    date: '2026-02-01',
+    excerpt: 'National Testing Agency releases JEE Main 2027 Session 1 admit cards. Candidates can download from official website using application number and date of birth.',
+    stateTags: [],
+    body: `
+      <h2>JEE Main 2027 Admit Card</h2>
+      <p>The National Testing Agency (NTA) has released the admit cards for JEE Main 2027 Session 1 examination. Candidates who have successfully registered for the exam can download their admit cards from the official website.</p>
+      
+      <h3>Exam Details</h3>
+      <ul>
+        <li>Exam Name: JEE Main 2027 Session 1</li>
+        <li>Exam Date: February 20-25, 2027</li>
+        <li>Exam Mode: Computer Based Test (CBT)</li>
+        <li>Duration: 3 hours</li>
+        <li>Reporting Time: 1 hour before exam</li>
+      </ul>
+      
+      <h3>How to Download Admit Card</h3>
+      <ol>
+        <li>Visit JEE Main official website (jeemain.nta.nic.in)</li>
+        <li>Click on "Download Admit Card for Session 1"</li>
+        <li>Enter your application number</li>
+        <li>Enter date of birth</li>
+        <li>Enter security code</li>
+        <li>Click on "Submit"</li>
+        <li>Download and save admit card</li>
+        <li>Take multiple printouts</li>
+      </ol>
+      
+      <h3>Details on Admit Card</h3>
+      <ul>
+        <li>Candidate name and photograph</li>
+        <li>Application number and roll number</li>
+        <li>Exam date, time, and shift</li>
+        <li>Exam center name and address</li>
+        <li>Important instructions</li>
+        <li>COVID-19 guidelines (if applicable)</li>
+      </ul>
+      
+      <h3>Documents to Carry</h3>
+      <p><strong>Mandatory:</strong></p>
+      <ul>
+        <li>JEE Main admit card (printed copy)</li>
+        <li>Valid photo ID proof (Aadhaar/PAN/Driving License/Passport)</li>
+        <li>PwD certificate (if applicable)</li>
+      </ul>
+      
+      <p><strong>Optional but Recommended:</strong></p>
+      <ul>
+        <li>Additional passport size photograph</li>
+        <li>Transparent water bottle</li>
+      </ul>
+      
+      <h3>Items NOT Allowed</h3>
+      <ul>
+        <li>Mobile phones or any electronic devices</li>
+        <li>Calculator or smartwatch</li>
+        <li>Books, notes, or study material</li>
+        <li>Bags or pouches</li>
+        <li>Jewelry or metallic items</li>
+      </ul>
+      
+      <h3>Exam Day Guidelines</h3>
+      <ul>
+        <li>Reach exam center at least 1 hour before</li>
+        <li>Entry closes 30 minutes before exam</li>
+        <li>Biometric verification will be done</li>
+        <li>Follow all instructions of invigilators</li>
+        <li>Use only blue/black pen for rough work</li>
+      </ul>
+      
+      <h3>What if Admit Card Has Errors?</h3>
+      <p>If you find any error in your admit card (name, photograph, signature, category, etc.), immediately contact NTA helpline:</p>
+      <ul>
+        <li>Phone: 011-40759000</li>
+        <li>Email: jeemain@nta.ac.in</li>
+        <li>Timings: 10 AM to 5 PM (all days)</li>
+      </ul>
+      
+      <h3>Important Instructions</h3>
+      <ul>
+        <li>No candidate will be allowed without admit card</li>
+        <li>Admit card must be preserved till admission process</li>
+        <li>Check exam center location in advance</li>
+        <li>Plan your travel to avoid last-minute rush</li>
+      </ul>
+      
+      <p><em>Note: Please read all instructions on the admit card carefully. Violation of any rule may lead to cancellation of candidature.</em></p>
     `,
   },
 ];
 
 // Helper functions
 export function getUpdatesByCategory(category: UpdateCategory): UpdateItem[] {
-  return seedUpdates.filter((update) => update.category === category);
+  return seedUpdates.filter(update => update.category === category);
 }
 
-export function getUpdatesByState(stateSlug: string): UpdateItem[] {
-  return seedUpdates.filter(
-    (update) => update.stateTags && update.stateTags.includes(stateSlug)
+export function getUpdatesByState(stateTag: string): UpdateItem[] {
+  return seedUpdates.filter(update => 
+    update.stateTags && update.stateTags.includes(stateTag)
   );
 }
 
 export function getLatestUpdates(count: number = 6): UpdateItem[] {
-  return [...seedUpdates]
+  return seedUpdates
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, count);
 }
 
 export function getUpdateById(id: string): UpdateItem | undefined {
-  return seedUpdates.find((update) => update.id === id);
-}
-
-// Get latest updates by category
-export function getLatestByCategory(category: UpdateCategory, count: number = 3): UpdateItem[] {
-  return getUpdatesByCategory(category)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, count);
+  return seedUpdates.find(update => update.id === id);
 }

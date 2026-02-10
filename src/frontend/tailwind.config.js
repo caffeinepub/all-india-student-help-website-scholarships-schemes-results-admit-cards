@@ -73,9 +73,10 @@ export default {
                 sm: 'calc(var(--radius) - 4px)'
             },
             boxShadow: {
-                xs: '0 1px 2px 0 rgba(0,0,0,0.05)',
-                soft: '0 2px 8px rgba(0,0,0,0.08)',
-                card: '0 1px 3px rgba(0,0,0,0.1)'
+                xs: '0 1px 2px 0 rgba(0,0,0,0.04)',
+                soft: '0 2px 12px rgba(0,0,0,0.06)',
+                card: '0 1px 3px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04)',
+                paper: '0 2px 8px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.03)'
             },
             keyframes: {
                 'accordion-down': {

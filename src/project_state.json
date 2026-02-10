@@ -1,53 +1,36 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Upgrade existing education-focused website with hands-free content automation: ingest user-provided raw content/links a few times per week, rewrite into student-friendly original articles, generate images, auto-categorize/tag, and auto-publish daily—while preserving the current URL, design/layout, and Google Search Console verification/SEO setup.",
+  "summary": "Website automation project for Aurora Studios: automatically fetch and update images/content from online sources and publish daily news/educational content via web scraping/search.",
   "architectural_notes": [
-    "Treat as an in-place upgrade (not a rebuild); must not reset or remove existing site assets/configuration.",
-    "Do not change website URL, design, or layout.",
-    "Do not remove/alter meta tags, ownership/verification files, or Google Search Console verification code; avoid triggering re-verification or re-indexing requirements.",
-    "Automation should run continuously in the backend and publish daily without manual posting."
+    "Add an automated content ingestion pipeline (web search/scraping -> filtering -> approval/publishing) scheduled to run daily.",
+    "Implement an image sourcing strategy to auto-fetch and refresh images for Aurora Studios-related sections across the site."
   ],
   "known_issues": [],
   "isFixRequest": false,
+  "imageRequirements": "## Edit Images\n- Crop/resize for a wide hero/card-safe aspect ratio and export (ncert-launches-portal-for-home-delivery-of-books.jpg > ncert-sample-papers.dim_1600x900.jpg)",
   "existing_features": [
     {
-      "id": "feature-preserve-the-current-site-url-routing-design-and-layout-and-keep-google-search-console-verification-intact-by-not-removing-or-altering-existing-verification-meta-tags-including-the-existing-meta-name-google-site-verification-in-frontend-index-html",
-      "title": "Preserve the current site URL, routing, design, and layout, and keep Google Search Console verification intact by not removing or altering existing verification/meta tags (including the existing <meta name=\"google-site-verification\" ...> in frontend/index.html).",
-      "reqIds": [
-        "REQ-1"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-a-minimal-manual-ingestion-mechanism-2-3-times-week-for-the-site-owner-to-provide-raw-content-or-official-source-links-which-the-backend-queues-for-processing-and-future-publishing-without-requiring-ongoing-dashboard-work",
-      "title": "Implement a minimal manual-ingestion mechanism (2–3 times/week) for the site owner to provide raw content or official-source links, which the backend queues for processing and future publishing without requiring ongoing dashboard work.",
-      "reqIds": [
-        "REQ-3"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-automatically-generate-and-attach-a-relevant-image-for-each-published-post-without-relying-on-third-party-ai-services-by-generating-a-simple-consistent-category-themed-image-e-g-svg-png-derived-from-the-post-category-and-keywords-and-make-it-retrievable-by-the-frontend-for-display",
-      "title": "Automatically generate and attach a relevant image for each published post without relying on third-party AI services, by generating a simple, consistent, category-themed image (e.g., SVG/PNG) derived from the post category and keywords, and make it retrievable by the frontend for display.",
-      "reqIds": [
-        "REQ-6"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-daily-backend-scheduler-that-auto-publishes-content-from-the-processed-queue-every-day-hands-free-while-preserving-site-uptime-and-ensuring-the-public-pages-continue-to-show-content-never-empty-via-fallback-behavior",
-      "title": "Add a daily backend scheduler that auto-publishes content from the processed queue every day (hands-free) while preserving site uptime and ensuring the public pages continue to show content (never empty) via fallback behavior.",
+      "id": "feature-add-a-simple-admin-ui-screen-owner-admin-only-to-manage-automation-settings-content-sources-list-a-run-ingestion-now-button-and-a-status-panel-showing-last-run-time-counts-and-recent-errors",
+      "title": "Add a simple admin UI screen (owner/admin-only) to manage automation settings: content sources list, a \"Run ingestion now\" button, and a status panel showing last run time, counts, and recent errors.",
       "reqIds": [
         "REQ-7"
       ],
       "version": 1
     },
     {
-      "id": "feature-update-the-frontend-content-sources-so-category-pages-search-home-latest-sections-and-post-detail-pages-use-backend-published-posts-first-and-fall-back-to-existing-seedupdates-when-backend-has-no-content-without-changing-existing-routes-or-overall-layout",
-      "title": "Update the frontend content sources so category pages, search, home 'latest' sections, and post detail pages use backend-published posts first and fall back to existing seedUpdates when backend has no content, without changing existing routes or overall layout.",
+      "id": "feature-replace-hardcoded-site-branding-image-usage-with-a-backend-configurable-brand-image-so-the-logo-brand-image-can-be-updated-centrally-supporting-the-user-s-request-to-update-images-wherever-the-brand-name-is-used",
+      "title": "Replace hardcoded site branding image usage with a backend-configurable \"brand image\" so the logo/brand image can be updated centrally (supporting the user’s request to update images wherever the brand name is used).",
       "reqIds": [
         "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-cohesive-editorial-style-visual-theme-refresh-warm-neutrals-high-contrast-typography-subtle-paper-like-surfaces-consistently-across-key-pages-home-list-pages-post-detail-header-footer-without-changing-site-structure-or-routes",
+      "title": "Apply a cohesive, editorial-style visual theme refresh (warm neutrals, high-contrast typography, subtle paper-like surfaces) consistently across key pages (Home, list pages, Post detail, header/footer) without changing site structure or routes.",
+      "reqIds": [
+        "REQ-9"
       ],
       "version": 1
     }
@@ -55,81 +38,43 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Preserve existing website unchanged (no rebuild): keep same URL, design/layout, meta tags, and Google Search Console verification/ownership intact",
+      "summary": "Automate fetching/updating images across the site where 'Aurora Studios' is referenced (auto-replace/refresh content images from online sources)",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-2",
-      "summary": "Content ingestion pipeline to accept user-provided raw content or official-source links (2–3x/week) for automated processing",
+      "summary": "Daily automated web scraping/search to discover and publish new news and educational content relevant to the website",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-3",
-      "summary": "Automatically rewrite provided content into simple, student-friendly, original articles suitable for Indian students",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-4",
-      "summary": "Auto-generate and attach AI-generated relevant images for each post",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-5",
-      "summary": "Auto-categorize content correctly into existing site sections (and tags if applicable)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-6",
-      "summary": "Daily scheduled auto-publishing with no manual posting/dashboard work after content is provided; ensure sections are never empty/outdated",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-7",
-      "summary": "Maintain SEO-friendliness and uninterrupted Google indexing/visibility during and after automation upgrade",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-9",
-      "summary": "Add backend support for storing and serving dynamically published posts (education news/exam notifications/results/admit cards/scholarships) as persistent data, including fields needed by the existing frontend cards and detail pages (id, title, category, date, excerpt, body, optional stateTags, and an image reference).",
-      "reqIds": [
-        "REQ-2"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-11",
-      "summary": "For each ingested item, automatically produce a student-friendly rewritten article in English that is clearly restructured (not a direct copy), including: a simplified title, a short excerpt, and an HTML body with headings and bullet points suitable for the existing PostDetailPage rendering.",
+      "summary": "Add backend support for automated content ingestion from admin-configured online sources (e.g., RSS/Atom feeds or JSON endpoints): store a list of sources, fetch and parse new items, and convert them into queued posts using the existing ingestion/publishing pipeline.",
       "reqIds": [
         "REQ-4"
       ],
       "status": "pending"
     },
     {
-      "id": "AR-12",
-      "summary": "Automatically assign each processed post to one of the existing site categories (education-news, competitive-exams, results, admit-cards, scholarships, schemes/school-education as applicable) using deterministic rules and/or optional owner-provided hints, and keep tags/stateTags when provided.",
+      "id": "AR-4",
+      "summary": "Implement a daily automated ingestion trigger in the backend that runs the fetch+ingest job once per day, and also expose an admin-only \"Run ingestion now\" method for manual triggering.",
       "reqIds": [
         "REQ-5"
       ],
       "status": "pending"
     },
     {
-      "id": "AR-16",
-      "summary": "Add a safe upgrade path for new persistent content data structures in the single Motoko actor, using migration logic only if required to avoid resetting or losing any existing canister state (e.g., current contact submissions/user profiles).",
+      "id": "AR-5",
+      "summary": "Add backend support to automatically set or refresh post hero images based on admin-configured image rules: for each ingested item, derive an image URL (from the source item when available) or fall back to a category image; validate that the stored image URL is non-empty and usable by the frontend.",
       "reqIds": [
-        "REQ-9"
+        "REQ-6"
       ],
       "status": "pending"
     }
   ],
   "gameProjectType": "none",
-  "projectName": "Add hands-free content ingestion, auto-rewrite, auto-categorize, image generation, and daily auto-publishing (upgrade without changing URL/design/Google verification)",
+  "projectName": "Aurora Studios",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

@@ -2,35 +2,12 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-preserve-the-current-site-url-routing-design-and-layout-and-keep-google-search-console-verification-intact-by-not-removing-or-altering-existing-verification-meta-tags-including-the-existing-meta-name-google-site-verification-in-frontend-index-html",
-      "featureTitle": "Preserve the current site URL, routing, design, and layout, and keep Google Search Console verification intact by not removing or altering existing verification/meta tags (including the existing <meta name=\"google-site-verification\" ...> in frontend/index.html).",
-      "files": [
-        "frontend/index.html",
-        "frontend/src/App.tsx"
-      ],
-      "components": [
-        "authorization@4.0.0",
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "blob-storage@4.0.0"
-      ],
-      "testIds": [
-        "REQ-1"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-implement-a-minimal-manual-ingestion-mechanism-2-3-times-week-for-the-site-owner-to-provide-raw-content-or-official-source-links-which-the-backend-queues-for-processing-and-future-publishing-without-requiring-ongoing-dashboard-work",
-      "featureTitle": "Implement a minimal manual-ingestion mechanism (2–3 times/week) for the site owner to provide raw content or official-source links, which the backend queues for processing and future publishing without requiring ongoing dashboard work.",
+      "featureId": "feature-add-a-simple-admin-ui-screen-owner-admin-only-to-manage-automation-settings-content-sources-list-a-run-ingestion-now-button-and-a-status-panel-showing-last-run-time-counts-and-recent-errors",
+      "featureTitle": "Add a simple admin UI screen (owner/admin-only) to manage automation settings: content sources list, a \"Run ingestion now\" button, and a status panel showing last run time, counts, and recent errors.",
       "files": [
         "frontend/src/App.tsx",
-        "frontend/src/components/content/AccessDeniedScreen.tsx",
-        "frontend/src/components/content/FormStatusBanner.tsx",
-        "frontend/src/hooks/useAdminGuard.ts",
-        "frontend/src/pages/OwnerIngestPage.tsx"
+        "frontend/src/hooks/useAutomationSettings.ts",
+        "frontend/src/pages/AutomationSettingsPage.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -39,57 +16,8 @@
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
         "github-export-icp-cli@1.0.0",
-        "blob-storage@4.0.0"
-      ],
-      "testIds": [
-        "REQ-3"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-automatically-generate-and-attach-a-relevant-image-for-each-published-post-without-relying-on-third-party-ai-services-by-generating-a-simple-consistent-category-themed-image-e-g-svg-png-derived-from-the-post-category-and-keywords-and-make-it-retrievable-by-the-frontend-for-display",
-      "featureTitle": "Automatically generate and attach a relevant image for each published post without relying on third-party AI services, by generating a simple, consistent, category-themed image (e.g., SVG/PNG) derived from the post category and keywords, and make it retrievable by the frontend for display.",
-      "files": [
-        "frontend/src/components/content/UpdateCard.tsx",
-        "frontend/src/content/updateTypes.ts",
-        "frontend/src/pages/PostDetailPage.tsx"
-      ],
-      "components": [
-        "authorization@4.0.0",
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "blob-storage@4.0.0"
-      ],
-      "testIds": [
-        "REQ-6"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-a-daily-backend-scheduler-that-auto-publishes-content-from-the-processed-queue-every-day-hands-free-while-preserving-site-uptime-and-ensuring-the-public-pages-continue-to-show-content-never-empty-via-fallback-behavior",
-      "featureTitle": "Add a daily backend scheduler that auto-publishes content from the processed queue every day (hands-free) while preserving site uptime and ensuring the public pages continue to show content (never empty) via fallback behavior.",
-      "files": [
-        "frontend/src/pages/AdmitCardsPage.tsx",
-        "frontend/src/pages/CompetitiveExamsPage.tsx",
-        "frontend/src/pages/EducationNewsPage.tsx",
-        "frontend/src/pages/HomePage.tsx",
-        "frontend/src/pages/ResultsPage.tsx",
-        "frontend/src/pages/SchemesPage.tsx",
-        "frontend/src/pages/ScholarshipsPage.tsx",
-        "frontend/src/pages/SchoolEducationPage.tsx",
-        "frontend/src/pages/StatePage.tsx"
-      ],
-      "components": [
-        "authorization@4.0.0",
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "blob-storage@4.0.0"
+        "blob-storage@4.0.0",
+        "http-outcalls@3.0.0"
       ],
       "testIds": [
         "REQ-7"
@@ -97,23 +25,11 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-frontend-content-sources-so-category-pages-search-home-latest-sections-and-post-detail-pages-use-backend-published-posts-first-and-fall-back-to-existing-seedupdates-when-backend-has-no-content-without-changing-existing-routes-or-overall-layout",
-      "featureTitle": "Update the frontend content sources so category pages, search, home 'latest' sections, and post detail pages use backend-published posts first and fall back to existing seedUpdates when backend has no content, without changing existing routes or overall layout.",
+      "featureId": "feature-replace-hardcoded-site-branding-image-usage-with-a-backend-configurable-brand-image-so-the-logo-brand-image-can-be-updated-centrally-supporting-the-user-s-request-to-update-images-wherever-the-brand-name-is-used",
+      "featureTitle": "Replace hardcoded site branding image usage with a backend-configurable \"brand image\" so the logo/brand image can be updated centrally (supporting the user’s request to update images wherever the brand name is used).",
       "files": [
-        "frontend/src/hooks/useBackendPosts.ts",
-        "frontend/src/hooks/useCombinedUpdates.ts",
-        "frontend/src/pages/AdmitCardsPage.tsx",
-        "frontend/src/pages/CompetitiveExamsPage.tsx",
-        "frontend/src/pages/EducationNewsPage.tsx",
-        "frontend/src/pages/HomePage.tsx",
-        "frontend/src/pages/PostDetailPage.tsx",
-        "frontend/src/pages/ResultsPage.tsx",
-        "frontend/src/pages/SchemesPage.tsx",
-        "frontend/src/pages/ScholarshipsPage.tsx",
-        "frontend/src/pages/SchoolEducationPage.tsx",
-        "frontend/src/pages/SearchPage.tsx",
-        "frontend/src/utils/backendPostAdapters.ts",
-        "frontend/src/utils/searchUpdates.ts"
+        "frontend/src/components/navigation/SiteHeader.tsx",
+        "frontend/src/pages/AutomationSettingsPage.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -122,10 +38,37 @@
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
         "github-export-icp-cli@1.0.0",
-        "blob-storage@4.0.0"
+        "blob-storage@4.0.0",
+        "http-outcalls@3.0.0"
       ],
       "testIds": [
         "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-cohesive-editorial-style-visual-theme-refresh-warm-neutrals-high-contrast-typography-subtle-paper-like-surfaces-consistently-across-key-pages-home-list-pages-post-detail-header-footer-without-changing-site-structure-or-routes",
+      "featureTitle": "Apply a cohesive, editorial-style visual theme refresh (warm neutrals, high-contrast typography, subtle paper-like surfaces) consistently across key pages (Home, list pages, Post detail, header/footer) without changing site structure or routes.",
+      "files": [
+        "frontend/src/components/content/UpdateCard.tsx",
+        "frontend/src/components/layout/SiteLayout.tsx",
+        "frontend/src/index.css",
+        "frontend/src/pages/HomePage.tsx",
+        "frontend/src/pages/PostDetailPage.tsx",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0",
+        "http-outcalls@3.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
       ],
       "confidence": "high"
     }

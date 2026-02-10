@@ -7,11 +7,11 @@ interface UpdateCardProps {
 }
 
 const categoryColors: Record<string, string> = {
-  'Scholarship': 'bg-primary/10 text-primary',
-  'Scheme': 'bg-chart-2/10 text-chart-2',
-  'Exam': 'bg-chart-3/10 text-chart-3',
-  'News': 'bg-chart-4/10 text-chart-4',
-  'School': 'bg-chart-5/10 text-chart-5',
+  'Scholarship': 'bg-primary/15 text-primary border-primary/20',
+  'Scheme': 'bg-chart-2/15 text-chart-2 border-chart-2/20',
+  'Exam': 'bg-chart-3/15 text-chart-3 border-chart-3/20',
+  'News': 'bg-chart-4/15 text-chart-4 border-chart-4/20',
+  'School': 'bg-chart-5/15 text-chart-5 border-chart-5/20',
 };
 
 export default function UpdateCard({ update }: UpdateCardProps) {
@@ -28,31 +28,29 @@ export default function UpdateCard({ update }: UpdateCardProps) {
   };
 
   const categoryLabel = getCategoryLabel(update.category);
-  const categoryColor = categoryColors[categoryLabel] || 'bg-muted text-muted-foreground';
+  const categoryColor = categoryColors[categoryLabel] || 'bg-muted text-muted-foreground border-muted';
 
-  // Fallback image if imageUrl is not provided or invalid
   const fallbackImage = '/assets/generated/site-logo.dim_512x128.png';
   const imageUrl = update.imageUrl || fallbackImage;
 
   return (
-    <article className="group bg-card border rounded-lg overflow-hidden hover:shadow-card transition-all duration-200 flex flex-col">
+    <article className="group bg-card border rounded-xl overflow-hidden hover:shadow-paper transition-all duration-300 flex flex-col">
       {/* Image */}
       <div className="relative w-full h-48 bg-muted overflow-hidden">
         <img
           src={imageUrl}
           alt={update.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           onError={(e) => {
-            // Fallback if image fails to load
             e.currentTarget.src = fallbackImage;
           }}
         />
       </div>
 
       {/* Content */}
-      <div className="p-5 flex flex-col flex-1">
-        <div className="flex flex-wrap items-center gap-2 mb-3">
-          <span className={`text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap ${categoryColor}`}>
+      <div className="p-6 flex flex-col flex-1">
+        <div className="flex flex-wrap items-center gap-2 mb-4">
+          <span className={`text-xs font-semibold px-3 py-1.5 rounded-full whitespace-nowrap border ${categoryColor}`}>
             {categoryLabel}
           </span>
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -61,19 +59,19 @@ export default function UpdateCard({ update }: UpdateCardProps) {
           </div>
         </div>
         
-        <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors leading-snug">
+        <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors leading-snug">
           <button onClick={handleClick} className="hover:underline text-left w-full break-words">
             {update.title}
           </button>
         </h3>
         
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
+        <p className="text-sm text-muted-foreground mb-5 line-clamp-2 leading-relaxed">
           {update.excerpt}
         </p>
         
         <button
           onClick={handleClick}
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-2.5 transition-all mt-auto"
+          className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all mt-auto"
         >
           Read more
           <ArrowRight className="h-4 w-4 flex-shrink-0" />

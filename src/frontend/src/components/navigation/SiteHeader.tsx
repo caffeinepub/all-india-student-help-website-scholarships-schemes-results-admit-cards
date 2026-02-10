@@ -3,14 +3,19 @@ import { Menu, Search } from 'lucide-react';
 import { useState } from 'react';
 import MobileNav from './MobileNav';
 import { Button } from '../ui/button';
+import { useBrandImage } from '../../hooks/useAutomationSettings';
 
 export default function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { data: brandImage } = useBrandImage();
 
   const handleSearchClick = () => {
     navigate({ to: '/search' });
   };
+
+  const fallbackLogo = '/assets/generated/site-logo.dim_512x128.png';
+  const logoSrc = brandImage?.url || fallbackLogo;
 
   return (
     <>
@@ -18,9 +23,12 @@ export default function SiteHeader() {
         <div className="container flex h-16 items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-2 flex-shrink-0">
             <img 
-              src="/assets/generated/site-logo.dim_512x128.png" 
+              src={logoSrc}
               alt="Education Portal" 
               className="h-8 sm:h-10 w-auto"
+              onError={(e) => {
+                e.currentTarget.src = fallbackLogo;
+              }}
             />
           </Link>
 

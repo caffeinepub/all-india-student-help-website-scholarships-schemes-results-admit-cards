@@ -13,7 +13,7 @@ export default function SiteLayout() {
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
       {showBreadcrumbs && (
-        <div className="border-b bg-muted/30">
+        <div className="border-b bg-accent/10">
           <div className="container py-3 px-4">
             <Breadcrumbs />
           </div>

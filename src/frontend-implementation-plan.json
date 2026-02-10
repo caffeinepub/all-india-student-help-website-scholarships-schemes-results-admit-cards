@@ -1,230 +1,104 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Frontend upgrade: prefer backend-published posts with seed fallback, add owner ingestion UI, and render post images without changing routes/layout",
+  "title": "Admin automation settings, dynamic brand image, and editorial theme refresh",
   "requirements": [
     {
-      "id": "REQ-1",
-      "summary": "Preserve current URL/routing/layout and keep Google Search Console verification meta tags intact while adding new functionality additively.",
-      "acceptanceCriteria": [
-        "The file frontend/index.html still contains the existing google-site-verification meta tag with the same content value.",
-        "No routes in frontend/src/App.tsx are removed or renamed.",
-        "Header/footer/layout components remain present and visually consistent (no intentional redesign)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "Add a nearby non-functional comment warning not to remove/alter existing meta tags; ensure the existing <meta name=\"google-site-verification\" content=\"hym4U2k_e6Y32exhxiM5yIhLCPh_rYLDWpY5B2Mr9wQ\" /> remains unchanged."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Add an unlinked owner-only ingestion route (e.g., /owner/ingest) without removing/renaming any existing routes; keep existing route tree intact."
-        },
-        {
-          "path": "frontend/src/components/layout/SiteLayout.tsx",
-          "operation": "modify",
-          "description": "If needed for the new unlinked owner route, ensure layout remains visually consistent (no redesign); avoid altering header/footer structure."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Add a minimal, non-disruptive owner ingestion UI (unlinked route) with guarded access and success/failure status feedback.",
-      "acceptanceCriteria": [
-        "Backend provides an authenticated/guarded ingestion method that accepts: raw text and/or a source URL, optional hints (desired category/state tags), and stores the submission in a queue.",
-        "Frontend provides a minimal submission UI that is not disruptive to the public site experience (e.g., an unlinked route or a simple form page), and submitting shows a success/failure banner.",
-        "The ingestion flow does not require changing existing public navigation or layout."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/OwnerIngestPage.tsx",
-          "operation": "create",
-          "description": "Create a minimal owner ingestion form page (unlinked) that collects raw content and/or source URL plus optional hints (category/state tags), calls the backend ingestion capability via the actor, and displays success/failure using the existing FormStatusBanner component. Use the selected authorization component patterns to require login and admin role checks; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/hooks/useAdminGuard.ts",
-          "operation": "create",
-          "description": "Add a small hook to (a) detect authentication via the existing Internet Identity context, (b) query the backend for admin status (e.g., isCallerAdmin/getCallerUserRole) using React Query, and (c) expose loading/authorized states for guarding the owner ingestion page. Use the selected authorization component patterns; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/content/AccessDeniedScreen.tsx",
-          "operation": "create",
-          "description": "Add a simple access denied screen used by the owner ingestion route when the caller is not authorized (guest/non-admin), without impacting public pages. Use the selected authorization component guidance for unauthorized UI; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Wire OwnerIngestPage into the router as an unlinked route (e.g., /owner/ingest). Do not add it to header/mobile navigation to keep the public UX unchanged."
-        },
-        {
-          "path": "frontend/src/components/content/FormStatusBanner.tsx",
-          "operation": "modify",
-          "description": "If required to support the ingestion page UX, extend banner usage ergonomics (e.g., allow a compact variant or improved error text handling) without changing existing behavior across the public site."
-        }
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "summary": "Render a per-post image when available from backend-published posts and show a safe fallback when missing or image generation fails.",
-      "acceptanceCriteria": [
-        "When a post is published, it has an associated image reference (id/URL/path) that the frontend can render.",
-        "Images are produced programmatically within the app stack (no external LLM/image-generation API integration required).",
-        "If image generation fails, the post still publishes and the frontend shows a safe fallback image state."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/content/updateTypes.ts",
-          "operation": "modify",
-          "description": "Extend UpdateItem with an optional imageUrl field so cards and detail pages can render backend-provided images while remaining compatible with existing seedUpdates."
-        },
-        {
-          "path": "frontend/src/components/content/UpdateCard.tsx",
-          "operation": "modify",
-          "description": "Add optional image rendering to UpdateCard when update.imageUrl is present; if absent/invalid, render a safe fallback image state using the static asset at frontend/public/assets/generated/site-logo.dim_512x128.png (do not break existing card layout)."
-        },
-        {
-          "path": "frontend/src/pages/PostDetailPage.tsx",
-          "operation": "modify",
-          "description": "Render a hero/cover image for the post when available (backend imageUrl), otherwise use a safe fallback image state referencing frontend/public/assets/generated/hero-banner.dim_1600x600.png or frontend/public/assets/generated/site-logo.dim_512x128.png; keep the existing content layout and route behavior unchanged."
-        }
-      ]
-    },
-    {
       "id": "REQ-7",
-      "summary": "Ensure public pages remain populated via frontend fallback behavior when backend has no queued/published content (supports hands-free daily publishing without empty states).",
+      "summary": "Add an admin-only Automation Settings screen to manage ingestion sources, trigger ingestion, and view ingestion status/errors.",
       "acceptanceCriteria": [
-        "Backend runs a scheduled job daily that publishes at least one queued processed item when available.",
-        "If no queued items exist, the site still displays content on each category page (frontend falls back to existing seed content rather than showing empty states).",
-        "Publishing does not require manual triggers, logins, or dashboard actions beyond occasional ingestion submissions."
+        "Only authorized admins can access the automation settings screen (reuse existing admin guard patterns).",
+        "Admin can add/edit/enable/disable/remove content sources from the UI.",
+        "Admin can click \"Run ingestion now\" and see a success/error result in the UI.",
+        "The UI displays last run time and basic ingestion stats returned from the backend."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/HomePage.tsx",
-          "operation": "modify",
-          "description": "Prefer backend-published posts for the home 'latest' sections; when backend returns none, fall back to seedUpdates so the home experience is never empty and layout remains unchanged."
+          "path": "frontend/src/pages/AutomationSettingsPage.tsx",
+          "operation": "create",
+          "description": "Create an owner/admin-only automation settings page that uses the existing admin-guard pattern (useAdminGuard + AccessDeniedScreen) from the authorization component to protect access, and provides: (1) CRUD UI for content sources (name, URL, default category, enabled flag, and image rule fields), (2) a \"Run ingestion now\" action wired to the backend trigger, and (3) a status/errors panel fed by backend-provided ingestion run info. Verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/pages/EducationNewsPage.tsx",
-          "operation": "modify",
-          "description": "Replace the current empty-state message with seed fallback behavior when backend has no items for the category; keep existing page design and route unchanged."
+          "path": "frontend/src/hooks/useAutomationSettings.ts",
+          "operation": "create",
+          "description": "Add React Query hooks/mutations for: fetching sources list, creating/updating/deleting sources, triggering a run-now action, and querying last-run stats + recent errors for the status panel; ensure queries are invalidated after mutations and show errors via existing UI patterns (e.g., FormStatusBanner)."
         },
         {
-          "path": "frontend/src/pages/ResultsPage.tsx",
+          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Prefer backend results; if backend yields zero posts, fall back to seedUpdates instead of rendering a 'No results' empty state."
+          "description": "Register and wire a new admin-only route (e.g., /owner/automation) that renders AutomationSettingsPage, keeping all existing routes/navigation intact and not removing any routes."
         },
         {
-          "path": "frontend/src/pages/AdmitCardsPage.tsx",
+          "path": "frontend/src/backend.d.ts",
           "operation": "modify",
-          "description": "Prefer backend admit-card posts; if backend yields zero posts, fall back to seedUpdates instead of rendering an empty state."
-        },
-        {
-          "path": "frontend/src/pages/SchemesPage.tsx",
-          "operation": "modify",
-          "description": "Prefer backend scheme posts; if backend yields zero posts, fall back to seedUpdates instead of rendering an empty state."
-        },
-        {
-          "path": "frontend/src/pages/ScholarshipsPage.tsx",
-          "operation": "modify",
-          "description": "Prefer backend scholarship posts; if backend yields zero posts for the active filter, fall back to seedUpdates while keeping the existing filter UI and layout unchanged."
-        },
-        {
-          "path": "frontend/src/pages/CompetitiveExamsPage.tsx",
-          "operation": "modify",
-          "description": "Prefer backend competitive-exam posts for the updates listing section; if backend yields zero posts, fall back to seedUpdates without changing the page’s informational sections."
-        },
-        {
-          "path": "frontend/src/pages/SchoolEducationPage.tsx",
-          "operation": "modify",
-          "description": "Prefer backend school-education posts; if backend yields zero posts, fall back to seedUpdates instead of showing empty state."
-        },
-        {
-          "path": "frontend/src/pages/StatePage.tsx",
-          "operation": "modify",
-          "description": "When browsing state-specific listings, prefer backend posts (filtered client-side by stateTags when available) and fall back to seedUpdates to avoid empty state pages."
+          "description": "Update frontend backend interface typings to match the automation settings needs: IngestionSource fields (name, url, defaultCategory, enabled, imageRule, id) and add typed return shapes for ingestion status (last run time/outcome/counts + recent errors) used by the UI. This is a frontend-only type alignment step anticipating backend capabilities."
         }
       ]
     },
     {
       "id": "REQ-8",
-      "summary": "Update frontend data sourcing so all listing/search/detail views prefer backend-published posts and fall back to seedUpdates without changing routes or overall layout.",
+      "summary": "Replace hardcoded logo usage with a backend-configured brand image, with safe fallbacks and admin update support.",
       "acceptanceCriteria": [
-        "HomePage and category pages show backend posts when available.",
-        "When backend returns zero posts for a category, the page renders seedUpdates content instead of 'No updates available' empty states.",
-        "Post detail route (/post/$postId) can resolve both backend post ids and seedUpdates ids without breaking navigation."
+        "Backend exposes admin-only methods to set/update a brand image reference (at minimum a URL string, optionally backed by stored asset bytes using existing storage mixins).",
+        "Frontend header logo uses the backend-configured brand image reference, with a safe fallback to the existing static logo if none is configured or load fails.",
+        "Brand image can be updated by an admin without redeploying the frontend."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/utils/backendPostAdapters.ts",
+          "path": "frontend/src/hooks/useBrandImage.ts",
           "operation": "create",
-          "description": "Add adapter utilities to map backend Post (union) into the existing UpdateItem shape, including category mapping to existing UpdateCategory values, date formatting from lastUpdatedAt, excerpt/body/title, stateTags, and imageUrl."
+          "description": "Create a React Query hook to load the backend-configured BrandImage (and optionally a mutation helper to update it) and expose loading/error states for use in header/admin UI."
         },
         {
-          "path": "frontend/src/hooks/useBackendPosts.ts",
-          "operation": "create",
-          "description": "Create React Query hooks that fetch published posts by category (and optionally fetch by id) using the existing actor, returning UpdateItem[] via backendPostAdapters. Keep public browsing available without requiring login."
+          "path": "frontend/src/components/navigation/SiteHeader.tsx",
+          "operation": "modify",
+          "description": "Replace the hardcoded logo src with the backend-configured brand image from useBrandImage; implement robust fallback to the existing static logo at frontend/public/assets/generated/site-logo.dim_512x128.png when unset or when the image fails to load."
         },
         {
-          "path": "frontend/src/hooks/useCombinedUpdates.ts",
-          "operation": "create",
-          "description": "Create a helper/hook that merges backend-derived updates with seedUpdates, preferring backend items, and provides convenience selectors for per-category lists and latest items used by pages."
+          "path": "frontend/src/pages/AutomationSettingsPage.tsx",
+          "operation": "modify",
+          "description": "Extend the admin-only Automation Settings screen to include a small brand image configuration panel that updates the backend-configured brand image (URL and related fields), enabling brand image updates without redeploying the frontend; reuse the authorization component's admin guard pattern. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Apply a cohesive editorial-style visual theme refresh (warm neutrals, high-contrast typography, subtle paper-like surfaces) across key pages without changing structure or routes.",
+      "acceptanceCriteria": [
+        "Colors/typography/spacing feel consistent across header, footer, cards, and page sections.",
+        "No routes are removed; existing navigation remains intact.",
+        "Theme avoids blue/purple as the primary brand palette."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Refresh global theme tokens toward warm neutrals and paper-like surfaces (background/card/muted/border), increase typographic contrast, and adjust chart/utility color tokens away from blue/purple primaries while keeping Tailwind/shadcn token conventions intact."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust/extend Tailwind theme settings (e.g., shadows/radius/typography defaults) to support an editorial look (subtle elevation, paper surfaces) while continuing to rely on existing CSS variables for core color tokens."
         },
         {
           "path": "frontend/src/pages/HomePage.tsx",
           "operation": "modify",
-          "description": "Switch home 'latest' sections to use useCombinedUpdates (backend-first, seed fallback) while preserving the existing hero/design and section structure."
+          "description": "Update hero/section styling to match the editorial theme (paper-like surfaces, warm neutral gradients, refined spacing/typography) without changing page structure or routes."
         },
         {
-          "path": "frontend/src/pages/EducationNewsPage.tsx",
+          "path": "frontend/src/components/content/UpdateCard.tsx",
           "operation": "modify",
-          "description": "Use combined backend-first updates for the Education News listing; ensure seed fallback replaces the current empty state when backend has no items."
-        },
-        {
-          "path": "frontend/src/pages/SchoolEducationPage.tsx",
-          "operation": "modify",
-          "description": "Use combined backend-first updates for School Education listings; preserve layout, copy, and SEO behavior."
-        },
-        {
-          "path": "frontend/src/pages/CompetitiveExamsPage.tsx",
-          "operation": "modify",
-          "description": "Use combined backend-first updates for the competitive exam updates listing area while preserving the existing informational sections and layout."
-        },
-        {
-          "path": "frontend/src/pages/ScholarshipsPage.tsx",
-          "operation": "modify",
-          "description": "Use combined backend-first updates for scholarships, keeping the existing filter tabs; when filtering by state, filter combined items by stateTags when present (fallback remains seedUpdates)."
-        },
-        {
-          "path": "frontend/src/pages/SchemesPage.tsx",
-          "operation": "modify",
-          "description": "Use combined backend-first updates for schemes; preserve existing layout and SEO behavior."
-        },
-        {
-          "path": "frontend/src/pages/ResultsPage.tsx",
-          "operation": "modify",
-          "description": "Use combined backend-first updates for results; remove reliance on empty state when seed fallback should display content."
-        },
-        {
-          "path": "frontend/src/pages/AdmitCardsPage.tsx",
-          "operation": "modify",
-          "description": "Use combined backend-first updates for admit cards; preserve existing layout and SEO behavior."
-        },
-        {
-          "path": "frontend/src/pages/SearchPage.tsx",
-          "operation": "modify",
-          "description": "Update search to query across combined backend-first updates rather than seedUpdates only; keep URL param behavior and page layout unchanged."
-        },
-        {
-          "path": "frontend/src/utils/searchUpdates.ts",
-          "operation": "modify",
-          "description": "If needed, adjust search utilities to handle optional fields (e.g., stateTags/imageUrl) and ensure sorting works for combined updates without changing current behavior for seed-only."
+          "description": "Align card styling with the editorial theme (surface, border, shadow, typography), and keep the existing image onError fallback behavior working."
         },
         {
           "path": "frontend/src/pages/PostDetailPage.tsx",
           "operation": "modify",
-          "description": "Update post detail to first attempt loading a backend post by id (via hook), and if not found fall back to seedUpdates getUpdateById; preserve route /post/$postId and existing detail layout."
+          "description": "Refine post detail surfaces/typography to match the editorial theme; update the hero image fallback to use the generated wide image at frontend/public/assets/generated/ncert-sample-papers.dim_1600x900.jpg (and continue handling load failures safely)."
+        },
+        {
+          "path": "frontend/src/components/layout/SiteLayout.tsx",
+          "operation": "modify",
+          "description": "Adjust layout-level wrappers (header/breadcrumb bar/main/footer spacing and surfaces) to ensure consistent editorial styling across key pages while preserving existing routing/navigation."
         }
       ]
     }
