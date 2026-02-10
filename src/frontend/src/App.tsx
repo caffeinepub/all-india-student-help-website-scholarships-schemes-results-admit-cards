@@ -16,6 +16,7 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import DisclaimerPage from './pages/DisclaimerPage';
 import PostDetailPage from './pages/PostDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
+import OwnerIngestPage from './pages/OwnerIngestPage';
 
 const rootRoute = createRootRoute({
   component: SiteLayout,
@@ -111,6 +112,13 @@ const postDetailRoute = createRoute({
   component: PostDetailPage,
 });
 
+// Unlinked owner ingestion route (not in navigation)
+const ownerIngestRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/owner/ingest',
+  component: OwnerIngestPage,
+});
+
 const notFoundRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '*',
@@ -133,6 +141,7 @@ const routeTree = rootRoute.addChildren([
   privacyRoute,
   disclaimerRoute,
   postDetailRoute,
+  ownerIngestRoute,
   notFoundRoute,
 ]);
 

@@ -17,6 +17,7 @@ function matchesQuery(update: UpdateItem, normalizedQuery: string): boolean {
     update.title,
     update.excerpt,
     update.body || '',
+    ...(update.stateTags || []),
   ].join(' ').toLowerCase();
   
   return searchableText.includes(normalizedQuery);

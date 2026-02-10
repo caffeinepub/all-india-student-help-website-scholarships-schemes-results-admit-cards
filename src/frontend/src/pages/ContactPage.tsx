@@ -88,14 +88,14 @@ export default function ContactPage() {
           <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
             {showSuccess && (
               <FormStatusBanner
-                type="success"
+                status="success"
                 message="Thank you for contacting us! We'll get back to you soon."
               />
             )}
 
             {submitMutation.isError && (
               <FormStatusBanner
-                type="error"
+                status="error"
                 message="Failed to send message. Please try again later."
               />
             )}

@@ -15,18 +15,68 @@ export interface ContactSubmission {
   'email' : string,
   'message' : string,
 }
+export type Post = { 'scholarship' : PostType } |
+  { 'examNotification' : PostType } |
+  { 'result' : PostType } |
+  { 'educationNews' : PostType } |
+  { 'generalInfo' : PostType } |
+  { 'stateScheme' : PostType } |
+  { 'admitCard' : PostType };
+export interface PostType {
+  'id' : string,
+  'title' : string,
+  'stateTags' : Array<string>,
+  'body' : string,
+  'published' : boolean,
+  'lastUpdatedAt' : bigint,
+  'imageUrl' : string,
+  'excerpt' : string,
+}
 export interface UserProfile { 'name' : string }
 export type UserRole = { 'admin' : null } |
   { 'user' : null } |
   { 'guest' : null };
+export interface _CaffeineStorageCreateCertificateResult {
+  'method' : string,
+  'blob_hash' : string,
+}
+export interface _CaffeineStorageRefillInformation {
+  'proposed_top_up_amount' : [] | [bigint],
+}
+export interface _CaffeineStorageRefillResult {
+  'success' : [] | [boolean],
+  'topped_up_amount' : [] | [bigint],
+}
 export interface _SERVICE {
+  '_caffeineStorageBlobIsLive' : ActorMethod<[Uint8Array], boolean>,
+  '_caffeineStorageBlobsToDelete' : ActorMethod<[], Array<Uint8Array>>,
+  '_caffeineStorageConfirmBlobDeletion' : ActorMethod<
+    [Array<Uint8Array>],
+    undefined
+  >,
+  '_caffeineStorageCreateCertificate' : ActorMethod<
+    [string],
+    _CaffeineStorageCreateCertificateResult
+  >,
+  '_caffeineStorageRefillCashier' : ActorMethod<
+    [[] | [_CaffeineStorageRefillInformation]],
+    _CaffeineStorageRefillResult
+  >,
+  '_caffeineStorageUpdateGatewayPrincipals' : ActorMethod<[], undefined>,
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
+  'autoPublishScheduledContent' : ActorMethod<[], undefined>,
   'getAllSubmissions' : ActorMethod<[], Array<ContactSubmission>>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
+  'getPostById' : ActorMethod<[string], [] | [Post]>,
+  'getPublishedPostsByCategory' : ActorMethod<[string], Array<Post>>,
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
+  'manualIngestContent' : ActorMethod<
+    [string, string, string, string, Array<string>],
+    undefined
+  >,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
   'submitContactForm' : ActorMethod<[string, string, string], undefined>,
 }

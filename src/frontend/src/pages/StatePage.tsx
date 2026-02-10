@@ -1,87 +1,70 @@
-import { useParams, Link } from '@tanstack/react-router';
-import { ArrowRight } from 'lucide-react';
+import { useParams } from '@tanstack/react-router';
+import { MapPin } from 'lucide-react';
+import { useCombinedUpdates } from '../hooks/useCombinedUpdates';
 import UpdateCard from '../components/content/UpdateCard';
-import { getUpdatesByState } from '../content/seedUpdates';
 import { usePageMeta } from '../seo/usePageMeta';
 
 const stateNames: Record<string, string> = {
-  jharkhand: 'Jharkhand',
-  bihar: 'Bihar',
+  'bihar': 'Bihar',
   'uttar-pradesh': 'Uttar Pradesh',
   'west-bengal': 'West Bengal',
+  'jharkhand': 'Jharkhand',
+  'madhya-pradesh': 'Madhya Pradesh',
+  'rajasthan': 'Rajasthan',
+  'maharashtra': 'Maharashtra',
+  'karnataka': 'Karnataka',
+  'tamil-nadu': 'Tamil Nadu',
+  'kerala': 'Kerala',
+  'andhra-pradesh': 'Andhra Pradesh',
+  'telangana': 'Telangana',
+  'gujarat': 'Gujarat',
+  'punjab': 'Punjab',
+  'haryana': 'Haryana',
 };
 
 export default function StatePage() {
   const { stateSlug } = useParams({ from: '/state/$stateSlug' });
+  const { updates } = useCombinedUpdates();
+  
   const stateName = stateNames[stateSlug] || stateSlug;
-  const updates = getUpdatesByState(stateSlug);
+
+  const stateUpdates = updates.filter((update) =>
+    update.stateTags?.includes(stateSlug)
+  );
 
   usePageMeta({
-    title: `${stateName} - Scholarships, Schemes & Results | Student Help Portal`,
-    description: `Get latest updates on scholarships, government schemes, exam results, and admit cards specifically for ${stateName} students. State-specific educational information and notifications.`,
+    title: `${stateName} - Education Updates, Scholarships & Schemes | Student Help Portal`,
+    description: `Get the latest education updates, scholarships, government schemes, and exam information specific to ${stateName}. Stay informed about state-specific opportunities for students.`,
   });
 
-  const categories = [
-    { name: 'Scholarships', link: '/scholarships' },
-    { name: 'Government Schemes', link: '/schemes' },
-    { name: 'Exam Results', link: '/results' },
-    { name: 'Admit Cards', link: '/admit-cards' },
-  ];
-
   return (
-    <div className="container py-6 sm:py-8 md:py-12 px-4">
-      <div className="mb-6 sm:mb-8">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">{stateName}</h1>
-        <p className="text-base sm:text-lg text-muted-foreground max-w-3xl leading-relaxed">
-          Find state-specific information on scholarships, government schemes, exam results, and admit cards for {stateName} students.
-        </p>
+    <div className="container py-8 sm:py-12 px-4">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="p-2 bg-primary/10 rounded-lg">
+          <MapPin className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-bold break-words">{stateName}</h1>
       </div>
 
-      {/* Quick Links */}
-      <div className="mb-6 sm:mb-8">
-        <h2 className="text-lg sm:text-xl font-bold mb-4">Browse by Category</h2>
-        <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-          {categories.map((category) => (
-            <Link
-              key={category.link}
-              to={category.link}
-              className="bg-card border rounded-lg p-4 hover:shadow-card hover:border-primary/50 transition-all duration-200 group"
-            >
-              <div className="flex items-center justify-between gap-2">
-                <h3 className="font-semibold group-hover:text-primary transition-colors break-words flex-1">
-                  {category.name}
-                </h3>
-                <ArrowRight className="h-4 w-4 flex-shrink-0" />
-              </div>
-            </Link>
+      <p className="text-muted-foreground mb-8 leading-relaxed max-w-3xl">
+        Find all education-related updates, scholarships, government schemes, and exam information 
+        specific to {stateName}. We bring you state-specific opportunities and announcements to help 
+        students stay informed.
+      </p>
+
+      {stateUpdates.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">
+            No updates available for {stateName} at the moment. Check back soon for new information.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {stateUpdates.map((update) => (
+            <UpdateCard key={update.id} update={update} />
           ))}
         </div>
-      </div>
-
-      {/* State Updates */}
-      <div>
-        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Latest Updates for {stateName}</h2>
-        {updates.length > 0 ? (
-          <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {updates.map((update) => (
-              <UpdateCard key={update.id} update={update} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-12 bg-muted/30 rounded-lg">
-            <p className="text-muted-foreground mb-4 leading-relaxed px-4">
-              No state-specific updates available for {stateName} at the moment.
-            </p>
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
-            >
-              View all updates
-              <ArrowRight className="h-4 w-4 flex-shrink-0" />
-            </Link>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 }

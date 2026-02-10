@@ -1,56 +1,196 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-10T04:27:02.112Z",
+  "generatedAt": "2026-02-10T13:31:01.309Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 9,
+    "implemented": 5,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Add the provided Google Search Console verification meta tag to the global HTML <head> so it is present site-wide on every route.",
+        "summary": "Preserve the current site URL, routing, design, and layout, and keep Google Search Console verification intact by not removing or altering existing verification/meta tags (including the existing <meta name=\"google-site-verification\" ...> in frontend/index.html).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/index.html"
+          "frontend/index.html",
+          "frontend/src/App.tsx",
+          "frontend/src/components/layout/SiteLayout.tsx"
         ],
         "matchedFiles": [
-          "frontend/index.html"
+          "frontend/index.html",
+          "frontend/src/App.tsx"
         ]
       },
       {
         "id": "REQ-2",
-        "summary": "Do not change any design, styling, layout, routing, or page content as part of this update (meta tag addition only).",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/index.html"
-        ],
-        "matchedFiles": [
-          "frontend/index.html"
-        ]
+        "summary": "Add backend support for storing and serving dynamically published posts (education news/exam notifications/results/admit cards/scholarships) as persistent data, including fields needed by the existing frontend cards and detail pages (id, title, category, date, excerpt, body, optional stateTags, and an image reference).",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
       },
       {
         "id": "REQ-3",
-        "summary": "Publish the updated build after adding the meta tag.",
+        "summary": "Implement a minimal manual-ingestion mechanism (2–3 times/week) for the site owner to provide raw content or official-source links, which the backend queues for processing and future publishing without requiring ongoing dashboard work.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/index.html"
+          "frontend/src/pages/OwnerIngestPage.tsx",
+          "frontend/src/hooks/useAdminGuard.ts",
+          "frontend/src/components/content/AccessDeniedScreen.tsx",
+          "frontend/src/App.tsx",
+          "frontend/src/components/content/FormStatusBanner.tsx"
         ],
         "matchedFiles": [
-          "frontend/index.html"
+          "frontend/src/pages/OwnerIngestPage.tsx",
+          "frontend/src/hooks/useAdminGuard.ts",
+          "frontend/src/components/content/AccessDeniedScreen.tsx",
+          "frontend/src/App.tsx",
+          "frontend/src/components/content/FormStatusBanner.tsx"
         ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "For each ingested item, automatically produce a student-friendly rewritten article in English that is clearly restructured (not a direct copy), including: a simplified title, a short excerpt, and an HTML body with headings and bullet points suitable for the existing PostDetailPage rendering.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Automatically assign each processed post to one of the existing site categories (education-news, competitive-exams, results, admit-cards, scholarships, schemes/school-education as applicable) using deterministic rules and/or optional owner-provided hints, and keep tags/stateTags when provided.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Automatically generate and attach a relevant image for each published post without relying on third-party AI services, by generating a simple, consistent, category-themed image (e.g., SVG/PNG) derived from the post category and keywords, and make it retrievable by the frontend for display.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/content/updateTypes.ts",
+          "frontend/src/components/content/UpdateCard.tsx",
+          "frontend/src/pages/PostDetailPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/content/updateTypes.ts",
+          "frontend/src/components/content/UpdateCard.tsx",
+          "frontend/src/pages/PostDetailPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Add a daily backend scheduler that auto-publishes content from the processed queue every day (hands-free) while preserving site uptime and ensuring the public pages continue to show content (never empty) via fallback behavior.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/EducationNewsPage.tsx",
+          "frontend/src/pages/ResultsPage.tsx",
+          "frontend/src/pages/AdmitCardsPage.tsx",
+          "frontend/src/pages/SchemesPage.tsx",
+          "frontend/src/pages/ScholarshipsPage.tsx",
+          "frontend/src/pages/CompetitiveExamsPage.tsx",
+          "frontend/src/pages/SchoolEducationPage.tsx",
+          "frontend/src/pages/StatePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/EducationNewsPage.tsx",
+          "frontend/src/pages/ResultsPage.tsx",
+          "frontend/src/pages/AdmitCardsPage.tsx",
+          "frontend/src/pages/SchemesPage.tsx",
+          "frontend/src/pages/ScholarshipsPage.tsx",
+          "frontend/src/pages/CompetitiveExamsPage.tsx",
+          "frontend/src/pages/SchoolEducationPage.tsx",
+          "frontend/src/pages/StatePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Update the frontend content sources so category pages, search, home 'latest' sections, and post detail pages use backend-published posts first and fall back to existing seedUpdates when backend has no content, without changing existing routes or overall layout.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/backendPostAdapters.ts",
+          "frontend/src/hooks/useBackendPosts.ts",
+          "frontend/src/hooks/useCombinedUpdates.ts",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/EducationNewsPage.tsx",
+          "frontend/src/pages/SchoolEducationPage.tsx",
+          "frontend/src/pages/CompetitiveExamsPage.tsx",
+          "frontend/src/pages/ScholarshipsPage.tsx",
+          "frontend/src/pages/SchemesPage.tsx",
+          "frontend/src/pages/ResultsPage.tsx",
+          "frontend/src/pages/AdmitCardsPage.tsx",
+          "frontend/src/pages/SearchPage.tsx",
+          "frontend/src/utils/searchUpdates.ts",
+          "frontend/src/pages/PostDetailPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/utils/backendPostAdapters.ts",
+          "frontend/src/hooks/useBackendPosts.ts",
+          "frontend/src/hooks/useCombinedUpdates.ts",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/EducationNewsPage.tsx",
+          "frontend/src/pages/SchoolEducationPage.tsx",
+          "frontend/src/pages/CompetitiveExamsPage.tsx",
+          "frontend/src/pages/ScholarshipsPage.tsx",
+          "frontend/src/pages/SchemesPage.tsx",
+          "frontend/src/pages/ResultsPage.tsx",
+          "frontend/src/pages/AdmitCardsPage.tsx",
+          "frontend/src/pages/SearchPage.tsx",
+          "frontend/src/utils/searchUpdates.ts",
+          "frontend/src/pages/PostDetailPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-9",
+        "summary": "Add a safe upgrade path for new persistent content data structures in the single Motoko actor, using migration logic only if required to avoid resetting or losing any existing canister state (e.g., current contact submissions/user profiles).",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
       }
     ]
   },
   "changedFiles": [
+    "backend/blob-storage/Mixin.mo",
+    "backend/blob-storage/Storage.mo",
+    "backend/main.mo",
+    "backend/post-helper.mo",
     "build-request.json",
+    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
     "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/content/AccessDeniedScreen.tsx",
+    "frontend/src/components/content/FormStatusBanner.tsx",
+    "frontend/src/components/content/UpdateCard.tsx",
+    "frontend/src/content/updateTypes.ts",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useAdminGuard.ts",
+    "frontend/src/hooks/useBackendPosts.ts",
+    "frontend/src/hooks/useCombinedUpdates.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/pages/AdmitCardsPage.tsx",
+    "frontend/src/pages/CompetitiveExamsPage.tsx",
+    "frontend/src/pages/ContactPage.tsx",
+    "frontend/src/pages/EducationNewsPage.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/pages/OwnerIngestPage.tsx",
+    "frontend/src/pages/PostDetailPage.tsx",
+    "frontend/src/pages/ResultsPage.tsx",
+    "frontend/src/pages/SchemesPage.tsx",
+    "frontend/src/pages/ScholarshipsPage.tsx",
+    "frontend/src/pages/SchoolEducationPage.tsx",
+    "frontend/src/pages/SearchPage.tsx",
+    "frontend/src/pages/StatePage.tsx",
+    "frontend/src/utils/backendPostAdapters.ts",
+    "frontend/src/utils/searchUpdates.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -30,35 +30,55 @@ export default function UpdateCard({ update }: UpdateCardProps) {
   const categoryLabel = getCategoryLabel(update.category);
   const categoryColor = categoryColors[categoryLabel] || 'bg-muted text-muted-foreground';
 
+  // Fallback image if imageUrl is not provided or invalid
+  const fallbackImage = '/assets/generated/site-logo.dim_512x128.png';
+  const imageUrl = update.imageUrl || fallbackImage;
+
   return (
-    <article className="group bg-card border rounded-lg p-5 hover:shadow-card transition-all duration-200 flex flex-col">
-      <div className="flex flex-wrap items-center gap-2 mb-3">
-        <span className={`text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap ${categoryColor}`}>
-          {categoryLabel}
-        </span>
-        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-          <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
-          <time dateTime={update.date} className="whitespace-nowrap">{formattedDate}</time>
-        </div>
+    <article className="group bg-card border rounded-lg overflow-hidden hover:shadow-card transition-all duration-200 flex flex-col">
+      {/* Image */}
+      <div className="relative w-full h-48 bg-muted overflow-hidden">
+        <img
+          src={imageUrl}
+          alt={update.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+          onError={(e) => {
+            // Fallback if image fails to load
+            e.currentTarget.src = fallbackImage;
+          }}
+        />
       </div>
-      
-      <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors leading-snug">
-        <button onClick={handleClick} className="hover:underline text-left w-full break-words">
-          {update.title}
+
+      {/* Content */}
+      <div className="p-5 flex flex-col flex-1">
+        <div className="flex flex-wrap items-center gap-2 mb-3">
+          <span className={`text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap ${categoryColor}`}>
+            {categoryLabel}
+          </span>
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
+            <time dateTime={update.date} className="whitespace-nowrap">{formattedDate}</time>
+          </div>
+        </div>
+        
+        <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors leading-snug">
+          <button onClick={handleClick} className="hover:underline text-left w-full break-words">
+            {update.title}
+          </button>
+        </h3>
+        
+        <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
+          {update.excerpt}
+        </p>
+        
+        <button
+          onClick={handleClick}
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-2.5 transition-all mt-auto"
+        >
+          Read more
+          <ArrowRight className="h-4 w-4 flex-shrink-0" />
         </button>
-      </h3>
-      
-      <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
-        {update.excerpt}
-      </p>
-      
-      <button
-        onClick={handleClick}
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-2.5 transition-all mt-auto"
-      >
-        Read more
-        <ArrowRight className="h-4 w-4 flex-shrink-0" />
-      </button>
+      </div>
     </article>
   );
 }

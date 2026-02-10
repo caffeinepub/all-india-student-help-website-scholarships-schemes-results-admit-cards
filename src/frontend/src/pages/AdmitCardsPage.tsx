@@ -1,35 +1,41 @@
-import UpdateCard from '../components/content/UpdateCard';
-import { getUpdatesByCategory } from '../content/seedUpdates';
+import { ClipboardCheck } from 'lucide-react';
+import { useCombinedUpdatesByCategory } from '../hooks/useCombinedUpdates';
 import { UpdateCategory } from '../content/updateTypes';
+import UpdateCard from '../components/content/UpdateCard';
 import { usePageMeta } from '../seo/usePageMeta';
 
 export default function AdmitCardsPage() {
   usePageMeta({
-    title: 'Admit Cards - Download Hall Tickets | Student Help Portal',
-    description: 'Download admit cards and hall tickets for board exams, competitive exams, and entrance tests. Get release dates, download links, and important instructions.',
+    title: 'Admit Cards - Download Hall Tickets for Exams | Student Help Portal',
+    description: 'Download admit cards and hall tickets for board exams, competitive exams, and entrance tests. Get direct links and instructions to download your admit card.',
   });
 
-  const admitCards = getUpdatesByCategory(UpdateCategory.ADMIT_CARDS);
+  const { updates, isLoading } = useCombinedUpdatesByCategory(UpdateCategory.ADMIT_CARDS);
 
   return (
-    <div className="container py-8 md:py-12">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-4">Admit Cards</h1>
-        <p className="text-lg text-muted-foreground max-w-3xl">
-          Download admit cards and hall tickets for various examinations. Stay updated on release dates, 
-          download procedures, and important instructions for exam day.
-        </p>
+    <div className="container py-8 sm:py-12 px-4">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="p-2 bg-chart-3/10 rounded-lg">
+          <ClipboardCheck className="h-6 w-6 sm:h-8 sm:w-8 text-chart-3" />
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-bold">Admit Cards</h1>
       </div>
 
-      {admitCards.length > 0 ? (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {admitCards.map((update) => (
-            <UpdateCard key={update.id} update={update} />
-          ))}
+      <p className="text-muted-foreground mb-8 leading-relaxed max-w-3xl">
+        Download admit cards and hall tickets for various examinations. Get timely updates about admit card 
+        release dates, direct download links, and step-by-step instructions for board exams, competitive exams, 
+        and entrance tests.
+      </p>
+
+      {isLoading ? (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">Loading admit cards...</p>
         </div>
       ) : (
-        <div className="text-center py-12">
-          <p className="text-muted-foreground">No admit cards available at the moment. Check back soon!</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {updates.map((update) => (
+            <UpdateCard key={update.id} update={update} />
+          ))}
         </div>
       )}
     </div>

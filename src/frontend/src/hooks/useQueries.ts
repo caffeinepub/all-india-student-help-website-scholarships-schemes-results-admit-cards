@@ -23,3 +23,30 @@ export function useSubmitContactForm() {
     },
   });
 }
+
+export function useManualIngestContent() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      title,
+      category,
+      body,
+      excerpt,
+      stateTags,
+    }: {
+      title: string;
+      category: string;
+      body: string;
+      excerpt: string;
+      stateTags: string[];
+    }) => {
+      if (!actor) throw new Error('Actor not available');
+      await actor.manualIngestContent(title, category, body, excerpt, stateTags);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['backendPosts'] });
+    },
+  });
+}

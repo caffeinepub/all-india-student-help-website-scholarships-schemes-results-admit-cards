@@ -2,10 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-the-provided-google-search-console-verification-meta-tag-to-the-global-html-head-so-it-is-present-site-wide-on-every-route",
-      "featureTitle": "Add the provided Google Search Console verification meta tag to the global HTML <head> so it is present site-wide on every route.",
+      "featureId": "feature-preserve-the-current-site-url-routing-design-and-layout-and-keep-google-search-console-verification-intact-by-not-removing-or-altering-existing-verification-meta-tags-including-the-existing-meta-name-google-site-verification-in-frontend-index-html",
+      "featureTitle": "Preserve the current site URL, routing, design, and layout, and keep Google Search Console verification intact by not removing or altering existing verification/meta tags (including the existing <meta name=\"google-site-verification\" ...> in frontend/index.html).",
       "files": [
-        "frontend/index.html"
+        "frontend/index.html",
+        "frontend/src/App.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -13,7 +14,8 @@
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
       ],
       "testIds": [
         "REQ-1"
@@ -21,10 +23,14 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-do-not-change-any-design-styling-layout-routing-or-page-content-as-part-of-this-update-meta-tag-addition-only",
-      "featureTitle": "Do not change any design, styling, layout, routing, or page content as part of this update (meta tag addition only).",
+      "featureId": "feature-implement-a-minimal-manual-ingestion-mechanism-2-3-times-week-for-the-site-owner-to-provide-raw-content-or-official-source-links-which-the-backend-queues-for-processing-and-future-publishing-without-requiring-ongoing-dashboard-work",
+      "featureTitle": "Implement a minimal manual-ingestion mechanism (2–3 times/week) for the site owner to provide raw content or official-source links, which the backend queues for processing and future publishing without requiring ongoing dashboard work.",
       "files": [
-        "frontend/index.html"
+        "frontend/src/App.tsx",
+        "frontend/src/components/content/AccessDeniedScreen.tsx",
+        "frontend/src/components/content/FormStatusBanner.tsx",
+        "frontend/src/hooks/useAdminGuard.ts",
+        "frontend/src/pages/OwnerIngestPage.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -32,18 +38,21 @@
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
       ],
       "testIds": [
-        "REQ-2"
+        "REQ-3"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-publish-the-updated-build-after-adding-the-meta-tag",
-      "featureTitle": "Publish the updated build after adding the meta tag.",
+      "featureId": "feature-automatically-generate-and-attach-a-relevant-image-for-each-published-post-without-relying-on-third-party-ai-services-by-generating-a-simple-consistent-category-themed-image-e-g-svg-png-derived-from-the-post-category-and-keywords-and-make-it-retrievable-by-the-frontend-for-display",
+      "featureTitle": "Automatically generate and attach a relevant image for each published post without relying on third-party AI services, by generating a simple, consistent, category-themed image (e.g., SVG/PNG) derived from the post category and keywords, and make it retrievable by the frontend for display.",
       "files": [
-        "frontend/index.html"
+        "frontend/src/components/content/UpdateCard.tsx",
+        "frontend/src/content/updateTypes.ts",
+        "frontend/src/pages/PostDetailPage.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -51,10 +60,72 @@
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
       ],
       "testIds": [
-        "REQ-3"
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-daily-backend-scheduler-that-auto-publishes-content-from-the-processed-queue-every-day-hands-free-while-preserving-site-uptime-and-ensuring-the-public-pages-continue-to-show-content-never-empty-via-fallback-behavior",
+      "featureTitle": "Add a daily backend scheduler that auto-publishes content from the processed queue every day (hands-free) while preserving site uptime and ensuring the public pages continue to show content (never empty) via fallback behavior.",
+      "files": [
+        "frontend/src/pages/AdmitCardsPage.tsx",
+        "frontend/src/pages/CompetitiveExamsPage.tsx",
+        "frontend/src/pages/EducationNewsPage.tsx",
+        "frontend/src/pages/HomePage.tsx",
+        "frontend/src/pages/ResultsPage.tsx",
+        "frontend/src/pages/SchemesPage.tsx",
+        "frontend/src/pages/ScholarshipsPage.tsx",
+        "frontend/src/pages/SchoolEducationPage.tsx",
+        "frontend/src/pages/StatePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-frontend-content-sources-so-category-pages-search-home-latest-sections-and-post-detail-pages-use-backend-published-posts-first-and-fall-back-to-existing-seedupdates-when-backend-has-no-content-without-changing-existing-routes-or-overall-layout",
+      "featureTitle": "Update the frontend content sources so category pages, search, home 'latest' sections, and post detail pages use backend-published posts first and fall back to existing seedUpdates when backend has no content, without changing existing routes or overall layout.",
+      "files": [
+        "frontend/src/hooks/useBackendPosts.ts",
+        "frontend/src/hooks/useCombinedUpdates.ts",
+        "frontend/src/pages/AdmitCardsPage.tsx",
+        "frontend/src/pages/CompetitiveExamsPage.tsx",
+        "frontend/src/pages/EducationNewsPage.tsx",
+        "frontend/src/pages/HomePage.tsx",
+        "frontend/src/pages/PostDetailPage.tsx",
+        "frontend/src/pages/ResultsPage.tsx",
+        "frontend/src/pages/SchemesPage.tsx",
+        "frontend/src/pages/ScholarshipsPage.tsx",
+        "frontend/src/pages/SchoolEducationPage.tsx",
+        "frontend/src/pages/SearchPage.tsx",
+        "frontend/src/utils/backendPostAdapters.ts",
+        "frontend/src/utils/searchUpdates.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
       ],
       "confidence": "high"
     }

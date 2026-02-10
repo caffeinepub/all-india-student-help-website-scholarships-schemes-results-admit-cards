@@ -1,35 +1,53 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Student help website (scholarships/schemes) requiring site-wide SEO/verification updates and deployments",
+  "summary": "Upgrade existing education-focused website with hands-free content automation: ingest user-provided raw content/links a few times per week, rewrite into student-friendly original articles, generate images, auto-categorize/tag, and auto-publish daily—while preserving the current URL, design/layout, and Google Search Console verification/SEO setup.",
   "architectural_notes": [
-    "Ensure a global <head> template/layout exists so meta tags can be applied site-wide without per-page edits.",
-    "Deployment workflow should support publishing a small head-only change with no UI/layout modifications."
+    "Treat as an in-place upgrade (not a rebuild); must not reset or remove existing site assets/configuration.",
+    "Do not change website URL, design, or layout.",
+    "Do not remove/alter meta tags, ownership/verification files, or Google Search Console verification code; avoid triggering re-verification or re-indexing requirements.",
+    "Automation should run continuously in the backend and publish daily without manual posting."
   ],
   "known_issues": [],
   "isFixRequest": false,
   "existing_features": [
     {
-      "id": "feature-add-the-provided-google-search-console-verification-meta-tag-to-the-global-html-head-so-it-is-present-site-wide-on-every-route",
-      "title": "Add the provided Google Search Console verification meta tag to the global HTML <head> so it is present site-wide on every route.",
+      "id": "feature-preserve-the-current-site-url-routing-design-and-layout-and-keep-google-search-console-verification-intact-by-not-removing-or-altering-existing-verification-meta-tags-including-the-existing-meta-name-google-site-verification-in-frontend-index-html",
+      "title": "Preserve the current site URL, routing, design, and layout, and keep Google Search Console verification intact by not removing or altering existing verification/meta tags (including the existing <meta name=\"google-site-verification\" ...> in frontend/index.html).",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-do-not-change-any-design-styling-layout-routing-or-page-content-as-part-of-this-update-meta-tag-addition-only",
-      "title": "Do not change any design, styling, layout, routing, or page content as part of this update (meta tag addition only).",
+      "id": "feature-implement-a-minimal-manual-ingestion-mechanism-2-3-times-week-for-the-site-owner-to-provide-raw-content-or-official-source-links-which-the-backend-queues-for-processing-and-future-publishing-without-requiring-ongoing-dashboard-work",
+      "title": "Implement a minimal manual-ingestion mechanism (2–3 times/week) for the site owner to provide raw content or official-source links, which the backend queues for processing and future publishing without requiring ongoing dashboard work.",
       "reqIds": [
-        "REQ-2"
+        "REQ-3"
       ],
       "version": 1
     },
     {
-      "id": "feature-publish-the-updated-build-after-adding-the-meta-tag",
-      "title": "Publish the updated build after adding the meta tag.",
+      "id": "feature-automatically-generate-and-attach-a-relevant-image-for-each-published-post-without-relying-on-third-party-ai-services-by-generating-a-simple-consistent-category-themed-image-e-g-svg-png-derived-from-the-post-category-and-keywords-and-make-it-retrievable-by-the-frontend-for-display",
+      "title": "Automatically generate and attach a relevant image for each published post without relying on third-party AI services, by generating a simple, consistent, category-themed image (e.g., SVG/PNG) derived from the post category and keywords, and make it retrievable by the frontend for display.",
       "reqIds": [
-        "REQ-3"
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-daily-backend-scheduler-that-auto-publishes-content-from-the-processed-queue-every-day-hands-free-while-preserving-site-uptime-and-ensuring-the-public-pages-continue-to-show-content-never-empty-via-fallback-behavior",
+      "title": "Add a daily backend scheduler that auto-publishes content from the processed queue every day (hands-free) while preserving site uptime and ensuring the public pages continue to show content (never empty) via fallback behavior.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-frontend-content-sources-so-category-pages-search-home-latest-sections-and-post-detail-pages-use-backend-published-posts-first-and-fall-back-to-existing-seedupdates-when-backend-has-no-content-without-changing-existing-routes-or-overall-layout",
+      "title": "Update the frontend content sources so category pages, search, home 'latest' sections, and post detail pages use backend-published posts first and fall back to existing seedUpdates when backend has no content, without changing existing routes or overall layout.",
+      "reqIds": [
+        "REQ-8"
       ],
       "version": 1
     }
@@ -37,12 +55,81 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Add Google Search Console verification meta tag to the <head> site-wide and publish without changing design/layout",
+      "summary": "Preserve existing website unchanged (no rebuild): keep same URL, design/layout, meta tags, and Google Search Console verification/ownership intact",
       "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Content ingestion pipeline to accept user-provided raw content or official-source links (2–3x/week) for automated processing",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Automatically rewrite provided content into simple, student-friendly, original articles suitable for Indian students",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Auto-generate and attach AI-generated relevant images for each post",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Auto-categorize content correctly into existing site sections (and tags if applicable)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Daily scheduled auto-publishing with no manual posting/dashboard work after content is provided; ensure sections are never empty/outdated",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Maintain SEO-friendliness and uninterrupted Google indexing/visibility during and after automation upgrade",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Add backend support for storing and serving dynamically published posts (education news/exam notifications/results/admit cards/scholarships) as persistent data, including fields needed by the existing frontend cards and detail pages (id, title, category, date, excerpt, body, optional stateTags, and an image reference).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "For each ingested item, automatically produce a student-friendly rewritten article in English that is clearly restructured (not a direct copy), including: a simplified title, a short excerpt, and an HTML body with headings and bullet points suitable for the existing PostDetailPage rendering.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Automatically assign each processed post to one of the existing site categories (education-news, competitive-exams, results, admit-cards, scholarships, schemes/school-education as applicable) using deterministic rules and/or optional owner-provided hints, and keep tags/stateTags when provided.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Add a safe upgrade path for new persistent content data structures in the single Motoko actor, using migration logic only if required to avoid resetting or losing any existing canister state (e.g., current contact submissions/user profiles).",
+      "reqIds": [
+        "REQ-9"
+      ],
       "status": "pending"
     }
   ],
-  "projectName": "Add Google Search Console site verification meta tag site-wide",
+  "gameProjectType": "none",
+  "projectName": "Add hands-free content ingestion, auto-rewrite, auto-categorize, image generation, and daily auto-publishing (upgrade without changing URL/design/Google verification)",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

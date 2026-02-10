@@ -16,6 +16,7 @@ export interface UpdateItem {
   excerpt: string;
   stateTags?: string[];
   body: string;
+  imageUrl?: string;
 }
 
 // Map internal categories to user-facing labels
